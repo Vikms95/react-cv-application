@@ -1,9 +1,15 @@
-import './styles/App.css';
+import React from 'react'
+import './styles/App.css'
+import GeneralInfo from './components/GeneralInfo'
 
-function App() {
-  return (
-   <div></div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="container">
+        <GeneralInfo />
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
