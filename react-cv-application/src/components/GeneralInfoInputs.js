@@ -5,13 +5,13 @@ class GeneralInfoInputs extends React.Component {
     return (
       <form className="general--info--inputs">
         <label htmlFor="name"> Name </label>
-        <input placeholder="John Doe"></input>
+        <input onChange={this.props.handleChange}  name="name" id="name" placeholder="John Doe"></input>
         
         <label htmlFor="email"> E-mail </label>
-        <input type="email" placeholder="johndoe@gmail.com"></input>
+        <input  name="email" id="email" type="email" placeholder="johndoe@gmail.com"></input>
         
         <label htmlFor="phone"> Phone </label>
-        <input type="email" placeholder="+99 123 456 789"></input>
+        <input   name="phone" id="phone" type="text" placeholder="+99 123 456 789"></input>
       </form>
     )
   }

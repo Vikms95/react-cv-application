@@ -9,7 +9,16 @@ import LanguagesInputs from './components/LanguagesInputs'
 import SubmitButton from './components/SubmitButton'
 
 class App extends React.Component {
+    constructor(){
+        super()
+        this.stateGeneralInfo = {
+            name  : "",
+            email : "",
+            phone : "",
+        }
 
+        this.updateGeneralInfo = this.updateGeneralInfo.bind(this)
+    }
   // State for profile picture
   // State for general info inputs
   // State for education input
@@ -18,9 +27,14 @@ class App extends React.Component {
 
   // 
 
-  previewCV(){
-
+  updateGeneralInfo(event){
+      const {name,value} = event.target
+      this.setState(prevState=>{
+          console.log(prevState)
+          return ( {...prevState, [`${name}`]: value})
+      })
   }
+
 
   render() {
     return (
@@ -29,7 +43,7 @@ class App extends React.Component {
         <section className="container">
           <section className='general--info'>
             <ProfilePicture />
-            <GeneralInfoInputs />
+            <GeneralInfoInputs handleChange={this.updateGeneralInfo}/>
           </section>
 
           <EducationInputs />
