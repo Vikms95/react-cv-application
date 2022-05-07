@@ -1,6 +1,6 @@
 import React from 'react'
 
-class WorkExperienceInput extends React.Component {
+class WorkExperienceInputs extends React.Component {
     render() {
       return (
           <form className='container--input'>
@@ -22,5 +22,5 @@ class WorkExperienceInput extends React.Component {
     }
   }
   
-  export default WorkExperienceInput
+  export default WorkExperienceInputs
   

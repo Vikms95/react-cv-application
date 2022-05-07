@@ -1,6 +1,6 @@
 import React from 'react'
 
-class LanguagesInput extends React.Component {
+class LanguagesInputs extends React.Component {
     render() {
       return (
           <form className='languages--inputs'>
@@ -22,5 +22,5 @@ class LanguagesInput extends React.Component {
     }
   }
   
-  export default LanguagesInput
+  export default LanguagesInputs
   

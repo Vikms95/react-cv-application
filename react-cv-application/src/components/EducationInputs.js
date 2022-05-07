@@ -1,6 +1,6 @@
 import React from 'react'
 
-class EducationInput extends React.Component {
+class EducationInputs extends React.Component {
     render() {
       return (
           <form className='container--input'>
@@ -22,5 +22,5 @@ class EducationInput extends React.Component {
     }
   }
   
-  export default EducationInput
+  export default EducationInputs
   

@@ -3,12 +3,25 @@ import './styles/App.css'
 import Header from './components/Header'
 import ProfilePicture from './components/ProfilePictureInput'
 import GeneralInfoInputs from './components/GeneralInfoInputs'
-import EducationInput from './components/EducationInput'
-import WorkExperienceInput from './components/WorkExperienceInput'
-import LanguagesInput from './components/LanguagesInput'
+import EducationInputs from './components/EducationInputs'
+import WorkExperienceInputs from './components/WorkExperienceInputs'
+import LanguagesInputs from './components/LanguagesInputs'
 import SubmitButton from './components/SubmitButton'
 
 class App extends React.Component {
+
+  // State for profile picture
+  // State for general info inputs
+  // State for education input
+  // State for work experience inputs
+  //
+
+  // 
+
+  previewCV(){
+
+  }
+
   render() {
     return (
       <section className='general--container'>
@@ -19,11 +32,11 @@ class App extends React.Component {
             <GeneralInfoInputs />
           </section>
 
-          <EducationInput />
-          <WorkExperienceInput />
+          <EducationInputs />
+          <WorkExperienceInputs />
 
           <section className='bottom--row'>
-            <LanguagesInput />
+            <LanguagesInputs />
             <SubmitButton />
           </section>
 

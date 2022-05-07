@@ -20,6 +20,17 @@
 <!-- -Make static version -->
 <!-- -Make header -->
 
+{
+- Plan how to handle props and state within the App
+    :https://reactjs.org/docs/thinking-in-react.html
+    :https://reactjs.org/docs/faq-state.html#what-is-the-difference-between-state-and-props
+
+   - Hold state in App and the functions to modify it (setState) and pass those functions to setState as
+      props to each component, then use those functions and pass them to the onChange property, share the name of the input with the value
+        : on each input? each form?
+        : pass the state directly as props as well?
+}
+
 -Implement HTML creation on button press(education)
 
 - Be sure to include an edit and submit button for each section or for the whole CV, your preference.
@@ -28,8 +39,10 @@
 
 - The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content.
 
-- NOTES
--State will be held in App.js
+- QUESTIONS
+-State will be held in App.js?
 -Wrap each component in a form or just one?
 -Last row one component rendering 2 components or 2 components in App?
--To swap views, conditional rendering on the App component
+-To swap views, conditional rendering on the App component?
+-State is already updated on each change, so button just has to get the state and render an HTML ?
+-Education and Work in one component with different props?
