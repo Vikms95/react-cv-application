@@ -11,29 +11,58 @@ import SubmitButton from './components/SubmitButton'
 class App extends React.Component {
     constructor(){
         super()
-        // State for profile picture
-        // State for general info inputs
-        this.stateGeneralInfo = {
-            name  : "",
-            email : "",
-            phone : "",
+        this.state = {
+            general:{
+                name  : "",
+                email : "",
+                phone : "",
+            },
+
+            education:{
+                title:"",
+                university:"",
+                observations:"",
+                educationArray:[],
+            },
+
+            work:{
+                place:"",
+                company:"",
+                observations:"",
+                workArray:[],
+            },
+
+            languages:{
+                language:"",
+                proficiency:"",
+                languagesArray:[],
+            },
         }
-        // State for education input
-        // State for work experience inputs
-        //
-        this.updateGeneralInfo = this.updateGeneralInfo.bind(this)
+
+        this.handleChange = this.handleChange.bind(this)
     }
 
 
-  updateGeneralInfo(event){
-      const {name,value} = event.target
+  handleChange(event){
+      const {name,id,value} = event.target
       this.setState(prevState=>{
+          console.log(prevState)
           return {
                 ...prevState,
-                [`${name}`]: value
+                [`${name}`]: {
+                    ...prevState[name],
+                    [id] : value
+                }
           }
       })
   }
+
+    handleSubmitField(){
+        //When any field button is cliked  
+    }
+    handleSubmitPreview(){
+        //When the preview button is clicked  
+    }   
 
   render() {
     return (
@@ -43,12 +72,11 @@ class App extends React.Component {
           <section className='general--info'>
             <ProfilePicture />
             <GeneralInfoInputs 
-                handleChange={this.updateGeneralInfo} 
-                values={this.stateGeneralInfo}
+                handleChange={this.handleChange} 
             />
           </section>
 
-          <EducationInputs />
+          <EducationInputs handleChange={this.handleChange} />
           <WorkExperienceInputs />
 
           <section className='bottom--row'>

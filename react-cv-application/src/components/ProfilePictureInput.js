@@ -1,5 +1,5 @@
 import React from 'react'
-import stockPic from '../images/stock-pic.jpg'
+import stockPic from '../images/stock-pic.png'
 
 class ProfilePictureInput extends React.Component {
   render() {

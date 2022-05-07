@@ -24,12 +24,16 @@
 - Plan how to handle props and state within the App
     :https://reactjs.org/docs/thinking-in-react.html
     :https://reactjs.org/docs/faq-state.html#what-is-the-difference-between-state-and-props
+<!-- 
+- Hold state in App and the functions to modify it (setState) and pass those functions to setState as
+props to each component, then use those functions and pass them to the onChange property, share the name of the input with the value -->
+<!-- : save state as nested objects for each section? > test changing name with nested objects (works) -->
+<!-- : on each input? each form? each input (works) -->
+: pass the state directly as props as well to have controlled components?
 
-   - Hold state in App and the functions to modify it (setState) and pass those functions to setState as
-      props to each component, then use those functions and pass them to the onChange property, share the name of the input with the value
-        : save state as objects for each section?
-        : on each input? each form?
-        : pass the state directly as props as well to have controlled components?
+{
+- Add the values within the state array's with submit but
+    : add JS restrictions to not allow empty inputs
 }
 
 -Implement HTML creation on button press(education)
