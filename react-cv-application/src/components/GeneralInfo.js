@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfilePicture from './ProfilePicture'
+import ProfilePicture from './ProfilePictureInput'
 import GeneralInfoInputs from './GeneralInfoInputs'
 
 class GeneralInfo extends React.Component {
