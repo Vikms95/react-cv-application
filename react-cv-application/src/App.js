@@ -11,39 +11,41 @@ import SubmitButton from './components/SubmitButton'
 class App extends React.Component {
     constructor(){
         super()
+        // State for profile picture
+        // State for general info inputs
         this.stateGeneralInfo = {
             name  : "",
             email : "",
             phone : "",
         }
-
+        // State for education input
+        // State for work experience inputs
+        //
         this.updateGeneralInfo = this.updateGeneralInfo.bind(this)
     }
-  // State for profile picture
-  // State for general info inputs
-  // State for education input
-  // State for work experience inputs
-  //
 
-  // 
 
   updateGeneralInfo(event){
       const {name,value} = event.target
       this.setState(prevState=>{
-          console.log(prevState)
-          return ( {...prevState, [`${name}`]: value})
+          return {
+                ...prevState,
+                [`${name}`]: value
+          }
       })
   }
-
 
   render() {
     return (
       <section className='general--container'>
         <Header />
-        <section className="container">
+        <section className="cv--editor--container">
           <section className='general--info'>
             <ProfilePicture />
-            <GeneralInfoInputs handleChange={this.updateGeneralInfo}/>
+            <GeneralInfoInputs 
+                handleChange={this.updateGeneralInfo} 
+                values={this.stateGeneralInfo}
+            />
           </section>
 
           <EducationInputs />

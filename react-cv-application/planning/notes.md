@@ -29,7 +29,7 @@
       props to each component, then use those functions and pass them to the onChange property, share the name of the input with the value
         : save state as objects for each section?
         : on each input? each form?
-        : pass the state directly as props as well?
+        : pass the state directly as props as well to have controlled components?
 }
 
 -Implement HTML creation on button press(education)
