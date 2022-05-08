@@ -13,6 +13,7 @@ class WorkExperienceInputs extends React.Component {
                         name="work"
                         minLength="2"
                         onChange={this.props.handleChange}
+                        values={this.props.values.place}
                         />
             </section>
             <section>
@@ -24,6 +25,7 @@ class WorkExperienceInputs extends React.Component {
                         name="work"
                         minLength="2"
                         onChange={this.props.handleChange}
+                        values={this.props.values.company}
                         />
             </section>
             <section className='observations--container'>
@@ -33,7 +35,9 @@ class WorkExperienceInputs extends React.Component {
                         type="text" 
                         id='observations'
                         name="work" 
-                        onChange={this.props.handleChange}/>
+                        onChange={this.props.handleChange}
+                        values={this.props.values.observations}
+                        />
             </section>   
             <button onClick={this.props.handleSubmit} className='work'> Add experience </button> 
           </form>

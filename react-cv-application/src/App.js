@@ -65,28 +65,25 @@ class App extends React.Component {
 		// we are only getting the event class name to know which field to
 		// update
     const name = event.target.className
-    // console.log(this.state) 
-    // Include form object into the respective array of objects
 		this.setState(prevState =>{
 			console.log(prevState)
-			const objectToSubmit = this.getObjectToSubmit(prevState, name)
+			const newArray = this.getObjectToAdd(prevState, name)
+			// Clear the fields for the current form
 			return {
 				...prevState,
 				[name]: {
 					...prevState[name],
 					[`${name + 'Array'}`] : 
 					// Include all the values from array + prev.state[name] minus the array
-						objectToSubmit 
+						newArray 
 				}
 			}
 		})
-    // Clear the fields for the current form
-    // 
   }
 
 
-	getObjectToSubmit(state, name){
-		
+	getObjectToAdd(state, name){
+
 		if(name === 'education'){
 			const {title, university, observations} = state[name]
 			const objectToAdd = {
@@ -133,17 +130,20 @@ class App extends React.Component {
             />
           </section>
 
-          <EducationInputs 
+          <EducationInputs
+						values={this.state.education} 
 						handleChange={this.handleChange} 
 						handleSubmit={this.handleSubmit} 
 					/>
           <WorkExperienceInputs 
+						values={this.state.work}
 						handleChange={this.handleChange} 
 						handleSubmit={this.handleSubmit} 
 					/>
 
           <section className='bottom--row'>
             <LanguagesInputs 
+							values={this.state.languages}
 							handleChange={this.handleChange} 
 							handleSubmit={this.handleSubmit} 
 						/>

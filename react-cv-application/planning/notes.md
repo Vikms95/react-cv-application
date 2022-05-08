@@ -34,7 +34,9 @@ props to each component, then use those functions and pass them to the onChange 
 {
 - Add the values within the state array's with submit but
     <!-- : add JS restrictions to not allow empty inputs -->
-    : test on education button
+    <!-- : button submit the created form within the object array -->
+    : button converts current object values to string
+        ? tie input value to state value so it gets erased by itself?
 }
 
 -Implement HTML creation on button press(education)

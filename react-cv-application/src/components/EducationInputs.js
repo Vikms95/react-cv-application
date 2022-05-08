@@ -2,6 +2,7 @@ import React from 'react'
 
 class EducationInputs extends React.Component {
     render() {
+      console.log(this.props.values.title)
       return (
           <form className='container--input'>
             <section>
@@ -12,7 +13,8 @@ class EducationInputs extends React.Component {
                         id='title'
                         name="education"
                         minLength="2"
-                        onChange={this.props.handleChange}/>
+                        onChange={this.props.handleChange}
+                        value={this.props.values.title}/>
             </section>
             <section>
                   <label htmlFor="university" > University </label>
@@ -21,7 +23,8 @@ class EducationInputs extends React.Component {
                          id="university"
                          name="education"
                          minLength="2"
-                         onChange={this.props.handleChange}/>
+                         onChange={this.props.handleChange}
+                         value={this.props.values.university}/>
             </section>
             <section className='observations--container'>
                   <label htmlFor="observations"> Observations </label>
@@ -30,7 +33,8 @@ class EducationInputs extends React.Component {
                         type="text" 
                         id='observations'
                         name="education"
-                        onChange={this.props.handleChange}/>
+                        onChange={this.props.handleChange}
+                        value={this.props.values.observations}/>
             </section>   
             <button onClick={this.props.handleSubmit} className='education'> Add education </button> 
           </form>
