@@ -6,7 +6,7 @@ class LanguagesInputs extends React.Component {
           <form className='languages--inputs'>
             <section>
               <label htmlFor="language--name"> Language </label>
-              <input className='language--input' type="text" id="language--name"/>
+              <input className='language--input' type="text" id="language--name" minLength="2"/>
             </section>
             <section className='languages-bottom'>
                   <select defaultValue="default" id='language--level'>
@@ -15,7 +15,7 @@ class LanguagesInputs extends React.Component {
                       <option value="professional"> Professional </option>
                       <option value="native"> Native </option>
                   </select>
-                  <button className='add--language--button' > Add language </button>
+                  <button onClick={this.props.handleSubmit}  className='languages' > Add language </button>
             </section>
           </form>
       )

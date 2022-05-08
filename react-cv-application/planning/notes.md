@@ -33,7 +33,8 @@ props to each component, then use those functions and pass them to the onChange 
 
 {
 - Add the values within the state array's with submit but
-    : add JS restrictions to not allow empty inputs
+    <!-- : add JS restrictions to not allow empty inputs -->
+    : test on education button
 }
 
 -Implement HTML creation on button press(education)

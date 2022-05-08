@@ -9,16 +9,22 @@ class WorkExperienceInputs extends React.Component {
                   <input 
                         className='place--input' 
                         type="text" 
-                        id='title'
-                        name="work"/>
+                        id='place'
+                        name="work"
+                        minLength="2"
+                        onChange={this.props.handleChange}
+                        />
             </section>
             <section>
                   <label htmlFor="location" > Company </label>
                   <input 
                         className='company--input' 
                         type="text" 
-                        id="location"
-                        name="work"/>
+                        id="company"
+                        name="work"
+                        minLength="2"
+                        onChange={this.props.handleChange}
+                        />
             </section>
             <section className='observations--container'>
                   <label htmlFor="observations"> Observations </label>
@@ -26,9 +32,10 @@ class WorkExperienceInputs extends React.Component {
                         className='observations--input--work' 
                         type="text" 
                         id='observations'
-                        name="work" />
+                        name="work" 
+                        onChange={this.props.handleChange}/>
             </section>   
-            <button className='add--education--button'> Add experience </button> 
+            <button onClick={this.props.handleSubmit} className='work'> Add experience </button> 
           </form>
       )
     }

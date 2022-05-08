@@ -15,10 +15,10 @@ class EducationInputs extends React.Component {
                         onChange={this.props.handleChange}/>
             </section>
             <section>
-                  <label htmlFor="location" > University </label>
+                  <label htmlFor="university" > University </label>
                   <input className='university--input' 
                          type="text" 
-                         id="location"
+                         id="university"
                          name="education"
                          minLength="2"
                          onChange={this.props.handleChange}/>
@@ -32,7 +32,7 @@ class EducationInputs extends React.Component {
                         name="education"
                         onChange={this.props.handleChange}/>
             </section>   
-            <button className='add--education--button'> Add education </button> 
+            <button onClick={this.props.handleSubmit} className='education'> Add education </button> 
           </form>
       )
     }

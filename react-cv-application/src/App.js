@@ -40,29 +40,86 @@ class App extends React.Component {
         }
 
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
 
   handleChange(event){
-      const {name,id,value} = event.target
+		console.log(this.state)
+      const {value, id ,name} = event.target
       this.setState(prevState=>{
-          console.log(prevState)
           return {
-                ...prevState,
-                [`${name}`]: {
-                    ...prevState[name],
-                    [id] : value
-                }
+						...prevState,
+						[name]: {
+								...prevState[name],
+								[id] : value
+						}
           }
       })
   }
 
-    handleSubmitField(){
-        //When any field button is cliked  
-    }
-    handleSubmitPreview(){
-        //When the preview button is clicked  
-    }   
+  //When any field button is cliked  
+  handleSubmit(event){
+    event.preventDefault()
+    // Select the button values to know which field needs submitting
+		// we are only getting the event class name to know which field to
+		// update
+    const name = event.target.className
+    // console.log(this.state) 
+    // Include form object into the respective array of objects
+		this.setState(prevState =>{
+			console.log(prevState)
+			const objectToSubmit = this.getObjectToSubmit(prevState, name)
+			return {
+				...prevState,
+				[name]: {
+					...prevState[name],
+					[`${name + 'Array'}`] : 
+					// Include all the values from array + prev.state[name] minus the array
+						objectToSubmit 
+				}
+			}
+		})
+    // Clear the fields for the current form
+    // 
+  }
+
+
+	getObjectToSubmit(state, name){
+		
+		if(name === 'education'){
+			const {title, university, observations} = state[name]
+			const objectToAdd = {
+				'title': title,
+				'university': university,
+				'observations': observations
+			}
+			return [...state.education.educationArray, objectToAdd]
+		}
+
+		if(name === 'work'){
+			const {place, company, observations} = state[name]
+			const objectToAdd = {
+				'place': place,
+				'company': company,
+				'observations': observations
+			}
+			return [...state.work.workArray, objectToAdd]
+		}
+
+		if(name === 'languages'){
+			const {language, proficiency} = state[name]
+			const objectToAdd = {
+				'language': language,
+				'proficiency': proficiency
+			}
+			return [...state.languages.languagesArray,objectToAdd]
+		}
+	}
+
+  //When the preview button is clicked  
+  handleSubmitPreview(){
+  }   
 
   render() {
     return (
@@ -76,11 +133,20 @@ class App extends React.Component {
             />
           </section>
 
-          <EducationInputs handleChange={this.handleChange} />
-          <WorkExperienceInputs />
+          <EducationInputs 
+						handleChange={this.handleChange} 
+						handleSubmit={this.handleSubmit} 
+					/>
+          <WorkExperienceInputs 
+						handleChange={this.handleChange} 
+						handleSubmit={this.handleSubmit} 
+					/>
 
           <section className='bottom--row'>
-            <LanguagesInputs />
+            <LanguagesInputs 
+							handleChange={this.handleChange} 
+							handleSubmit={this.handleSubmit} 
+						/>
             <SubmitButton />
           </section>
 
