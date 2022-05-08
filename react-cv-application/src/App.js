@@ -68,11 +68,12 @@ class App extends React.Component {
 		this.setState(prevState =>{
 			console.log(prevState)
 			const newArray = this.getObjectToAdd(prevState, name)
+			const emptyObject = this.eraseObjectContent(name)
 			// Clear the fields for the current form
 			return {
 				...prevState,
 				[name]: {
-					...prevState[name],
+					...emptyObject, // Replace with erased values
 					[`${name + 'Array'}`] : 
 					// Include all the values from array + prev.state[name] minus the array
 						newArray 
@@ -114,6 +115,32 @@ class App extends React.Component {
 		}
 	}
 
+	eraseObjectContent(name){
+		let objectToAdd
+		if(name === 'education'){
+			objectToAdd = {
+				'title': "",
+				'university': "",
+				'observations': ""
+			}
+		}
+
+		if(name === 'work'){
+			objectToAdd = {
+				'place': "",
+				'company': "",
+				'observations': ""
+			}
+		}
+
+		if(name === 'languages'){
+			objectToAdd = {
+				'language': "",
+				'proficiency': ""
+			}
+		}
+		return objectToAdd
+	}
   //When the preview button is clicked  
   handleSubmitPreview(){
   }   
