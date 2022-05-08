@@ -29,14 +29,16 @@
 props to each component, then use those functions and pass them to the onChange property, share the name of the input with the value -->
 <!-- : save state as nested objects for each section? > test changing name with nested objects (works) -->
 <!-- : on each input? each form? each input (works) -->
-: pass the state directly as props as well to have controlled components?
+<!-- : pass the state directly as props as well to have controlled components? -->
 
 {
 - Add the values within the state array's with submit but
     <!-- : button submit the created form within the object array -->
     <!-- : button converts current object values to string
         ? tie input value to state value so it gets erased by itself? -->
-    : add JS restrictions to not allow empty inputs > check js form validation docs
+    : add JS validation constraints to not allow empty inputs
+        :check JS constraints lessons and docs
+        :copied the library form validation, adjust?
 }
 
 -Implement HTML creation on button press(education)

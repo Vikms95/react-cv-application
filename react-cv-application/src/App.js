@@ -68,7 +68,7 @@ class App extends React.Component {
 		this.setState(prevState =>{
 			console.log(prevState)
 			const newArray = this.getObjectToAdd(prevState, name)
-			const emptyObject = this.eraseObjectContent(name)
+			const emptyObject = this.removeObjectContent(name)
 			// Clear the fields for the current form
 			return {
 				...prevState,
@@ -115,7 +115,7 @@ class App extends React.Component {
 		}
 	}
 
-	eraseObjectContent(name){
+	removeObjectContent(name){
 		let objectToAdd
 		if(name === 'education'){
 			objectToAdd = {
@@ -141,6 +141,48 @@ class App extends React.Component {
 		}
 		return objectToAdd
 	}
+
+	formIsValid(){
+		const titleInput = document.getElementById('title')
+		const authorInput = document.getElementById('author')
+		const pagesInput = document.getElementById('pages')
+	
+		titleInput.setCustomValidity('')
+		authorInput.setCustomValidity('')
+		pagesInput.setCustomValidity('')
+	
+		titleInput.style.backgroundColor = 'white'
+		authorInput.style.backgroundColor = 'white'
+		pagesInput.style.backgroundColor = 'white'
+		titleInput.style.border = '1px solid black'
+		authorInput.style.border = '1px solid black'
+		pagesInput.style.border = '1px solid black'
+	
+		if(titleInput.value === ''){
+			titleInput.setCustomValidity('The book needs a title!')
+			titleInput.reportValidity()
+			titleInput.style.backgroundColor = 'pink'
+			titleInput.style.border = '1px solid red'
+			return false
+		}
+		if(authorInput.value === ''){
+			authorInput.setCustomValidity('The author needs a name!')
+			authorInput.reportValidity()
+			authorInput.style.backgroundColor = 'pink'
+			authorInput.style.border = '1px solid red'
+			return false
+		}
+		
+		if(!pagesInput.checkValidity()){
+			pagesInput.setCustomValidity('The book cannot have negative pages!')
+			pagesInput.reportValidity()
+			pagesInput.style.backgroundColor = 'pink'
+			pagesInput.style.border = '1px solid red'
+			return false
+		}
+			return true
+	}
+	
   //When the preview button is clicked  
   handleSubmitPreview(){
   }   
