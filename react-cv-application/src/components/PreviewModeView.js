@@ -7,9 +7,10 @@ class PreviewModeView extends React.Component {
     render() {
       return (
         <section className="cv--container">
+            {console.log(this.props.inputValues.work.workArray)}
             {this.props.inputValues.education.educationArray.length > 0 && 
             <EducationView values={this.props.inputValues.education.educationArray}/>}
-            
+
             {this.props.inputValues.work.workArray.length > 0 &&
             <WorkExperienceView values={this.props.inputValues.work.workArray}/>}
 

@@ -11,11 +11,17 @@ import LanguagesView from './LanguagesView'
 
 class EditModeView extends React.Component{
     
-    isItemInCategory(inputValues){
+    isAnyItemInCategory(inputValues){
         return inputValues.length > 0
     }
 
     render(){
+        
+        const values = this.props.inputValues
+        const educationArray = values.education.educationArray
+        const workArray = values.work.workArray
+        const languagesArray = values.languages.languagesArray
+
         return(   
             <section className="cv--container">
                 <section className='general--info'>
@@ -26,26 +32,28 @@ class EditModeView extends React.Component{
                 </section>
 
                 <EducationInputs
-                            values={this.props.inputValues.education} 
+                            values={values.education} 
                             handleChange={this.props.handleChange} 
                             handleSubmit={this.props.handleSubmit} 
                         />
-                {this.props.inputValues.education.educationArray.length > 0 && 
-                <EducationView values={this.props.inputValues.education.educationArray}/>}
-                <WorkExperienceInputs 
-                            values={this.props.inputValues.work}
-                            handleChange={this.props.handleChange} 
-                            handleSubmit={this.props.handleSubmit} 
-                        />
-                {this.props.inputValues.work.workArray.length > 0 &&
-                <WorkExperienceView values={this.props.inputValues.work.workArray}/>}
 
-                {this.props.inputValues.languages.languagesArray.length > 0 &&
-                <LanguagesView values={this.props.inputValues.languages.languagesArray}/>}
-                
+                { this.isAnyItemInCategory(educationArray) && 
+                < EducationView values={educationArray}/> }
+
+                <WorkExperienceInputs 
+                            values={values.work}
+                            handleChange={this.props.handleChange} 
+                            handleSubmit={this.props.handleSubmit} 
+                        />
+                {this.isAnyItemInCategory(workArray) &&
+                <WorkExperienceView values={workArray}/>}
+
+                {this.isAnyItemInCategory(languagesArray) &&
+                <LanguagesView values={languagesArray}/>}
+
                 <section className='bottom--row'>
                 <LanguagesInputs 
-                                values={this.props.inputValues.languages}
+                                values={values.languages}
                                 handleChange={this.props.handleChange} 
                                 handleSubmit={this.props.handleSubmit} 
                             />

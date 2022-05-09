@@ -8,7 +8,7 @@ class App extends React.Component {
     constructor(){
         super()
         this.state = {
-            isEditorMode: false,
+            isEditorMode: true,
             
             general:{
                 name  : "",
@@ -117,6 +117,7 @@ class App extends React.Component {
 	}
 	
 	getArrayToAdd(state, name){
+        console.log("Hi")
 		if(name === 'education'){
 			const {title, university, observations} = state[name]
 			const objectToAdd = {
