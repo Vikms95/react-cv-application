@@ -21,34 +21,57 @@
 <!-- -Make header -->
 
 {
-- Plan how to handle props and state within the App
-    :https://reactjs.org/docs/thinking-in-react.html
-    :https://reactjs.org/docs/faq-state.html#what-is-the-difference-between-state-and-props
-<!-- 
-- Hold state in App and the functions to modify it (setState) and pass those functions to setState as
+<!-- - Plan how to handle props and state within the App
+*:https://reactjs.org/docs/thinking-in-react.html
+:https://reactjs.org/docs/faq-state.html#what-is-the-difference-between-state-and-props -->
+
+<!-- - Hold state in App and the functions to modify it (setState) and pass those functions to setState as
 props to each component, then use those functions and pass them to the onChange property, share the name of the input with the value -->
-<!-- : save state as nested objects for each section? > test changing name with nested objects (works) -->
+*<!-- : save state as nested objects for each section? > test changing name with nested objects (works) -->
 <!-- : on each input? each form? each input (works) -->
 <!-- : pass the state directly as props as well to have controlled components? -->
 
-{
-- Add the values within the state array's with submit but
-    <!-- : button submit the created form within the object array -->
-    <!-- : button converts current object values to string
-        ? tie input value to state value so it gets erased by itself? -->
-    : add JS validation constraints to not allow empty inputs
-        :check JS constraints lessons and docs
-        :copied the library form validation, adjust?
-        :use the passed 'name' variable to locate the form which required validity instead of the inputs?
-}
 
--Implement HTML creation on button press(education)
+<!-- - Add the values within the state array's with submit but -->
+<!-- : button submit the created form within the object array -->
+<!-- : button converts current object values to string
+*? tie input value to state value so it gets erased by itself? -->
+<!-- : add JS validation constraints to not allow empty inputs
+:check JS constraints lessons and docs
+:copied the library form validation, adjust?
+:use the passed 'name' variable to locate the form which required validity instead of the inputs? -->
 
+
+<!-- -Implement HTML creation on button press
+*:they will be new components that will show up ONLY when the arrays from
+the state length are over 0 (state.array.length > 0 && component)
+:they will get passed the state values as props to be able to display them
+below the form fields
+:include the functionality in the handleSubmit function (split both the object part and the display part in two functions)
+:problem with grid, change className upon grid creation? -->
+
+<!-- -Fix grid issues with creating new elements inbetween the default grid elements(they all grow to fit the 1fr specification) -->
+
+-The submit button should submit your form and display the value of your input fields
+(which do not need to be referenced, since all is already updated in our state) in HTML elements with its respective titles.
 - Be sure to include an edit button for the HTML version for each section or for the whole CV, your preference.
+    <!-- : one component for edit mode and the other for preview mode -->
+    <!-- : use ternary statement to know which component should be displayed,
+    editMode ? then display the edit mode -->
+    : change value whenever the preview button is clicked or if any edit button 
+    is clicked on the preview mode(just goes back to editor mode,
+    no fancy editing mode on preview mode) 
+    :previewMode needs to get the state passed as props
+    
+    :1. organize the preview component elements and map all the arrays to formatted elements
+    :2. implement handleSubmitPreview which will check how many field are empty to
+    see if swapping to preview mode makes sense, if that's the case, change the value to false
+    :3 every element will have a button that will appear on hover to bring you back to edit mode
+    :4.at the bottom of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print
+     
+- Remove button per field element    
 
--The submit button should submit your form and display the value of your input fields in HTML elements.
-
-- The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content.
+- The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content(use the already created inputs and lay down the values from current state)
 
 - QUESTIONS
 -State will be held in App.js?

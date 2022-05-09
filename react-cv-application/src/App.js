@@ -1,12 +1,8 @@
 import React from 'react'
 import './styles/App.css'
 import Header from './components/Header'
-import ProfilePicture from './components/ProfilePictureInput'
-import GeneralInfoInputs from './components/GeneralInfoInputs'
-import EducationInputs from './components/EducationInputs'
-import WorkExperienceInputs from './components/WorkExperienceInputs'
-import LanguagesInputs from './components/LanguagesInputs'
-import SubmitButton from './components/SubmitButton'
+import EditModeView from './components/EditModeView'
+import PreviewModeView from './components/PreviewModeView'
 
 class App extends React.Component {
     constructor(){
@@ -22,7 +18,9 @@ class App extends React.Component {
                 title:"",
                 university:"",
                 observations:"",
-                educationArray:[],
+                educationArray:[
+					{title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Cum Laude graduated with specialization on computer quantum theory and web development prospects"}
+				],
             },
 
             work:{
@@ -37,6 +35,7 @@ class App extends React.Component {
                 proficiency:"",
                 languagesArray:[],
             },
+			isEditorMode: true
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -48,20 +47,20 @@ class App extends React.Component {
       const {value, id ,name} = event.target
       this.setState(prevState=>{
           return {
-						...prevState,
-						[name]: {
-								...prevState[name],
-								[id] : value
-						}
-          }
+			...prevState,
+			[name]: {
+				...prevState[name],
+				[id] : value
+			}
+		}
       })
   }
 
   //When any field button is cliked  
   handleSubmit(event){
+	console.log(this.state)
 	event.preventDefault()
 	const name = event.target.className
-	console.log(this.state)
 	if(this.formIsValid(name)){
 		this.setState(prevState =>{
 			const newArray = this.getObjectToAdd(prevState, name)
@@ -83,6 +82,7 @@ class App extends React.Component {
 	}
 	
 	formIsValid(name){
+
 		const formToValidate = document.getElementById(`${name}`)
 		const inputsToValidate = Array.from(formToValidate.getElementsByTagName('input'))
 		this.resetFormsStyling()
@@ -111,34 +111,35 @@ class App extends React.Component {
 	}
 	
 	getObjectToAdd(state, name){
-	if(name === 'education'){
-		const {title, university, observations} = state[name]
-		const objectToAdd = {
-			'title': title,
-			'university': university,
-			'observations': observations
+		if(name === 'education'){
+			const {title, university, observations} = state[name]
+			const objectToAdd = {
+				'title': title,
+				'university': university,
+				'observations': observations
+			}
+			return [...state.education.educationArray, objectToAdd]
 		}
-		return [...state.education.educationArray, objectToAdd]
-	}
 
-	if(name === 'work'){
-		const {place, company, observations} = state[name]
-		const objectToAdd = {
-			'place': place,
-			'company': company,
-			'observations': observations
+		if(name === 'work'){
+			const {place, company, observations} = state[name]
+			const objectToAdd = {
+				'place': place,
+				'company': company,
+				'observations': observations
+			}
+			return [...state.work.workArray, objectToAdd]
 		}
-		return [...state.work.workArray, objectToAdd]
-	}
 
-	if(name === 'languages'){
-		const {language, proficiency} = state[name]
-		const objectToAdd = {
-			'language': language,
-			'proficiency': proficiency
+		if(name === 'languages'){
+			const {language} = state[name]
+			const proficiency = document.querySelector('.proficiency').value
+			const objectToAdd = {
+				'language': language,
+				'proficiency': proficiency
+			}
+			return [...state.languages.languagesArray, objectToAdd]
 		}
-		return [...state.languages.languagesArray,objectToAdd]
-	}
 	}
 
 	removeObjectContent(name){
@@ -175,36 +176,16 @@ class App extends React.Component {
   render() {
     return (
       <section className='general--container'>
-        <Header />
-        <section className="cv--editor--container">
-          <section className='general--info'>
-            <ProfilePicture />
-            <GeneralInfoInputs 
-                handleChange={this.handleChange} 
-            />
-          </section>
+        <Header/>
+		{ 
+			(this.state.isEditorMode) 
+				? <EditModeView 
+					handleChange={this.handleChange} 
+					handleSubmit={this.handleSubmit} 
+					state       ={this.state} />
 
-          <EducationInputs
-						values={this.state.education} 
-						handleChange={this.handleChange} 
-						handleSubmit={this.handleSubmit} 
-					/>
-          <WorkExperienceInputs 
-						values={this.state.work}
-						handleChange={this.handleChange} 
-						handleSubmit={this.handleSubmit} 
-					/>
-
-          <section className='bottom--row'>
-            <LanguagesInputs 
-							values={this.state.languages}
-							handleChange={this.handleChange} 
-							handleSubmit={this.handleSubmit} 
-						/>
-            <SubmitButton />
-          </section>
-
-        </section>
+				: <PreviewModeView />
+		}
       </section>
     )
   }
