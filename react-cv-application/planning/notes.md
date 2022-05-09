@@ -39,11 +39,12 @@ props to each component, then use those functions and pass them to the onChange 
     : add JS validation constraints to not allow empty inputs
         :check JS constraints lessons and docs
         :copied the library form validation, adjust?
+        :use the passed 'name' variable to locate the form which required validity instead of the inputs?
 }
 
 -Implement HTML creation on button press(education)
 
-- Be sure to include an edit and submit button for each section or for the whole CV, your preference.
+- Be sure to include an edit button for the HTML version for each section or for the whole CV, your preference.
 
 -The submit button should submit your form and display the value of your input fields in HTML elements.
 

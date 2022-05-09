@@ -3,7 +3,7 @@ import React from 'react'
 class LanguagesInputs extends React.Component {
     render() {
       return (
-          <form className='languages--inputs'>
+          <form className='languages--inputs' id='languages'>
 
             <section>
               <label htmlFor="language--name"> Language </label>
@@ -18,8 +18,7 @@ class LanguagesInputs extends React.Component {
             </section>
 
             <section className='languages-bottom'>
-                  <select defaultValue="default" id='language--level'>
-                      <option value="default"> - Proficiency - </option>
+                  <select defaultValue="elementary" id='language--level'>
                       <option value="elementary"> Elementary </option>
                       <option value="professional"> Professional </option>
                       <option value="native"> Native </option>

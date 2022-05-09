@@ -2,9 +2,9 @@ import React from 'react'
 
 class EducationInputs extends React.Component {
     render() {
-      console.log(this.props.values.title)
       return (
-          <form className='container--input'>
+          <form className='container--input' id='education'>
+
             <section>
                   <label htmlFor="title"> Title obtained </label>
                   <input 
@@ -16,6 +16,7 @@ class EducationInputs extends React.Component {
                         onChange={this.props.handleChange}
                         value={this.props.values.title}/>
             </section>
+
             <section>
                   <label htmlFor="university" > University </label>
                   <input className='university--input' 
@@ -26,6 +27,7 @@ class EducationInputs extends React.Component {
                          onChange={this.props.handleChange}
                          value={this.props.values.university}/>
             </section>
+
             <section className='observations--container'>
                   <label htmlFor="observations"> Observations </label>
                   <textarea 
@@ -36,6 +38,7 @@ class EducationInputs extends React.Component {
                         onChange={this.props.handleChange}
                         value={this.props.values.observations}/>
             </section>   
+
             <button onClick={this.props.handleSubmit} className='education'> Add education </button> 
           </form>
       )

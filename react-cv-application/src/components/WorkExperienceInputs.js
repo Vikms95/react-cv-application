@@ -3,9 +3,9 @@ import React from 'react'
 class WorkExperienceInputs extends React.Component {
     render() {
       return (
-          <form className='container--input'>
+          <form className='container--input' id='work'>
             <section>
-                  <label htmlFor="title"> Place </label>
+                  <label htmlFor="place"> Place </label>
                   <input 
                         className='place--input' 
                         type="text" 
