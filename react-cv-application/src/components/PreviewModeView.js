@@ -5,18 +5,37 @@ import LanguagesView from './LanguagesView'
 
 class PreviewModeView extends React.Component {
     render() {
+
+      const values = this.props.inputValues
+      const educationValues = values.education.educationArray
+      const workValues = values.work.workArray
+      const languagesValues = values.languages.languagesArray
+
       return (
+
         <section className="cv--container">
-            {console.log(this.props.inputValues.work.workArray)}
-            {this.props.inputValues.education.educationArray.length > 0 && 
-            <EducationView values={this.props.inputValues.education.educationArray}/>}
 
-            {this.props.inputValues.work.workArray.length > 0 &&
-            <WorkExperienceView values={this.props.inputValues.work.workArray}/>}
+            
 
+            <h2 className='preview--field--title'> Education </h2>
+            {
+              this.props.isAnyItemInField(educationValues) 
+              && <EducationView values={educationValues}
+              />
+            }
+            <h2 className='preview--field--title'> Work experience </h2>
+            {
+              this.props.isAnyItemInField(workValues) 
+              && <WorkExperienceView values={workValues}
+              />
+            }
+            <h2 className='preview--field--title'> Languages </h2>
 
-            {this.props.inputValues.languages.languagesArray.length > 0 &&
-            <LanguagesView values={this.props.inputValues.languages.languagesArray}/>}
+            {
+              this.props.isAnyItemInField(languagesValues) 
+              && <LanguagesView values={languagesValues}
+              />
+            }
         </section>
       )
     }

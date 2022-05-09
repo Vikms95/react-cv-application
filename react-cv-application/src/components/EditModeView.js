@@ -11,16 +11,13 @@ import LanguagesView from './LanguagesView'
 
 class EditModeView extends React.Component{
     
-    isAnyItemInCategory(inputValues){
-        return inputValues.length > 0
-    }
 
     render(){
         
         const values = this.props.inputValues
-        const educationArray = values.education.educationArray
-        const workArray = values.work.workArray
-        const languagesArray = values.languages.languagesArray
+        const educationValues = values.education.educationArray
+        const workValues = values.work.workArray
+        const languagesValues = values.languages.languagesArray
 
         return(   
             <section className="cv--container">
@@ -37,19 +34,19 @@ class EditModeView extends React.Component{
                             handleSubmit={this.props.handleSubmit} 
                         />
 
-                { this.isAnyItemInCategory(educationArray) && 
-                < EducationView values={educationArray}/> }
+                { this.props.isAnyItemInField(educationValues) && 
+                < EducationView values={educationValues}/> }
 
                 <WorkExperienceInputs 
                             values={values.work}
                             handleChange={this.props.handleChange} 
                             handleSubmit={this.props.handleSubmit} 
                         />
-                {this.isAnyItemInCategory(workArray) &&
-                <WorkExperienceView values={workArray}/>}
+                {this.props.isAnyItemInField(workValues) &&
+                <WorkExperienceView values={workValues}/>}
 
-                {this.isAnyItemInCategory(languagesArray) &&
-                <LanguagesView values={languagesArray}/>}
+                {this.props.isAnyItemInField(languagesValues) &&
+                <LanguagesView values={languagesValues}/>}
 
                 <section className='bottom--row'>
                 <LanguagesInputs 

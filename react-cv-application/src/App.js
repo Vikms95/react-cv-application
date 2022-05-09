@@ -8,7 +8,7 @@ class App extends React.Component {
     constructor(){
         super()
         this.state = {
-            isEditorMode: true,
+            isEditorMode: false,
             
             general:{
                 name  : "",
@@ -30,7 +30,7 @@ class App extends React.Component {
                 company:"",
                 observations:"",
                 workArray:[
-                    {title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Cum Laude graduated with specialization on computer quantum theory and web development prospects"}
+                    {place:"Backend developer", company: "Spotify", observations:"Worked with React, Node, Mongo and Express to build fully fledged backend network. "}
                 ],
             },
 
@@ -38,7 +38,7 @@ class App extends React.Component {
                 language:"",
                 proficiency:"",
                 languagesArray:[
-                    {title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Cum Laude graduated with specialization on computer quantum theory and web development prospects"}
+                    {language:"English", proficiency: "Native"}
                 ],
             }
         }
@@ -201,6 +201,10 @@ class App extends React.Component {
                )
     }
 
+	isAnyItemInField(values){
+        return values.length > 0
+    }
+
   render() {
     return (
       <section className='general--container'>
@@ -211,10 +215,12 @@ class App extends React.Component {
                     inputValues         = {this.state}
 					handleChange        = {this.handleChange} 
 					handleSubmit        = {this.handleSubmit} 
+					isAnyItemInField    = {this.isAnyItemInField}
                     handleSubmitPreview = {this.handleSubmitPreview}
                 />
 				: <PreviewModeView
-                    inputValues = {this.state}
+                    inputValues      = {this.state}
+					isAnyItemInField = {this.isAnyItemInField}
                  />
 		}
       </section>

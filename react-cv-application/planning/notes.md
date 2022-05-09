@@ -63,20 +63,13 @@ below the form fields
     no fancy editing mode on preview mode) 
     :previewMode needs to get the state passed as props
     
-    :1. organize the preview component elements and map all the arrays to formatted elements
+    :1. create GeneralInfoView for the preview mode
     :2. implement handleSubmitPreview which will-
         :check if the three main inputs are filled, if not, trigger constraints validations and return from the function
         :check how many education/work/languages fields are empty to
         see if swapping to preview mode makes sense, ask the user, if it says yes, change the value to false
     :3 every element will have a button that will appear on hover to bring you back to edit mode
     :4.at the bottom of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print
-
-    *:work and languages title and subtitle do not show up? (swapped the components and seems to be a problem from those two components themselves)
-        :education props are being passed in work and languages?(saw through console log)
-        :only happens when they are already created?
-        :arrays objects have the property names already changed
-        :when elements first created, they dont get passed through the object creation function, this might be the cause
-        :just an isolated case for elements created before loading?
 
 - Remove button per field element    
 
