@@ -61,9 +61,9 @@ class App extends React.Component {
   handleSubmit(event){
 	event.preventDefault()
 	const name = event.target.className
+	console.log(this.state)
 	if(this.formIsValid(name)){
 		this.setState(prevState =>{
-			console.log(prevState)
 			const newArray = this.getObjectToAdd(prevState, name)
 			// Store the current object with empty fields to reassign later
 			const emptyObject = this.removeObjectContent(name)
@@ -78,7 +78,6 @@ class App extends React.Component {
 			}
 		})
 	}else{
-		console.log("No")
 		return
 	}
 	}
@@ -86,6 +85,7 @@ class App extends React.Component {
 	formIsValid(name){
 		const formToValidate = document.getElementById(`${name}`)
 		const inputsToValidate = Array.from(formToValidate.getElementsByTagName('input'))
+		this.resetFormsStyling()
 
 		for (let i = 0; i < inputsToValidate.length; i++) {
 			inputsToValidate[i].setCustomValidity('')
@@ -98,12 +98,18 @@ class App extends React.Component {
 	}
 
 	reportInvalidInput(element){
-		element.setCustomValidity('This is wrong!')
+		element.setCustomValidity('This field is required')
 		element.reportValidity()
-		element.style.backgroundColor = 'pink'
-		element.style.border = '1px solid red'
+		element.classList.add('invalid--input')
 	}
 
+	resetFormsStyling(){
+		const inputElements = Array.from(document.getElementsByTagName('input'))
+		for (let i = 0;  i < inputElements.length; i++) {
+			inputElements[i].classList.remove('invalid--input')		
+		}
+	}
+	
 	getObjectToAdd(state, name){
 	if(name === 'education'){
 		const {title, university, observations} = state[name]
@@ -163,8 +169,8 @@ class App extends React.Component {
 	}
 
   //When the preview button is clicked  
-  handleSubmitPreview(){
-  }   
+	handleSubmitPreview(){
+	}   
 
   render() {
     return (

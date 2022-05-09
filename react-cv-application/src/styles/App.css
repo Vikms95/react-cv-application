@@ -173,3 +173,8 @@ button.languages{
     padding: 1rem;
     width: 10rem;
 }
+
+.invalid--input{
+    background-color: pink;
+    border: 1px solid red;
+}
