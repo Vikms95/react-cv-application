@@ -4,20 +4,20 @@ class EducationView extends React.Component {
 
     formatValues(){
          return this.props.values.map(value =>{
-             return <section key={value.title} className="education--view">
-                        <h4>{value.title}</h4>
-                        <h4>{value.university}</h4>
-                        { (value.observations) && <div>{value.observations}</div> }
-                    </section>
+             return <div key={value.title} className="education--view">
+                        <h2 className='title--view'>{value.title}</h2>
+                        <h4 className='university--view'>{value.university}</h4>
+                        { (value.observations) && <div className='observations--view'>{value.observations}</div> }
+                    </div>
          })
 
     }
     
     render() {
         return (
-            <div>
+            <section className="education--view">
                 {this.formatValues()}
-            </div>
+            </section>
       )}
 }
   export default EducationView

@@ -18,10 +18,14 @@ class LanguagesInputs extends React.Component {
             </section>
 
             <section className='languages-bottom'>
-                  <select defaultValue="elementary" id='language--level'>
-                      <option value="elementary"> Elementary </option>
-                      <option value="professional"> Professional </option>
-                      <option value="native"> Native </option>
+                  <select 
+                      defaultValue="elementary" 
+                      id='language--level' 
+                      className="proficiency"
+                  >
+                      <option value="Elementary"> Elementary </option>
+                      <option value="Professional"> Professional </option>
+                      <option value="Native"> Native </option>
                   </select>
                   <button 
                     value={this.props.values.proficiency}

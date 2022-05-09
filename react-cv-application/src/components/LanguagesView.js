@@ -4,9 +4,9 @@ class LanguagesView extends React.Component {
 
     formatValues(){
          return this.props.values.map(value =>{
-             return <section key={value.place} className="languages--view">
-                        <h4>{value.place}</h4>
-                        <h4>{value.company}</h4>
+             return <section key={value.language}>
+                        <h4>{value.language}</h4>
+                        <div>{value.proficiency}</div>
                         { (value.observations) && <div>{value.observations}</div> }
                     </section>
          })
@@ -15,7 +15,7 @@ class LanguagesView extends React.Component {
     
     render() {
         return (
-            <div>
+            <div  className="languages--view">
                 {this.formatValues()}
             </div>
       )}
