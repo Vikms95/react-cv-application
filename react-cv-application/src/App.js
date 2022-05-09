@@ -8,6 +8,8 @@ class App extends React.Component {
     constructor(){
         super()
         this.state = {
+            isEditorMode: false,
+            
             general:{
                 name  : "",
                 email : "",
@@ -27,19 +29,24 @@ class App extends React.Component {
                 place:"",
                 company:"",
                 observations:"",
-                workArray:[],
+                workArray:[
+                    {title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Cum Laude graduated with specialization on computer quantum theory and web development prospects"}
+                ],
             },
 
             languages:{
                 language:"",
                 proficiency:"",
-                languagesArray:[],
-            },
-			isEditorMode: true
+                languagesArray:[
+                    {title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Cum Laude graduated with specialization on computer quantum theory and web development prospects"}
+                ],
+            }
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.isAllItemsFilled = this.isAllItemsFilled.bind(this)
+        this.handleSubmitPreview = this.handleSubmitPreview.bind(this)
     }
 
 
@@ -63,9 +70,9 @@ class App extends React.Component {
 	const name = event.target.className
 	if(this.formIsValid(name)){
 		this.setState(prevState =>{
-			const newArray = this.getObjectToAdd(prevState, name)
+			const newArray = this.getArrayToAdd(prevState, name)
 			// Store the current object with empty fields to reassign later
-			const emptyObject = this.removeObjectContent(name)
+			const emptyObject = this.getEmptyObjectToAdd(name)
 			return {
 				...prevState,
 				[name]: {
@@ -82,7 +89,6 @@ class App extends React.Component {
 	}
 	
 	formIsValid(name){
-
 		const formToValidate = document.getElementById(`${name}`)
 		const inputsToValidate = Array.from(formToValidate.getElementsByTagName('input'))
 		this.resetFormsStyling()
@@ -110,7 +116,7 @@ class App extends React.Component {
 		}
 	}
 	
-	getObjectToAdd(state, name){
+	getArrayToAdd(state, name){
 		if(name === 'education'){
 			const {title, university, observations} = state[name]
 			const objectToAdd = {
@@ -142,7 +148,7 @@ class App extends React.Component {
 		}
 	}
 
-	removeObjectContent(name){
+	getEmptyObjectToAdd(name){
 	let objectToAdd
 	if(name === 'education'){
 		objectToAdd = {
@@ -171,7 +177,28 @@ class App extends React.Component {
 
   //When the preview button is clicked  
 	handleSubmitPreview(){
+        // Make some checks to see if education, work and languages
+        // array have at least 1 item
+        // *IF one empty array is found
+        if(this.isAllItemsFilled()){
+            console.log("exit")
+        }else{
+            console.log("check")
+        }
+            // Ask if they are sure that they want
+            // to proceed with the preview (use an absolute element with
+            // display none/block) a warning of the empty field and a button
+            // which just triggers the same functionality of the next lines of code
+        // Swap the value isEditorMode to false
 	}   
+
+    isAllItemsFilled(){
+        return (
+                   this.state.education.educationArray.length > 0
+                && this.state.work.workArray.length > 0
+                && this.state.languages.languagesArray.length > 0                
+               )
+    }
 
   render() {
     return (
@@ -180,11 +207,14 @@ class App extends React.Component {
 		{ 
 			(this.state.isEditorMode) 
 				? <EditModeView 
-					handleChange={this.handleChange} 
-					handleSubmit={this.handleSubmit} 
-					state       ={this.state} />
-
-				: <PreviewModeView />
+                    inputValues         = {this.state}
+					handleChange        = {this.handleChange} 
+					handleSubmit        = {this.handleSubmit} 
+                    handleSubmitPreview = {this.handleSubmitPreview}
+                />
+				: <PreviewModeView
+                    inputValues = {this.state}
+                 />
 		}
       </section>
     )

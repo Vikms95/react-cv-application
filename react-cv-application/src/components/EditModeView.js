@@ -10,6 +10,11 @@ import WorkExperienceView from './WorkExperienceView'
 import LanguagesView from './LanguagesView'
 
 class EditModeView extends React.Component{
+    
+    isItemInCategory(inputValues){
+        return inputValues.length > 0
+    }
+
     render(){
         return(   
             <section className="cv--container">
@@ -21,29 +26,30 @@ class EditModeView extends React.Component{
                 </section>
 
                 <EducationInputs
-                            values={this.props.state.education} 
+                            values={this.props.inputValues.education} 
                             handleChange={this.props.handleChange} 
                             handleSubmit={this.props.handleSubmit} 
                         />
-                {this.props.state.education.educationArray.length > 0 && 
-                <EducationView values={this.props.state.education.educationArray}/>}
+                {this.props.inputValues.education.educationArray.length > 0 && 
+                <EducationView values={this.props.inputValues.education.educationArray}/>}
                 <WorkExperienceInputs 
-                            values={this.props.state.work}
+                            values={this.props.inputValues.work}
                             handleChange={this.props.handleChange} 
                             handleSubmit={this.props.handleSubmit} 
                         />
-                {this.props.state.work.workArray.length > 0 &&
-                <WorkExperienceView values={this.props.state.work.workArray}/>}
+                {this.props.inputValues.work.workArray.length > 0 &&
+                <WorkExperienceView values={this.props.inputValues.work.workArray}/>}
 
-                {this.props.state.languages.languagesArray.length > 0 &&
-                <LanguagesView values={this.props.state.languages.languagesArray}/>}
+                {this.props.inputValues.languages.languagesArray.length > 0 &&
+                <LanguagesView values={this.props.inputValues.languages.languagesArray}/>}
+                
                 <section className='bottom--row'>
                 <LanguagesInputs 
-                                values={this.props.state.languages}
+                                values={this.props.inputValues.languages}
                                 handleChange={this.props.handleChange} 
                                 handleSubmit={this.props.handleSubmit} 
                             />
-                <SubmitButton />
+                <SubmitButton handleClick={this.props.handleSubmitPreview}/>
                 </section>
             </section>
 

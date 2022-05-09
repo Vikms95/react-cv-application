@@ -58,17 +58,21 @@ below the form fields
     <!-- : one component for edit mode and the other for preview mode -->
     <!-- : use ternary statement to know which component should be displayed,
     editMode ? then display the edit mode -->
-    : change value whenever the preview button is clicked or if any edit button 
+    : change value whenever the edit button is clicked or if any edit button 
     is clicked on the preview mode(just goes back to editor mode,
     no fancy editing mode on preview mode) 
     :previewMode needs to get the state passed as props
     
     :1. organize the preview component elements and map all the arrays to formatted elements
-    :2. implement handleSubmitPreview which will check how many field are empty to
-    see if swapping to preview mode makes sense, if that's the case, change the value to false
+    :2. implement handleSubmitPreview which will-
+        :check if the three main inputs are filled, if not, trigger constraints validations and return from the function
+        :check how many education/work/languages fields are empty to
+        see if swapping to preview mode makes sense, ask the user, if it says yes, change the value to false
     :3 every element will have a button that will appear on hover to bring you back to edit mode
     :4.at the bottom of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print
-     
+
+    :work and languages title and subtitle do not show up? (swapped the components and seems to be a problem from those two components themselves)
+
 - Remove button per field element    
 
 - The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content(use the already created inputs and lay down the values from current state)
@@ -80,3 +84,5 @@ below the form fields
 -To swap views, conditional rendering on the App component?
 -State is already updated on each change, so button just has to get the state and render an HTML ?
 -Education and Work in one component with different props?
+-Reassign props to another variable name without changing its value to make
+components in the jsx cleaner?
