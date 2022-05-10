@@ -39,15 +39,17 @@ class App extends React.Component {
                 language:"",
                 proficiency:"",
                 languagesArray:[
-                    {language:"English", proficiency: "Native"}
+                    // {language:"English", proficiency: "Native"}
                 ],
             }
         }
 
+        this.toggleMode = this.toggleMode.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.isAllItemsFilled = this.isAnyOptionalFieldEmpty.bind(this)
         this.handleSubmitPreview = this.handleSubmitPreview.bind(this)
+		
     }
 
 
@@ -176,6 +178,22 @@ class App extends React.Component {
 	return objectToAdd
 	}
 
+	toggleMode(){
+		this.setState(prevState =>{
+			// Toggle the value isEditorMode to
+			// the opposite value it was
+			return {
+					...prevState,
+					isEditorMode : !prevState.isEditorMode
+					}
+		})
+		this.removeAlertBox()
+	}
+
+	removeAlertBox(){
+		document.querySelector('.alert--box').classList.remove('active')
+	}
+
   //When the preview button is clicked  
 	handleSubmitPreview(){
         // Make some checks to see if education, work and languages
@@ -184,23 +202,13 @@ class App extends React.Component {
         
 		if(this.isRequiredFieldsValid()){
 			if(this.isAnyOptionalFieldEmpty()){
-				console.log("i ask u")
+				document.querySelector('.alert--box').classList.add('active')
+				return
 			}
-
-			this.setState(prevState =>{
-				return {
-						...prevState,
-						isEditorMode : !prevState.isEditorMode
-						}
-			})
+			this.toggleMode()
+			return
 		}
 	}
-		
-            // Ask if they are sure that they want
-            // to proceed with the preview (use an absolute element with
-            // display none/block) a warning of the empty field and a button
-            // which just triggers the same functionality of the next lines of code
-        // Swap the value isEditorMode to false 
 
 	isRequiredFieldsValid(){
 		const{ name, email, phone } = this.state.general
@@ -222,6 +230,15 @@ class App extends React.Component {
   render() {
 		return (
 		<section className='general--container'>
+			<div className='alert--box'>
+				<div> Not all the CV fields are filled with your information,
+					are you sure you want to proceed with the preview? 
+				</div>
+				<div>
+					<button onClick={this.toggleMode} className='alert--box--button'> Proceed </button>
+					<button onClick={this.removeAlertBox} className='alert--box--button'> Back to editing </button>
+				</div>
+			</div>
 			<Header/>
 			{ 
 				(this.state.isEditorMode) 

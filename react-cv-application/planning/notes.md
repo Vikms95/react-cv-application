@@ -63,14 +63,16 @@ below the form fields
     no fancy editing mode on preview mode) 
     :previewMode needs to get the state passed as props
     
-    <!-- :1. create GeneralInfoView for the preview mode -->
-    :2. pass in the selected profile picture
-    :3. implement handleSubmitPreview which will-
+    <!-- :. create GeneralInfoView for the preview mode -->
+    <!-- :. pass in the selected profile picture -->
+    :. create element which will ask if you want to proceed with the CV preview even though not all fields have content
+        :set up an absolute div with display none on App 
+    :. implement handleSubmitPreview which will-
         :check if the three main inputs are filled, if not, trigger constraints validations and return from the function
         :check how many education/work/languages fields are empty to
         see if swapping to preview mode makes sense, ask the user, if it says yes, change the value to false
-    :3 every element will have a button that will appear on hover to bring you back to edit mode
-    :4.at the bottom of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print
+    : every element will have a button that will appear on hover to bring you back to edit mode
+    :.at the bottom of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print
 
 - Remove button per field element    
 
