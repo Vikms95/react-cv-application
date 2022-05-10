@@ -1,4 +1,6 @@
 import React from 'react'
+import ProfilePhotoView from './ProfilePhotoView'
+import GeneralInfoView from './GeneralInfoView'
 import EducationView from './EducationView'
 import WorkExperienceView from './WorkExperienceView'
 import LanguagesView from './LanguagesView'
@@ -7,6 +9,7 @@ class PreviewModeView extends React.Component {
     render() {
 
       const values = this.props.inputValues
+      const generalValues = values.general
       const educationValues = values.education.educationArray
       const workValues = values.work.workArray
       const languagesValues = values.languages.languagesArray
@@ -15,7 +18,8 @@ class PreviewModeView extends React.Component {
 
         <section className="cv--container">
 
-            
+            <ProfilePhotoView profilePhoto={this.props.profilePhoto} />
+            <GeneralInfoView values={generalValues} />
 
             <h2 className='preview--field--title'> Education </h2>
             {

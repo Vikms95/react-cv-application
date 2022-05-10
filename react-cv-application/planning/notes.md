@@ -63,8 +63,9 @@ below the form fields
     no fancy editing mode on preview mode) 
     :previewMode needs to get the state passed as props
     
-    :1. create GeneralInfoView for the preview mode
-    :2. implement handleSubmitPreview which will-
+    <!-- :1. create GeneralInfoView for the preview mode -->
+    :2. pass in the selected profile picture
+    :3. implement handleSubmitPreview which will-
         :check if the three main inputs are filled, if not, trigger constraints validations and return from the function
         :check how many education/work/languages fields are empty to
         see if swapping to preview mode makes sense, ask the user, if it says yes, change the value to false

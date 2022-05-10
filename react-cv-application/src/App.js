@@ -3,17 +3,18 @@ import './styles/App.css'
 import Header from './components/Header'
 import EditModeView from './components/EditModeView'
 import PreviewModeView from './components/PreviewModeView'
+import profilePhoto from './images/stock-pic.png'
 
 class App extends React.Component {
     constructor(){
         super()
         this.state = {
-            isEditorMode: false,
+            isEditorMode: true,
             
             general:{
-                name  : "",
-                email : "",
-                phone : "",
+                name  : "Victor",
+                email : "vms1955@hotmail.com",
+                phone : "446746778",
             },
 
             education:{
@@ -45,47 +46,46 @@ class App extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.isAllItemsFilled = this.isAllItemsFilled.bind(this)
+        this.isAllItemsFilled = this.isAnyOptionalFieldEmpty.bind(this)
         this.handleSubmitPreview = this.handleSubmitPreview.bind(this)
     }
 
 
-  handleChange(event){
-      const {value, id ,name} = event.target
-      this.setState(prevState=>{
-          return {
-			...prevState,
-			[name]: {
-				...prevState[name],
-				[id] : value
-			}
-		}
-      })
-  }
-
-  //When any field button is cliked  
-  handleSubmit(event){
-	console.log(this.state)
-	event.preventDefault()
-	const name = event.target.className
-	if(this.formIsValid(name)){
-		this.setState(prevState =>{
-			const newArray = this.getArrayToAdd(prevState, name)
-			// Store the current object with empty fields to reassign later
-			const emptyObject = this.getEmptyObjectToAdd(name)
+	handleChange(event){
+		const {value, id ,name} = event.target
+		this.setState(prevState=>{
 			return {
 				...prevState,
 				[name]: {
-					...emptyObject, // Replace with erased values
-					[`${name + 'Array'}`] : 
-					// Include all the values from array + prev.state[name] minus the array
-						newArray 
+					...prevState[name],
+					[id] : value
 				}
 			}
 		})
-	}else{
-		return
 	}
+
+  //When any field button is cliked  
+	handleSubmit(event){
+		event.preventDefault()
+		const name = event.target.className
+		if(this.formIsValid(name)){
+			this.setState(prevState =>{
+				const newArray = this.getArrayToAdd(prevState, name)
+				// Store the current object with empty fields to reassign later
+				const emptyObject = this.getEmptyObjectToAdd(name)
+				return {
+					...prevState,
+					[name]: {
+						...emptyObject, // Replace with erased values
+						[`${name + 'Array'}`] : 
+						// Include all the values from array + prev.state[name] minus the array
+							newArray 
+					}
+				}
+			})
+		}else{
+			return
+		}
 	}
 	
 	formIsValid(name){
@@ -181,23 +181,37 @@ class App extends React.Component {
         // Make some checks to see if education, work and languages
         // array have at least 1 item
         // *IF one empty array is found
-        if(this.isAllItemsFilled()){
-            console.log("exit")
-        }else{
-            console.log("check")
-        }
+        
+		if(this.isRequiredFieldsValid()){
+			if(this.isAnyOptionalFieldEmpty()){
+				console.log("i ask u")
+			}
+
+			this.setState(prevState =>{
+				return {
+						...prevState,
+						isEditorMode : !prevState.isEditorMode
+						}
+			})
+		}
+	}
+		
             // Ask if they are sure that they want
             // to proceed with the preview (use an absolute element with
             // display none/block) a warning of the empty field and a button
             // which just triggers the same functionality of the next lines of code
-        // Swap the value isEditorMode to false
-	}   
+        // Swap the value isEditorMode to false 
 
-    isAllItemsFilled(){
+	isRequiredFieldsValid(){
+		const{ name, email, phone } = this.state.general
+		return name.length > 0 || email.length > 0 || phone.length > 0                
+	}
+
+    isAnyOptionalFieldEmpty(){
         return (
-                   this.state.education.educationArray.length > 0
-                && this.state.work.workArray.length > 0
-                && this.state.languages.languagesArray.length > 0                
+                   this.state.education.educationArray.length === 0
+                || this.state.work.workArray.length === 0
+                || this.state.languages.languagesArray.length === 0                
                )
     }
 
@@ -206,25 +220,27 @@ class App extends React.Component {
     }
 
   render() {
-    return (
-      <section className='general--container'>
-        <Header/>
-		{ 
-			(this.state.isEditorMode) 
-				? <EditModeView 
-                    inputValues         = {this.state}
-					handleChange        = {this.handleChange} 
-					handleSubmit        = {this.handleSubmit} 
-					isAnyItemInField    = {this.isAnyItemInField}
-                    handleSubmitPreview = {this.handleSubmitPreview}
-                />
-				: <PreviewModeView
-                    inputValues      = {this.state}
-					isAnyItemInField = {this.isAnyItemInField}
-                 />
-		}
-      </section>
-    )
+		return (
+		<section className='general--container'>
+			<Header/>
+			{ 
+				(this.state.isEditorMode) 
+					? <EditModeView 
+						profilePhoto        = {profilePhoto}
+						inputValues         = {this.state}
+						handleChange        = {this.handleChange} 
+						handleSubmit        = {this.handleSubmit} 
+						isAnyItemInField    = {this.isAnyItemInField}
+						handleSubmitPreview = {this.handleSubmitPreview}
+					/>
+					: <PreviewModeView
+						profilePhoto     = {profilePhoto}
+						inputValues      = {this.state}
+						isAnyItemInField = {this.isAnyItemInField}
+					/>
+			}
+		</section>
+		)
   }
 }
 

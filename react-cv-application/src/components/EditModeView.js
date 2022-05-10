@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfilePicture from './ProfilePictureInput'
+import ProfilePhotoInput from './ProfilePhotoInput'
 import GeneralInfoInputs from './GeneralInfoInputs'
 import EducationInputs from './EducationInputs'
 import WorkExperienceInputs from './WorkExperienceInputs'
@@ -22,7 +22,7 @@ class EditModeView extends React.Component{
         return(   
             <section className="cv--container">
                 <section className='general--info'>
-                <ProfilePicture />
+                <ProfilePhotoInput profilePhoto={this.props.profilePhoto}/>
                 <GeneralInfoInputs 
                     handleChange={this.props.handleChange} 
                 />

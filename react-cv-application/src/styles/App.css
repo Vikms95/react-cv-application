@@ -41,13 +41,13 @@
 
 }
 
-.stock--pic,
+.profile--photo,
 .general--info--inputs{
     padding-left: 2rem;
     padding-right: 2rem;
 }
 
-.stock--pic{
+.profile--photo{
     width:20rem;
 }
 
