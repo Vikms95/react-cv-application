@@ -5,7 +5,7 @@ class WorkExperienceInputs extends React.Component {
       return (
           <form className='container--input' id='work'>
             <section>
-                  <label htmlFor="place"> Place </label>
+                  <label htmlFor="place"> Position </label>
                   <input 
                         className='place--input' 
                         type="text" 
