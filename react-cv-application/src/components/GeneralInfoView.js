@@ -5,8 +5,8 @@ class GeneralInfoView extends React.Component {
     formatValues(){
          return Object.values(this.props).map(value =>{
              return <div key={value.name} className="general--info--element">
-                        <h2 className='name--view'>{value.name}</h2>
-                        <h4 className='email--view'>{value.email}</h4>
+                        <h1 className='name--view'>{value.name}</h1>
+                        <div className='email--view'>{value.email}</div>
                         <div className='phone--view'>{value.phone}</div> 
                     </div>
          })
