@@ -230,11 +230,11 @@ class App extends React.Component {
   render() {
 		return (
 		<section className='general--container'>
-			<div className='alert--box'>
-				<div> Not all the CV fields are filled with your information,
-					are you sure you want to proceed with the preview? 
+			<div className='alert--box active'>
+				<div className='alert--box--text'> Not all the CV fields are filled with your information.
+					Are you sure you want to proceed with the preview? 
 				</div>
-				<div>
+				<div className='alert--box--buttons'>
 					<button onClick={this.toggleMode} className='alert--box--button'> Proceed </button>
 					<button onClick={this.removeAlertBox} className='alert--box--button'> Back to editing </button>
 				</div>
