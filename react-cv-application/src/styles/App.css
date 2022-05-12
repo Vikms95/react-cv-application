@@ -55,10 +55,14 @@
     padding: .3rem .5rem;
 }
 
+.alert--highlight{
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
 .cv--container{
     box-shadow: 0px 2px 38px rgba(0, 0, 0, 0.2);
     display: grid;
-    /* justify-content: center; */
     align-items: center;
     grid-template-rows: repeat(minmax(min-content, max-content) + 50);
     grid-auto-rows: minmax(min-content, max-content) + 50;
@@ -67,12 +71,29 @@
     max-width: 50rem;
     gap: 4rem;
 }
+.cv--container.preview{
+    box-shadow: 0px 2px 38px rgba(0, 0, 0, 0.2);
+    font-size: smaller;
+    display: grid;
+    align-items: center;
+    grid-template-rows: repeat(minmax(min-content, max-content) + 50);
+    grid-auto-rows: minmax(min-content, max-content) + 50;
+    margin: 3rem;
+    padding: 3rem;
+    max-width: 50rem;
+    gap: 1rem;
+}
 
 .general--info,
+.general--info--view,
 .bottom--row{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
+}
+
+.general--info--view{
+    margin-right: 7rem;
 }
 
 .profile--photo,
@@ -81,8 +102,46 @@
     padding-right: 2rem;
 }
 
+.general--info--element{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.general--info--view{
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
 .profile--photo{
     width:20rem;
+    border-radius: 15px; 
+}
+
+.profile--photo--preview{
+    margin: 0 2rem;
+   width: 10rem;
+   border-radius: 50%; 
+}
+
+.preview--field--title{
+    color: rgb(93, 92, 92);
+    color:#AB6F84 ;
+    margin: -1rem 2rem;
+    text-decoration: underline;
+    font-style: italic;
+    letter-spacing: .5rem;
+    font-weight: 400;
+}
+
+.name--view{
+    font-variant: small-caps;
+    font-size: 2rem;
+}
+
+.email--view,
+.phone--view{
+    font-size: smaller;
 }
 
 input,
@@ -170,7 +229,7 @@ button.work
 }
 
 .place--input{
-    margin-left: 6.1rem;
+    margin-left: 4.9rem;
 }
 
 .company--input{
@@ -222,12 +281,15 @@ button.languages{
 .education--view,
 .work--view,
 .languages--view{
-    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* align-items: center; */
-    line-height: 2rem;
+    line-height: 1.7rem;
+}
+
+.languages--view{
+    display: flex;
+    flex-direction: row;
 }
 
 .title--view,
@@ -253,7 +315,7 @@ button.languages{
 .education--element,
 .work--element,
 .languages--element{
-    padding:2rem 2rem;
+    padding:1.2rem 2rem;
     border-radius: 15px;
 }
 

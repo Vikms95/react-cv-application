@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles/App.css'
+import AlertBox from './components/AlertBox'
 import Header from './components/Header'
 import EditModeView from './components/EditModeView'
 import PreviewModeView from './components/PreviewModeView'
@@ -10,9 +11,8 @@ class App extends React.Component {
         super()
         this.state = {
             isEditorMode: true,
-            
             general:{
-                name  : "Victor",
+                name  : "Victor Martín Serra",
                 email : "vms1955@hotmail.com",
                 phone : "446746778",
             },
@@ -22,7 +22,9 @@ class App extends React.Component {
                 university:"",
                 observations:"",
                 educationArray:[
-					{title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Cum Laude graduated with specialization on computer quantum theory and web development prospects"}
+					{title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Lorem Ipsum is simply dummy text ofnic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letr Ipsum"},
+					{title:"Grade in Tourism", university: "CETA - Escola de Turisme", observations:"Lorem Ipsum is simply dummy text has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lom Ipsum"},
+					// {title:"Highscool Diploma", university: "Carrasco i Formiguera", observations:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
 				],
             },
 
@@ -31,7 +33,9 @@ class App extends React.Component {
                 company:"",
                 observations:"",
                 workArray:[
-                    {place:"Backend developer", company: "Spotify", observations:"Worked with React, Node, Mongo and Express to build fully fledged backend network. "}
+                    {place:"Backend developer", company: "Spotify", observations:"Lorem Ipsum is simply dummy text of the printing and types in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
+                    {place:"Hotel Recepcionist", company: "H10 Diagonal", observations:"Lorem Ipsum is simply dummy text of the printing and unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
+                    // {place:"Hotel Recepcionist", company: "Duquesa de Cardona", observations:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
                 ],
             },
 
@@ -39,7 +43,9 @@ class App extends React.Component {
                 language:"",
                 proficiency:"",
                 languagesArray:[
-                    // {language:"English", proficiency: "Native"}
+                    {language:"English", proficiency: "Native"},
+                    {language:"Spanish", proficiency: "Native"},
+                    {language:"Russian", proficiency: "Professional"},
                 ],
             }
         }
@@ -49,6 +55,7 @@ class App extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.isAllItemsFilled = this.isAnyOptionalFieldEmpty.bind(this)
         this.handleSubmitPreview = this.handleSubmitPreview.bind(this)
+		this.isRequiredFieldsValid = this.isRequiredFieldsValid.bind(this)
 		
     }
 
@@ -194,25 +201,29 @@ class App extends React.Component {
 		document.querySelector('.alert--box').classList.remove('active')
 	}
 
+	revealAlertBox(){
+		document.querySelector('.alert--box').classList.add('active')
+	}
+
   //When the preview button is clicked  
-	handleSubmitPreview(){
-        // Make some checks to see if education, work and languages
-        // array have at least 1 item
-        // *IF one empty array is found
-        
+	handleSubmitPreview(){        
 		if(this.isRequiredFieldsValid()){
 			if(this.isAnyOptionalFieldEmpty()){
-				document.querySelector('.alert--box').classList.add('active')
+				this.revealAlertBox()
 				return
 			}
 			this.toggleMode()
 			return
 		}
+		this.revealAlertBox()
+		setTimeout(this.removeAlertBox, 2000)
 	}
 
 	isRequiredFieldsValid(){
 		const{ name, email, phone } = this.state.general
-		return name.length > 0 || email.length > 0 || phone.length > 0                
+		return name.length  > 0 
+			&& email.length > 0 
+			&& phone.length > 0                
 	}
 
     isAnyOptionalFieldEmpty(){
@@ -230,16 +241,15 @@ class App extends React.Component {
   render() {
 		return (
 		<section className='general--container'>
-			<div className='alert--box active'>
-				<div className='alert--box--text'> Not all the CV fields are filled with your information.
-					Are you sure you want to proceed with the preview? 
-				</div>
-				<div className='alert--box--buttons'>
-					<button onClick={this.toggleMode} className='alert--box--button'> Proceed </button>
-					<button onClick={this.removeAlertBox} className='alert--box--button'> Back to editing </button>
-				</div>
-			</div>
+
+			<AlertBox
+				toggleMode={this.toggleMode}
+				removeAlertBox={this.removeAlertBox}
+				isRequiredFieldsValid={this.isRequiredFieldsValid}
+			/>
+
 			<Header/>
+
 			{ 
 				(this.state.isEditorMode) 
 					? <EditModeView 

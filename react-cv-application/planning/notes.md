@@ -58,25 +58,30 @@ below the form fields
     <!-- : one component for edit mode and the other for preview mode -->
     <!-- : use ternary statement to know which component should be displayed,
     editMode ? then display the edit mode -->
-    : change value whenever the edit button is clicked or if any edit button 
-    is clicked on the preview mode(just goes back to editor mode,
-    no fancy editing mode on preview mode) 
-    :previewMode needs to get the state passed as props
+    <!-- :previewMode needs to get the state passed as props -->
     
     <!-- :. create GeneralInfoView for the preview mode -->
     <!-- :. pass in the selected profile picture -->
-    :. create element which will ask if you want to proceed with the CV preview even though not all fields have content
-        :set up an absolute div with display none on App 
-    :. implement handleSubmitPreview which will-
-        :check if the three main inputs are filled, if not, trigger constraints validations and return from the function
-        :check how many education/work/languages fields are empty to
-        see if swapping to preview mode makes sense, ask the user, if it says yes, change the value to false
+    <!-- :. create element which will ask if you want to proceed with the CV preview even though not all fields have content
+        :set up an absolute div with display none on App  -->
+    <!-- :. create element pop-up to alert of required fields to be filled -->
+    <!-- :. implement handleSubmitPreview which will- -->
+    <!-- :check how many education/work/languages fields are empty to -->
+    <!-- see if swapping to preview mode makes sense, ask the user, if it says yes, change the value to false -->
+    <!-- :check if the three main inputs are filled, if not, trigger constraints validations and return from the function -->
+    {: style preview mode a little bit}
     : every element will have a button that will appear on hover to bring you back to edit mode
     :.at the bottom of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print
+    : change value whenever the edit button is clicked or if any edit button 
+    is clicked on the preview mode(just goes back to editor mode,
+    no fancy editing mode on preview mode) 
 
 - Remove button per field element    
 
 - The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content(use the already created inputs and lay down the values from current state)
+
+- Make specific part of the page printable
+    :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage
 
 - QUESTIONS
 -State will be held in App.js?
