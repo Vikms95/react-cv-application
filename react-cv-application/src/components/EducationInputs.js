@@ -4,7 +4,6 @@ class EducationInputs extends React.Component {
     render() {
       return (
           <form className='container--input' id='education'>
-
             <section>
                   <label htmlFor="title"> Title obtained </label>
                   <input 
