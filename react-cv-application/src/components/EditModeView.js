@@ -35,7 +35,10 @@ class EditModeView extends React.Component{
                         />
 
                 { this.props.isAnyItemInField(educationValues) && 
-                < EducationView values={educationValues}/> }
+                < EducationView 
+                            values={educationValues}
+                            isEditorMode= {this.props.isEditorMode}
+                            /> }
 
                 <WorkExperienceInputs 
                             values={values.work}
@@ -43,7 +46,10 @@ class EditModeView extends React.Component{
                             handleSubmit={this.props.handleSubmit} 
                         />
                 {this.props.isAnyItemInField(workValues) &&
-                <WorkExperienceView values={workValues}/>}
+                <WorkExperienceView 
+                            values={workValues}
+                            isEditorMode= {this.props.isEditorMode}
+                />}
 
                 {this.props.isAnyItemInField(languagesValues) &&
                 <LanguagesView values={languagesValues}/>}

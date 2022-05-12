@@ -124,6 +124,23 @@
    border-radius: 50%; 
 }
 
+.edit--button{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 41rem;
+    background-color: #c4c3c3;
+    padding: .3rem 1rem;
+    border-radius: 15px;
+    border: none;
+}
+
+.education--element.preview:hover .edit--button,
+.work--element.preview:hover .edit--button{
+    display: flex;
+}
+
 .preview--field--title{
     color: rgb(93, 92, 92);
     color:#AB6F84 ;
@@ -315,6 +332,7 @@ button.languages{
 .education--element,
 .work--element,
 .languages--element{
+    position: relative;
     padding:1.2rem 2rem;
     border-radius: 15px;
 }

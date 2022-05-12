@@ -195,6 +195,7 @@ class App extends React.Component {
 					}
 		})
 		this.removeAlertBox()
+		console.log(this.state.isEditorMode)
 	}
 
 	removeAlertBox(){
@@ -255,14 +256,17 @@ class App extends React.Component {
 					? <EditModeView 
 						profilePhoto        = {profilePhoto}
 						inputValues         = {this.state}
+						isEditorMode        = {this.state.isEditorMode}
 						handleChange        = {this.handleChange} 
 						handleSubmit        = {this.handleSubmit} 
 						isAnyItemInField    = {this.isAnyItemInField}
 						handleSubmitPreview = {this.handleSubmitPreview}
 					/>
-					: <PreviewModeView
+					: <PreviewModeView   
+						toggleMode       = {this.toggleMode}
 						profilePhoto     = {profilePhoto}
 						inputValues      = {this.state}
+						isEditorMode     = {this.state.isEditorMode}
 						isAnyItemInField = {this.isAnyItemInField}
 					/>
 			}

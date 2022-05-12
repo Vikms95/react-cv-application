@@ -26,20 +26,27 @@ class PreviewModeView extends React.Component {
             <h2 className='preview--field--title'> EDUCATION </h2>
             {
               this.props.isAnyItemInField(educationValues) 
-              && <EducationView values={educationValues}
-              />
+              && <EducationView 
+                    isEditorMode={this.props.isEditorMode}
+                    values={educationValues}
+                    toggleMode = {this.props.toggleMode}
+                 />
             }
             <h2 className='preview--field--title'> WORK EXPERIENCE </h2>
             {
               this.props.isAnyItemInField(workValues) 
-              && <WorkExperienceView values={workValues}
-              />
+              && <WorkExperienceView
+                    isEditorMode={this.props.isEditorMode}
+                    values={workValues}
+                    toggleMode = {this.props.toggleMode}
+                 />
             }
             <h2 className='preview--field--title'> LANGUAGES </h2>
 
             {
               this.props.isAnyItemInField(languagesValues) 
-              && <LanguagesView values={languagesValues}
+              && <LanguagesView 
+                    values={languagesValues}
               />
             }
         </section>
