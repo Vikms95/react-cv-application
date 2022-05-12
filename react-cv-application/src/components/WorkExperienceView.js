@@ -4,10 +4,15 @@ class WorkExperienceView extends React.Component {
 
     formatValues(){
          return this.props.values.map(value =>{
-             return <div key={value.place} className={`work--element ${this.props.isEditorMode ? "editor" : "preview"}`}>
+             return <div 
+                        key={value.place} 
+                        className={`work--element ${this.props.isEditorMode ? "editor" : "preview"}`}
+                        name="work"
+                        >
                        <button
                             onClick={this.props.toggleMode}
-                            className='edit--button'> Back to edit 
+                            className='edit--button'>
+                        {this.props.isEditorMode ? 'Edit' : 'Back to edit'}
                         </button>
                         <h2 className='place--view'>{value.place}</h2>
                         <h4 className='company--view'>{value.company}</h4>

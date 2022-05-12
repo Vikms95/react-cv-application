@@ -44,14 +44,12 @@
     text-decoration: underline;
 }
 
-.title{
-    margin-right: 5rem;
-}
 
 .header--buttons{
     display: flex;
     justify-content: center;
     gap: 2rem;
+    margin-left: 3rem;
 
 }
 
@@ -189,10 +187,12 @@
     margin-right: 20rem;
 }
 
-.education--element.preview:hover .edit--button,
-.work--element.preview:hover .edit--button{
+.education--element:hover .edit--button,
+.work--element:hover .edit--button{
     display: flex;
+    content: 'Back to edit';
 }
+
 
 .preview--field--title{
     color: rgb(93, 92, 92);

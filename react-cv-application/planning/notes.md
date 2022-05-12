@@ -73,7 +73,8 @@ below the form fields
     <!-- : every element will have a button that will appear on hover to bring you back to edit mode -->
     <!-- :edit button also appears in edit mode
             :isEditMode not being passed as a prop? -->
-    :.at the bottom of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print
+    :implement delete button
+    :.at the header of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print
     : change *isEditorMode* whenever the edit button is clicked or if any edit button is clicked on the preview mode(just goes back to editor mode,
     no fancy editing mode on preview mode) 
 

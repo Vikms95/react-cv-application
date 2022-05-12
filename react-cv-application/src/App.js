@@ -5,6 +5,7 @@ import Header from './components/Header'
 import EditModeView from './components/EditModeView'
 import PreviewModeView from './components/PreviewModeView'
 import profilePhoto from './images/stock-pic.png'
+import uniqid from 'uniqid'
 
 class App extends React.Component {
     constructor(){
@@ -12,40 +13,43 @@ class App extends React.Component {
         this.state = {
             isEditorMode: true,
             general:{
-                name  : "Victor Martín Serra",
-                email : "vms1955@hotmail.com",
-                phone : "446746778",
+                name  : "John Doe",
+                email : "lorem@ipsu.com",
+                phone : "123321123321",
             },
 
             education:{
+				id: uniqid(),
                 title:"",
                 university:"",
                 observations:"",
                 educationArray:[
-					{title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Lorem Ipsum is simply dummy text ofnic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letr Ipsum"},
-					{title:"Grade in Tourism", university: "CETA - Escola de Turisme", observations:"Lorem Ipsum is simply dummy text has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lom Ipsum"},
+					{id:'32', title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Lorem Ipsum is simply dummy text ofnic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letr Ipsum"},
+					{id:'33', title:"Grade in Tourism", university: "CETA - Escola de Turisme", observations:"Lorem Ipsum is simply dummy text has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lom Ipsum"},
 					// {title:"Highscool Diploma", university: "Carrasco i Formiguera", observations:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
 				],
             },
 
             work:{
+				id: uniqid(),
                 place:"",
                 company:"",
                 observations:"",
                 workArray:[
-                    {place:"Backend developer", company: "Spotify", observations:"Lorem Ipsum is simply dummy text of the printing and types in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
-                    {place:"Hotel Recepcionist", company: "H10 Diagonal", observations:"Lorem Ipsum is simply dummy text of the printing and unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
+                    {id:'3232132', place:"Backend developer", company: "Spotify", observations:"Lorem Ipsum is simply dummy text of the printing and types in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
+                    {id:'33242342', place:"Hotel Recepcionist", company: "H10 Diagonal", observations:"Lorem Ipsum is simply dummy text of the printing and unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
                     // {place:"Hotel Recepcionist", company: "Duquesa de Cardona", observations:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
                 ],
             },
 
             languages:{
+				id: uniqid(),
                 language:"",
                 proficiency:"",
                 languagesArray:[
-                    {language:"English", proficiency: "Native"},
-                    {language:"Spanish", proficiency: "Native"},
-                    {language:"Russian", proficiency: "Professional"},
+                    {id:'32329992', language:"English", proficiency: "Native"},
+                    {id:'320923', language:"Spanish", proficiency: "Native"},
+                    {id:'903239', language:"Russian", proficiency: "Professional"},
                 ],
             }
         }
@@ -75,6 +79,7 @@ class App extends React.Component {
 
   //When any field button is cliked  
 	handleSubmit(event){
+		console.log(this.state)
 		event.preventDefault()
 		const name = event.target.className
 		if(this.formIsValid(name)){
@@ -95,6 +100,18 @@ class App extends React.Component {
 		}else{
 			return
 		}
+	}
+
+	/**
+	 * Will be invoked when delete button on edit mode is
+	 * clicked. 
+	 */
+	handleDelete(event){
+		// -Pass as argument and check the *name* from the parent node and select the property from state/props.
+		// -Pass as argument and check *id* property and compare it to the array from *name*  
+			// Need to create the id property
+		// -Use setState with array.filter to return a new array of object without the deleted object
+		console.log(event)
 	}
 	
 	formIsValid(name){
@@ -128,8 +145,9 @@ class App extends React.Component {
 	getArrayToAdd(state, name){
         console.log("Hi")
 		if(name === 'education'){
-			const {title, university, observations} = state[name]
+			const {id, title, university, observations} = state[name]
 			const objectToAdd = {
+				'id': id,
 				'title': title,
 				'university': university,
 				'observations': observations
@@ -138,8 +156,9 @@ class App extends React.Component {
 		}
 
 		if(name === 'work'){
-			const {place, company, observations} = state[name]
+			const {id, place, company, observations} = state[name]
 			const objectToAdd = {
+				'id': id,
 				'place': place,
 				'company': company,
 				'observations': observations
@@ -148,9 +167,10 @@ class App extends React.Component {
 		}
 
 		if(name === 'languages'){
-			const {language} = state[name]
+			const {id, language} = state[name]
 			const proficiency = document.querySelector('.proficiency').value
 			const objectToAdd = {
+				'id': id,
 				'language': language,
 				'proficiency': proficiency
 			}
@@ -162,6 +182,7 @@ class App extends React.Component {
 	let objectToAdd
 	if(name === 'education'){
 		objectToAdd = {
+			'id': uniqid(),
 			'title': "",
 			'university': "",
 			'observations': ""
@@ -170,6 +191,7 @@ class App extends React.Component {
 
 	if(name === 'work'){
 		objectToAdd = {
+			'id': uniqid(),
 			'place': "",
 			'company': "",
 			'observations': ""
@@ -178,6 +200,7 @@ class App extends React.Component {
 
 	if(name === 'languages'){
 		objectToAdd = {
+			'id': uniqid(),
 			'language': "",
 			'proficiency': ""
 		}
