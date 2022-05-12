@@ -238,19 +238,31 @@ class App extends React.Component {
 	isAnyItemInField(values){
         return values.length > 0
     }
+	
+	scrollTop(){
+		document.body.scrollTop = 0
+		document.documentElement.scrollTop = 0
+	}
+
 
   render() {
 		return (
 		<section className='general--container'>
-
 			<AlertBox
 				toggleMode={this.toggleMode}
 				removeAlertBox={this.removeAlertBox}
 				isRequiredFieldsValid={this.isRequiredFieldsValid}
 			/>
+			<button 
+				onClick={this.scrollTop} 
+				id='scroll--up--button'>
+			Scroll up
+			</button>
 
 			<Header 
 				isEditorMode={this.state.isEditorMode}
+				toggleMode={this.toggleMode}
+
 			/>
 
 			{ 
