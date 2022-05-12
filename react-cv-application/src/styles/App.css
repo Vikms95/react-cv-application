@@ -10,9 +10,32 @@
 }
 
 .header{
+    display: flex;
+    justify-content: center;
     width: 100%;
     background-color: #AB6F84;
     padding: 30px;
+}
+
+.title{
+    margin-right: 5rem;
+}
+
+.header--buttons{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+
+}
+
+.header--buttons > button{
+    background-color: transparent;
+    font-weight: 600;
+    font-size: medium;
+    border: none;
+    padding: 0 1rem;
+    border-radius: 15px;
+    
 }
 
 .general--container{
@@ -71,6 +94,7 @@
     max-width: 50rem;
     gap: 4rem;
 }
+
 .cv--container.preview{
     box-shadow: 0px 2px 38px rgba(0, 0, 0, 0.2);
     font-size: smaller;
@@ -134,6 +158,8 @@
     padding: .3rem 1rem;
     border-radius: 15px;
     border: none;
+    min-width: 7rem;
+    margin-right: 20rem;
 }
 
 .education--element.preview:hover .edit--button,
@@ -342,4 +368,9 @@ button.languages{
 .languages--element:hover{
     background-color: rgb(235, 235, 235);
 
+}
+
+.bottom--row--preview{
+    display: flex;
+    justify-content: space-between;
 }

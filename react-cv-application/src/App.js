@@ -249,7 +249,9 @@ class App extends React.Component {
 				isRequiredFieldsValid={this.isRequiredFieldsValid}
 			/>
 
-			<Header/>
+			<Header 
+				isEditorMode={this.state.isEditorMode}
+			/>
 
 			{ 
 				(this.state.isEditorMode) 

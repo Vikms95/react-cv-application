@@ -42,13 +42,14 @@ class PreviewModeView extends React.Component {
                  />
             }
             <h2 className='preview--field--title'> LANGUAGES </h2>
-
-            {
-              this.props.isAnyItemInField(languagesValues) 
-              && <LanguagesView 
-                    values={languagesValues}
-              />
-            }
+            <div className="bottom--row--preview">
+              {
+                this.props.isAnyItemInField(languagesValues)
+                && <LanguagesView
+                      values={languagesValues}
+                />
+              }
+          </div>  
         </section>
       )
     }
