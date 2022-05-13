@@ -13,7 +13,7 @@ class LanguagesInputs extends React.Component {
                 id="language"
                 name="languages" 
                 minLength="2"
-                value={this.props.values.language}
+                value={this.props.values.language || ''}
                 onChange={this.props.handleChange}/>
             </section>
 
@@ -28,7 +28,7 @@ class LanguagesInputs extends React.Component {
                       <option value="Native"> Native </option>
                   </select>
                   <button 
-                    value={this.props.values.proficiency}
+                    value={this.props.values.proficiency || ''}
                     onClick={this.props.handleSubmit}  
                     className='languages' > Add language 
                   </button>

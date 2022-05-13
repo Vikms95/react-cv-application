@@ -13,7 +13,7 @@ class EducationInputs extends React.Component {
                         name="education"
                         minLength="2"
                         onChange={this.props.handleChange}
-                        value={this.props.values.title}/>
+                        value={this.props.values.title || ''}/>
             </section>
 
             <section>
@@ -24,7 +24,7 @@ class EducationInputs extends React.Component {
                          name="education"
                          minLength="2"
                          onChange={this.props.handleChange}
-                         value={this.props.values.university}/>
+                         value={this.props.values.university || ''}/>
             </section>
 
             <section className='observations--container'>
@@ -35,7 +35,7 @@ class EducationInputs extends React.Component {
                         id='observations'
                         name="education"
                         onChange={this.props.handleChange}
-                        value={this.props.values.observations}/>
+                        value={this.props.values.observations || ''}/>
             </section>   
 
             <button onClick={this.props.handleSubmit} className='education'> Add education </button> 

@@ -61,6 +61,7 @@ class App extends React.Component {
         this.handleSubmitPreview = this.handleSubmitPreview.bind(this)
 		this.isRequiredFieldsValid = this.isRequiredFieldsValid.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
+        this.handleFieldEdit = this.handleFieldEdit.bind(this)
 		
     }
 
@@ -110,13 +111,6 @@ class App extends React.Component {
 	 */
 	handleDelete(id, event){
         const clickedField = event.target.parentElement.getAttribute('name')
-        console.log(id)
-        console.log(event)
-        console.log(event.target.parentElement.getAttribute('name'))
-		// -Pass as argument and check the *name* from the parent node and select the property from state/props.
-
-		// -Pass as argument and check *id* property and compare it to the array from *fieldCLicked*  
-		// -Use setState with array.filter to return a new array of object without the deleted object
         this.setState(prevState =>{
             //Get reference of corresponding array and create a new array out of it
             const newArray = prevState[`${clickedField}`][`${clickedField + 'Array'}`]
@@ -126,12 +120,28 @@ class App extends React.Component {
                 [clickedField]: {
                     ...prevState.clickedField,
                     [`${clickedField + 'Array'}`]:
+                        // Filter the element that received the click event
                         newArray.filter(element => element.id !== id)
                 }    
             }
         })  
 	}
-	
+    
+    /**
+     * Invoked when edit button is clicked on edit mode
+     * Will take the clicked button field element, find it in the array
+     * based on the id, erase the values from state and insert the values from
+     * the clicked element in state.
+     * When the submit button is clicked, it will change all the values from within
+     * the array corresponding to the element clicked and empty the inputs again.
+     */
+    handleFieldEdit(id,event){
+        console.log(this.state)
+        console.dir(id,event)
+        // Get field through parent element input
+
+    }
+
 	formIsValid(name){
 		const formToValidate = document.getElementById(`${name}`)
 		const inputsToValidate = Array.from(formToValidate.getElementsByTagName('input'))
@@ -161,7 +171,6 @@ class App extends React.Component {
 	}
 	
 	getArrayToAdd(state, name){
-        console.log("Hi")
 		if(name === 'education'){
 			const {id, title, university, observations} = state[name]
 			const objectToAdd = {
@@ -313,6 +322,7 @@ class App extends React.Component {
 						handleChange        = {this.handleChange} 
 						handleSubmit        = {this.handleSubmit} 
                         handleDelete        = {this.handleDelete}
+                        handleFieldEdit     = {this.handleFieldEdit}
 						isAnyItemInField    = {this.isAnyItemInField}
 						handleSubmitPreview = {this.handleSubmitPreview}
 					/>

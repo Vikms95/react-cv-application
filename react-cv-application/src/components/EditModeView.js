@@ -39,6 +39,7 @@ class EditModeView extends React.Component{
                             values={educationValues}
                             isEditorMode= {this.props.isEditorMode}
                             handleDelete = {this.props.handleDelete}
+                            handleFieldEdit = {this.props.handleFieldEdit}
                             /> }
 
                 <WorkExperienceInputs 
@@ -51,6 +52,7 @@ class EditModeView extends React.Component{
                             values={workValues}
                             isEditorMode= {this.props.isEditorMode}
                             handleDelete = {this.props.handleDelete}
+                            handleFieldEdit = {this.props.handleFieldEdit}
                 />}
 
                 {this.props.isAnyItemInField(languagesValues) &&

@@ -10,9 +10,13 @@ class EducationView extends React.Component {
                         name='education'
                     >
                         <button
-                            onClick={this.props.toggleMode}
+                            onClick = {
+                                (this.props.isEditorMode)
+                                    ? this.props.handleFieldEdit
+                                    : this.props.toggleMode
+                            }
                             className='edit--button'>
-                                {this.props.isEditorMode ? 'Edit' : 'Back to edit'}
+                            {this.props.isEditorMode ? 'Edit' : 'Back to edit'}
                         </button>
 
                         {(this.props.isEditorMode) && 
