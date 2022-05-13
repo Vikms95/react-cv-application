@@ -103,6 +103,43 @@ class App extends React.Component {
 			return
 		}
 	}
+    
+    /**
+     * Will be called when resubmit button is available(when edit field is clicked)
+     * Will take the elements from the corresponding input value and the id which was attached
+     * to the button element from *handleFieldEdit* and return an object to state on the same index
+     * within the array(will be found with the ID) but with the newly changed values taken from state
+     */
+    handleResubmit(event){
+        console.log(event)
+        // Take id element from the same input.target attributes
+        // Take field name to store from the input.target attributes
+        // Call setState and return all the state with new array within the corresponding field 
+        // with the current state values
+        // Replace state with an empty object (you can use this.getEmptyObjectToAdd(clickedField)) 
+    }
+
+    /**
+     * Invoked when edit button is clicked on edit mode
+     * Will take the clicked button field element, find it in the array
+     * based on the id, erase the values from state and insert the values from
+     * the clicked element in state.
+     * When the submit button is clicked, it will change all the values from within
+     * the array corresponding to the element clicked and empty the inputs again.
+     */
+     handleFieldEdit(id,event){
+        console.log(this.state)
+        console.dir(id,event)
+        // Get field clicked through parent element *name* attribute
+        // const clickedField = event.target.parentElement.getAttribute('name')
+        // Look into the array based on the clickedField value 
+        // Find the object within the array with the same id as the parameter one
+        // Get each attribute(destructure) 
+        // Allocate it into the clickedField named key properties(inputs will change)
+        // Turn the field button into a resubmit button instead of submit(make functionality)
+        // Pass the id to resubmit to the button element?
+    }
+
 
 	/**
 	 * Will be invoked when delete button on edit mode is
@@ -126,21 +163,6 @@ class App extends React.Component {
             }
         })  
 	}
-    
-    /**
-     * Invoked when edit button is clicked on edit mode
-     * Will take the clicked button field element, find it in the array
-     * based on the id, erase the values from state and insert the values from
-     * the clicked element in state.
-     * When the submit button is clicked, it will change all the values from within
-     * the array corresponding to the element clicked and empty the inputs again.
-     */
-    handleFieldEdit(id,event){
-        console.log(this.state)
-        console.dir(id,event)
-        // Get field through parent element input
-
-    }
 
 	formIsValid(name){
 		const formToValidate = document.getElementById(`${name}`)

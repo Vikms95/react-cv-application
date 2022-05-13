@@ -16,15 +16,17 @@ class WorkExperienceView extends React.Component {
                                     : this.props.toggleMode
                             }
                             className='edit--button'>
-                        {this.props.isEditorMode ? 'Edit' : 'Back to edit'}
+                            {this.props.isEditorMode ? 'Edit' : 'Back to edit'}
                         </button>
 
-                        {(this.props.isEditorMode) && 
-                        <button
-                            onClick={(event) => this.props.handleDelete(value.id, event)}
-                            className='delete--button'>
+                        {
+                            (this.props.isEditorMode) && 
+                            <button
+                                onClick={(event) => this.props.handleDelete(value.id, event)}
+                                className='delete--button'>
                                 Delete
-                        </button>}
+                            </button>
+                        }
 
                         <h2 className='place--view'>{value.place}</h2>
                         <h4 className='company--view'>{value.company}</h4>
