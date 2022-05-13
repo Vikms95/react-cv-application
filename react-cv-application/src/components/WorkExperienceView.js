@@ -16,7 +16,7 @@ class WorkExperienceView extends React.Component {
                         </button>
                         {(this.props.isEditorMode) && 
                         <button
-                            onClick={this.props.handleDelete}
+                            onClick={(event) => this.props.handleDelete(value.id, event)}
                             className='delete--button'>
                                 Delete
                         </button>}

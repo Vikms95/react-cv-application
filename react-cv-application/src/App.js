@@ -60,6 +60,7 @@ class App extends React.Component {
         this.isAllItemsFilled = this.isAnyOptionalFieldEmpty.bind(this)
         this.handleSubmitPreview = this.handleSubmitPreview.bind(this)
 		this.isRequiredFieldsValid = this.isRequiredFieldsValid.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
 		
     }
 
@@ -81,17 +82,17 @@ class App extends React.Component {
 	handleSubmit(event){
 		console.log(this.state)
 		event.preventDefault()
-		const name = event.target.className
-		if(this.formIsValid(name)){
+		const clickedField = event.target.className
+		if(this.formIsValid(clickedField)){
 			this.setState(prevState =>{
-				const newArray = this.getArrayToAdd(prevState, name)
+				const newArray = this.getArrayToAdd(prevState, clickedField)
 				// Store the current object with empty fields to reassign later
-				const emptyObject = this.getEmptyObjectToAdd(name)
+				const emptyObject = this.getEmptyObjectToAdd(clickedField)
 				return {
 					...prevState,
-					[name]: {
+					[clickedField]: {
 						...emptyObject, // Replace with erased values
-						[`${name + 'Array'}`] : 
+						[`${clickedField + 'Array'}`] : 
 						// Include all the values from array + prev.state[name] minus the array
 							newArray 
 					}
@@ -104,14 +105,31 @@ class App extends React.Component {
 
 	/**
 	 * Will be invoked when delete button on edit mode is
-	 * clicked. Will be passed to
+	 * clicked. 
+     * Will be passed to EditViewMode > EducationView | WorkExperienceView
 	 */
-	handleDelete(event){
+	handleDelete(id, event){
+        const clickedField = event.target.parentElement.getAttribute('name')
+        console.log(id)
+        console.log(event)
+        console.log(event.target.parentElement.getAttribute('name'))
 		// -Pass as argument and check the *name* from the parent node and select the property from state/props.
-		// -Pass as argument and check *id* property and compare it to the array from *name*  
-			// Need to create the id property
+
+		// -Pass as argument and check *id* property and compare it to the array from *fieldCLicked*  
 		// -Use setState with array.filter to return a new array of object without the deleted object
-		console.log(event)
+        this.setState(prevState =>{
+            //Get reference of corresponding array and create a new array out of it
+            const newArray = prevState[`${clickedField}`][`${clickedField + 'Array'}`]
+            //Assign it to the new state
+            return{
+                ...prevState,
+                [clickedField]: {
+                    ...prevState.clickedField,
+                    [`${clickedField + 'Array'}`]:
+                        newArray.filter(element => element.id !== id)
+                }    
+            }
+        })  
 	}
 	
 	formIsValid(name){
@@ -179,39 +197,37 @@ class App extends React.Component {
 	}
 
 	getEmptyObjectToAdd(name){
-	let objectToAdd
-	if(name === 'education'){
-		objectToAdd = {
-			'id': uniqid(),
-			'title': "",
-			'university': "",
-			'observations': ""
-		}
-	}
+        let objectToAdd
+        if(name === 'education'){
+            objectToAdd = {
+                'id': uniqid(),
+                'title': "",
+                'university': "",
+                'observations': ""
+            }
+        }
 
-	if(name === 'work'){
-		objectToAdd = {
-			'id': uniqid(),
-			'place': "",
-			'company': "",
-			'observations': ""
-		}
-	}
+        if(name === 'work'){
+            objectToAdd = {
+                'id': uniqid(),
+                'place': "",
+                'company': "",
+                'observations': ""
+            }
+        }
 
-	if(name === 'languages'){
-		objectToAdd = {
-			'id': uniqid(),
-			'language': "",
-			'proficiency': ""
-		}
-	}
-	return objectToAdd
-	}
+        if(name === 'languages'){
+            objectToAdd = {
+                'id': uniqid(),
+                'language': "",
+                'proficiency': ""
+            }
+        }
+        return objectToAdd
+        }
 
 	toggleMode(){
 		this.setState(prevState =>{
-			// Toggle the value isEditorMode to
-			// the opposite value it was
 			return {
 					...prevState,
 					isEditorMode : !prevState.isEditorMode
