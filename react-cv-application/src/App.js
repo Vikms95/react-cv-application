@@ -104,7 +104,7 @@ class App extends React.Component {
 
 	/**
 	 * Will be invoked when delete button on edit mode is
-	 * clicked. 
+	 * clicked. Will be passed to
 	 */
 	handleDelete(event){
 		// -Pass as argument and check the *name* from the parent node and select the property from state/props.
@@ -296,6 +296,7 @@ class App extends React.Component {
 						isEditorMode        = {this.state.isEditorMode}
 						handleChange        = {this.handleChange} 
 						handleSubmit        = {this.handleSubmit} 
+                        handleDelete        = {this.handleDelete}
 						isAnyItemInField    = {this.isAnyItemInField}
 						handleSubmitPreview = {this.handleSubmitPreview}
 					/>

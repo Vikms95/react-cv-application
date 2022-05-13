@@ -14,6 +14,12 @@ class WorkExperienceView extends React.Component {
                             className='edit--button'>
                         {this.props.isEditorMode ? 'Edit' : 'Back to edit'}
                         </button>
+                        {(this.props.isEditorMode) && 
+                        <button
+                            onClick={this.props.handleDelete}
+                            className='delete--button'>
+                                Delete
+                        </button>}
                         <h2 className='place--view'>{value.place}</h2>
                         <h4 className='company--view'>{value.company}</h4>
                         { (value.observations) && <div className='observations--view'>{value.observations}</div> }

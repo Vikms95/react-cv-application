@@ -168,29 +168,44 @@
 }
 
 .profile--photo--preview{
-    margin: 0 2rem;
+   margin: 0 2rem;
    width: 10rem;
    border-radius: 50%; 
 }
 
-.edit--button{
+.edit--button,
+.delete--button{
     display: none;
     justify-content: center;
     align-items: center;
     position: absolute;
-    left: 41rem;
+    left: 78%;
     background-color: #c4c3c3;
-    padding: .3rem 1rem;
+    padding: .3rem .5rem;
     border-radius: 15px;
     border: none;
-    min-width: 7rem;
+    /* min-width: 5rem; */
     margin-right: 20rem;
 }
 
+.delete--button{
+    left: 89%;
+}
+
+.education--element.preview .edit--button,
+.work--element.preview .edit--button{
+    left: 89%;
+    /* min-width: 7rem; */
+}
+
+
 .education--element:hover .edit--button,
-.work--element:hover .edit--button{
+.work--element:hover .edit--button,
+.education--element:hover .delete--button,
+.work--element:hover .delete--button{
     display: flex;
-    content: 'Back to edit';
+    width: 10%;
+    transform: translate(-20%);
 }
 
 

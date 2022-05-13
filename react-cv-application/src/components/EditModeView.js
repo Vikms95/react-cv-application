@@ -38,6 +38,7 @@ class EditModeView extends React.Component{
                 < EducationView 
                             values={educationValues}
                             isEditorMode= {this.props.isEditorMode}
+                            handleDelete = {this.props.handleDelete}
                             /> }
 
                 <WorkExperienceInputs 
@@ -49,11 +50,14 @@ class EditModeView extends React.Component{
                 <WorkExperienceView 
                             values={workValues}
                             isEditorMode= {this.props.isEditorMode}
+                            handleDelete = {this.props.handleDelete}
                 />}
 
                 {this.props.isAnyItemInField(languagesValues) &&
-                <LanguagesView values={languagesValues}/>}
-
+                <LanguagesView 
+                            values={languagesValues}
+                            handleDelete = {this.props.handleDelete}
+                            />}
                 <section className='bottom--row'>
                 <LanguagesInputs 
                                 values={values.languages}
