@@ -18,7 +18,6 @@ class EditModeView extends React.Component{
         const educationValues = values.education.educationArray
         const workValues = values.work.workArray
         const languagesValues = values.languages.languagesArray
-        console.log(values)
         return(   
             <section className="cv--container">
                 <section className='general--info'>
@@ -32,20 +31,22 @@ class EditModeView extends React.Component{
                             values={values.education} 
                             handleChange={this.props.handleChange} 
                             handleSubmit={this.props.handleSubmit} 
-                        />
+                            handleResubmit={this.props.handleResubmit}
+                            />
 
                 { this.props.isAnyItemInField(educationValues) && 
                 < EducationView 
-                            values={educationValues}
-                            isEditorMode= {this.props.isEditorMode}
-                            handleDelete = {this.props.handleDelete}
-                            handleFieldEdit = {this.props.handleFieldEdit}
-                            /> }
+                values={educationValues}
+                isEditorMode= {this.props.isEditorMode}
+                handleDelete = {this.props.handleDelete}
+                handleFieldEdit = {this.props.handleFieldEdit}
+                /> }
 
                 <WorkExperienceInputs 
                             values={values.work}
                             handleChange={this.props.handleChange} 
                             handleSubmit={this.props.handleSubmit} 
+                            handleResubmit={this.props.handleResubmit}
                         />
                 {this.props.isAnyItemInField(workValues) &&
                 <WorkExperienceView 

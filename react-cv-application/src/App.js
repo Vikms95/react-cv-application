@@ -108,9 +108,12 @@ class App extends React.Component {
      * Will be called when resubmit button is available(when edit field is clicked)
      * Will take the elements from the corresponding input value and the id which was attached
      * to the button element from *handleFieldEdit* and return an object to state on the same index
-     * within the array(will be found with the ID) but with the newly changed values taken from state
+     * within the array(will be found with the ID) but with the newly changed values taken from state 
+     * instead of creating a whole new value
      */
     handleResubmit(event){
+        event.preventDefault()
+        console.log("Hi")
         console.log(event)
         // Take id element from the same input.target attributes
         // Take field name to store from the input.target attributes
@@ -128,18 +131,24 @@ class App extends React.Component {
      * the array corresponding to the element clicked and empty the inputs again.
      */
      handleFieldEdit(id,event){
-         // Get field clicked through parent element *name* attribute
-         const clickedField = event.target.parentElement.getAttribute('name')
+        // Get field clicked through parent element *name* attribute
+        const clickedField = event.target.parentElement.getAttribute('name')
         // Look into the array based on the clickedField value 
         const arrayToLookUp = this.state[`${clickedField}`][`${clickedField  + 'Array'}`]
         // Find the object within the array with the same id as the parameter one
         const elementToEdit = arrayToLookUp.find(element => element.id === id)
+        // Get each attribute(destructure)
+        // Turn the field button into a resubmit button instead of submit(make functionality)
+
+        // Pass the id to resubmit to the button element? 
+        document.querySelector(`button.${clickedField}`).setAttribute('id-to-edit',id)
         this.setState(prevState =>{
-            console.log(prevState)
+            // Allocate it into the clickedField named key properties(inputs will change)
             if(clickedField === 'education'){
                 return{
                     ...prevState,
                     [clickedField]:{
+                        id: elementToEdit.id,
                         title: elementToEdit.title,
                         university: elementToEdit.university,
                         observations: elementToEdit.observations,
@@ -152,6 +161,7 @@ class App extends React.Component {
                 return{
                     ...prevState,
                     [clickedField]:{
+                        id: elementToEdit.id,
                         place: elementToEdit.place,
                         company: elementToEdit.company,
                         observations: elementToEdit.observations,
@@ -163,10 +173,6 @@ class App extends React.Component {
             }
         })
         console.log(this.state)
-        // Get each attribute(destructure) 
-        // Allocate it into the clickedField named key properties(inputs will change)
-        // Turn the field button into a resubmit button instead of submit(make functionality)
-        // Pass the id to resubmit to the button element?
     }
 
 
@@ -374,6 +380,7 @@ class App extends React.Component {
 						handleSubmit        = {this.handleSubmit} 
                         handleDelete        = {this.handleDelete}
                         handleFieldEdit     = {this.handleFieldEdit}
+                        handleResubmit      = {this.handleResubmit}
 						isAnyItemInField    = {this.isAnyItemInField}
 						handleSubmitPreview = {this.handleSubmitPreview}
 					/>

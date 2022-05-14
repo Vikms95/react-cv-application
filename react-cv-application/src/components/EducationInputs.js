@@ -1,7 +1,35 @@
 import React from 'react'
 
 class EducationInputs extends React.Component {
+
+    componentDidMount(){
+        let button = document.querySelector('button.education')
+        if(button.hasAttribute('id-to-edit')){
+            button.addEventListener('click', this.props.handleResubmit)
+            button.textContent = 'Edit education'
+        }
+        if(!button.hasAttribute('id-to-edit')){
+            button.addEventListener('click', this.props.handleSubmit)
+            button.textContent = 'Add education'
+        }
+    }
+    
+    componentDidUpdate(){
+        let button = document.querySelector('button.education')
+        if(button.hasAttribute('id-to-edit')){
+            button.removeEventListener('click', this.props.handleSubmit)
+            button.addEventListener('click', this.props.handleResubmit)
+            button.textContent = 'Edit education'
+        }
+        if(!button.hasAttribute('id-to-edit')){
+            button.removeEventListener('click', this.props.handleResubmit)
+            button.addEventListener('click', this.props.handleSubmit)
+            button.textContent = 'Add education'
+        }
+    }
+
     render() {
+
       return (
           <form className='container--input' id='education'>
             <section>
@@ -37,8 +65,9 @@ class EducationInputs extends React.Component {
                         onChange={this.props.handleChange}
                         value={this.props.values.observations || ''}/>
             </section>   
-
-            <button onClick={this.props.handleSubmit} className='education'> Add education </button> 
+            <button 
+                className='education'> 
+                </button> 
           </form>
       )
     }
