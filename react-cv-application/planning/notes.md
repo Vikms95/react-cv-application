@@ -76,15 +76,19 @@ below the form fields
     <!-- :work experience inputs not getting erased when button is clicked?
         :state is getting updated
         :input value property was spelled wrong xd -->
-    :implement delete button
-    :.at the header of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print
-    : change *isEditorMode* whenever the edit button is clicked or if any edit button is clicked on the preview mode(just goes back to editor mode,
-    no fancy editing mode on preview mode) 
+    <!-- :implement delete button -->
+    <!-- :.at the header of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print -->
+    <!-- : change *isEditorMode* whenever the edit button is clicked or if any edit button is clicked on the preview mode(just goes back to editor mode,
+    no fancy editing mode on preview mode)  -->
 
 
-- Remove button per field element    
+<!-- - Remove button per field element     -->
 
-- The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content(use the already created inputs and lay down the values from current state)
+<!-- - The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content(use the already created inputs and lay down the values from current state) -->
+
+- Can avoid using 2 functions for submit and resubmit since both share the same logic(i did the implementation on getArrayToAdd)
+
+- Find a way to insert the newly edited property to the previous index
 
 - Make specific part of the page printable
     :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage

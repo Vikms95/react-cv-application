@@ -62,7 +62,7 @@ class App extends React.Component {
 		this.isRequiredFieldsValid = this.isRequiredFieldsValid.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
         this.handleFieldEdit = this.handleFieldEdit.bind(this)
-		
+		this.handleResubmit = this.handleResubmit.bind(this)
     }
 
 
@@ -115,6 +115,24 @@ class App extends React.Component {
         event.preventDefault()
         console.log("Hi")
         console.log(event)
+        const clickedField = event.target.className
+        if(this.formIsValid(clickedField)){
+            this.setState(prevState =>{
+                const newArray = this.getArrayToAdd(prevState, clickedField)
+                const emptyObject = this.getEmptyObjectToAdd(clickedField)
+                // Splice the object array and use the new array instead
+                console.log(newArray)
+                return{
+                    ...prevState,
+                    [clickedField]:{
+                        ...emptyObject,
+                        [`${clickedField + 'Array'}`] : 
+						// Include all the values and substitute the new array
+							newArray 
+                    }
+                }
+            })
+        }
         // Take id element from the same input.target attributes
         // Take field name to store from the input.target attributes
         // Call setState and return all the state with new array within the corresponding field 
@@ -153,7 +171,6 @@ class App extends React.Component {
                         university: elementToEdit.university,
                         observations: elementToEdit.observations,
                         educationArray: prevState.education.educationArray
-                        
                     }
                 }
             }
@@ -166,10 +183,8 @@ class App extends React.Component {
                         company: elementToEdit.company,
                         observations: elementToEdit.observations,
                         workArray: prevState.work.workArray
-                        
                     }
                 }
-                
             }
         })
         console.log(this.state)
@@ -228,37 +243,50 @@ class App extends React.Component {
 	}
 	
 	getArrayToAdd(state, name){
+        // Check if element is in the array, and take its index if its the case to use splice?
 		if(name === 'education'){
 			const {id, title, university, observations} = state[name]
+
+            const newArray = state.education.educationArray
+                .filter(element => element.id !== id)
+
 			const objectToAdd = {
 				'id': id,
 				'title': title,
 				'university': university,
 				'observations': observations
 			}
-			return [...state.education.educationArray, objectToAdd]
+			return [...newArray, objectToAdd]
 		}
 
 		if(name === 'work'){
 			const {id, place, company, observations} = state[name]
+
+            const newArray = state.work.workArray
+                .filter(element => element.id !== id)
+
 			const objectToAdd = {
 				'id': id,
 				'place': place,
 				'company': company,
 				'observations': observations
 			}
-			return [...state.work.workArray, objectToAdd]
+			return [...newArray, objectToAdd]
 		}
 
 		if(name === 'languages'){
 			const {id, language} = state[name]
 			const proficiency = document.querySelector('.proficiency').value
+
+            const newArray = state.languages.lanuagesArray
+            .filter(element => element.id !== id)
+
 			const objectToAdd = {
 				'id': id,
 				'language': language,
 				'proficiency': proficiency
 			}
-			return [...state.languages.languagesArray, objectToAdd]
+			return [...newArray, objectToAdd]
 		}
 	}
 
