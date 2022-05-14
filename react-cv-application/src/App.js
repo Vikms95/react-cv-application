@@ -113,15 +113,13 @@ class App extends React.Component {
      */
     handleResubmit(event){
         event.preventDefault()
-        console.log("Hi")
-        console.log(event)
         const clickedField = event.target.className
+        document.querySelector(`button.${clickedField}`).removeAttribute('id-to-edit')
         if(this.formIsValid(clickedField)){
             this.setState(prevState =>{
-                const newArray = this.getArrayToAdd(prevState, clickedField)
+                const newArray = this.getArrayToResubmit(prevState, clickedField)
                 const emptyObject = this.getEmptyObjectToAdd(clickedField)
                 // Splice the object array and use the new array instead
-                console.log(newArray)
                 return{
                     ...prevState,
                     [clickedField]:{
@@ -137,7 +135,6 @@ class App extends React.Component {
         // Take field name to store from the input.target attributes
         // Call setState and return all the state with new array within the corresponding field 
         // with the current state values
-        // Replace state with an empty object (you can use this.getEmptyObjectToAdd(clickedField)) 
     }
 
     /**
@@ -287,6 +284,57 @@ class App extends React.Component {
 				'proficiency': proficiency
 			}
 			return [...newArray, objectToAdd]
+		}
+	}
+	getArrayToResubmit(state, name){
+        // Check if element is in the array, and take its index if its the case to use splice?
+		if(name === 'education'){
+			const {id, title, university, observations} = state[name]
+
+			const objectToAdd = {
+				'id': id,
+				'title': title,
+				'university': university,
+				'observations': observations
+			}
+
+            const indexToReplace = state.education.educationArray.findIndex(element => element.id === id)
+            const editedArray = state.education.educationArray
+            editedArray.splice(indexToReplace,1,objectToAdd)
+
+			return editedArray
+		}
+
+		if(name === 'work'){
+			const {id, place, company, observations} = state[name]
+
+			const objectToAdd = {
+				'id': id,
+				'place': place,
+				'company': company,
+				'observations': observations
+			}
+            const indexToReplace = state.work.workArray.findIndex(element => element.id === id)
+            const editedArray = state.work.workArray
+            editedArray.splice(indexToReplace,1,objectToAdd)
+
+			return editedArray
+		}
+
+		if(name === 'languages'){
+			const {id, language} = state[name]
+			const proficiency = document.querySelector('.proficiency').value
+
+			const objectToAdd = {
+				'id': id,
+				'language': language,
+				'proficiency': proficiency
+			}
+            const indexToReplace = state.work.workArray.findIndex(element => element.id === id)
+            const editedArray = state.work.workArray
+            editedArray.splice(indexToReplace,1,objectToAdd)
+
+			return editedArray
 		}
 	}
 

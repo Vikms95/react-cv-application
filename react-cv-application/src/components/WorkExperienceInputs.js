@@ -1,6 +1,33 @@
 import React from 'react'
 
 class WorkExperienceInputs extends React.Component {
+
+      componentDidMount(){
+            let button = document.querySelector('button.work')
+            if(button.hasAttribute('id-to-edit')){
+                button.addEventListener('click', this.props.handleResubmit)
+                button.textContent = 'Edit experience'
+            }
+            if(!button.hasAttribute('id-to-edit')){
+                button.addEventListener('click', this.props.handleSubmit)
+                button.textContent = 'Add experience'
+            }
+        }
+        
+        componentDidUpdate(){
+            let button = document.querySelector('button.work')
+            if(button.hasAttribute('id-to-edit')){
+                button.removeEventListener('click', this.props.handleSubmit)
+                button.addEventListener('click', this.props.handleResubmit)
+                button.textContent = 'Edit experience'
+            }
+            if(!button.hasAttribute('id-to-edit')){
+                button.removeEventListener('click', this.props.handleResubmit)
+                button.addEventListener('click', this.props.handleSubmit)
+                button.textContent = 'Add experience'
+            }
+        }
+
     render() {
       return (
           <form className='container--input' id='work'>
@@ -39,7 +66,9 @@ class WorkExperienceInputs extends React.Component {
                         value={this.props.values.observations || ''}
                         />
             </section>   
-            <button onClick={this.props.handleSubmit} className='work'> Add experience </button> 
+            <button 
+                  className='work'>
+            </button> 
           </form>
       )
     }

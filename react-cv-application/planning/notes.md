@@ -88,7 +88,7 @@ below the form fields
 
 - Can avoid using 2 functions for submit and resubmit since both share the same logic(i did the implementation on getArrayToAdd)
 
-- Find a way to insert the newly edited property to the previous index
+- Find a way to insert the newly edited property to the previous index(splice?)
 
 - Make specific part of the page printable
     :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage
