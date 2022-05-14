@@ -86,9 +86,14 @@ below the form fields
 
 <!-- - The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content(use the already created inputs and lay down the values from current state) -->
 
+<!-- - Find a way to insert the newly edited property to the previous index(splice?) -->
+
+-Languages inputs get state of proficiency
+
+-Major refactoring
+
 - Can avoid using 2 functions for submit and resubmit since both share the same logic(i did the implementation on getArrayToAdd)
 
-- Find a way to insert the newly edited property to the previous index(splice?)
 
 - Make specific part of the page printable
     :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage

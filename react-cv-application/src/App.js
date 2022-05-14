@@ -79,28 +79,23 @@ class App extends React.Component {
 		})
 	}
 
-  //When any field button is cliked  
 	handleSubmit(event){
-		console.log(this.state)
 		event.preventDefault()
 		const clickedField = event.target.className
 		if(this.formIsValid(clickedField)){
 			this.setState(prevState =>{
 				const newArray = this.getArrayToAdd(prevState, clickedField)
-				// Store the current object with empty fields to reassign later
+				// Store the current object with empty fields to reassign to state
 				const emptyObject = this.getEmptyObjectToAdd(clickedField)
 				return {
 					...prevState,
 					[clickedField]: {
-						...emptyObject, // Replace with erased values
+						...emptyObject, 
 						[`${clickedField + 'Array'}`] : 
-						// Include all the values from array + prev.state[name] minus the array
 							newArray 
 					}
 				}
 			})
-		}else{
-			return
 		}
 	}
     
@@ -152,7 +147,6 @@ class App extends React.Component {
         const arrayToLookUp = this.state[`${clickedField}`][`${clickedField  + 'Array'}`]
         // Find the object within the array with the same id as the parameter one
         const elementToEdit = arrayToLookUp.find(element => element.id === id)
-        // Get each attribute(destructure)
         // Turn the field button into a resubmit button instead of submit(make functionality)
 
         // Pass the id to resubmit to the button element? 
@@ -184,7 +178,6 @@ class App extends React.Component {
                 }
             }
         })
-        console.log(this.state)
     }
 
 
@@ -234,49 +227,32 @@ class App extends React.Component {
 
 	resetFormsStyling(){
 		const inputElements = Array.from(document.getElementsByTagName('input'))
-		for (let i = 0;  i < inputElements.length; i++) {
-			inputElements[i].classList.remove('invalid--input')		
-		}
+        inputElements.forEach(element => element.classList.remove('invalid--input'))
 	}
 	
 	getArrayToAdd(state, name){
-        // Check if element is in the array, and take its index if its the case to use splice?
-		if(name === 'education'){
-			const {id, title, university, observations} = state[name]
+        //TODO Refactor into better object destructuring to avoid 3 if statements
+            // Rest operator?
+            // Get the elements of the array with destructuring, name by name
+        const arrayToModify = [`${name + 'Array'}`]
+            // Get a filtered array from state excluding the one currently on edit
+        if(name==='education'){
+            const newArray = state[`${name}`][`${arrayToModify}`]
+                .filter(element => element.id !== state[name].id)
 
-            const newArray = state.education.educationArray
-                .filter(element => element.id !== id)
-
-			const objectToAdd = {
-				'id': id,
-				'title': title,
-				'university': university,
-				'observations': observations
-			}
-			return [...newArray, objectToAdd]
-		}
-
-		if(name === 'work'){
-			const {id, place, company, observations} = state[name]
-
-            const newArray = state.work.workArray
-                .filter(element => element.id !== id)
-
-			const objectToAdd = {
-				'id': id,
-				'place': place,
-				'company': company,
-				'observations': observations
-			}
-			return [...newArray, objectToAdd]
-		}
+            const objectToAdd = Object.assign({}, state[name])
+            delete objectToAdd[`${name + 'Array'}`]
+            
+            return [...newArray, objectToAdd]
+        }
 
 		if(name === 'languages'){
-			const {id, language} = state[name]
-			const proficiency = document.querySelector('.proficiency').value
+			const {id, language, proficiency} = state[name]
+            console.log(state[name])
+			// const proficiency = document.querySelector('.proficiency').value
 
-            const newArray = state.languages.lanuagesArray
-            .filter(element => element.id !== id)
+            const newArray = state.languages.languagesArray
+                .filter(element => element.id !== id)
 
 			const objectToAdd = {
 				'id': id,

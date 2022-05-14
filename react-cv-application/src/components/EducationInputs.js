@@ -67,7 +67,7 @@ class EducationInputs extends React.Component {
             </section>   
             <button 
                 className='education'> 
-                </button> 
+            </button> 
           </form>
       )
     }
