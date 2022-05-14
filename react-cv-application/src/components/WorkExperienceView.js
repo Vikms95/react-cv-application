@@ -10,9 +10,9 @@ class WorkExperienceView extends React.Component {
                         name="work"
                     >
                         <button
-                            onClick = {
+                            onClick = {(event) =>
                                 (this.props.isEditorMode)
-                                    ? this.props.handleFieldEdit
+                                    ? this.props.handleFieldEdit(value.id, event)
                                     : this.props.toggleMode
                             }
                             className='edit--button'>

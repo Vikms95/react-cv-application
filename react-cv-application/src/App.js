@@ -128,12 +128,41 @@ class App extends React.Component {
      * the array corresponding to the element clicked and empty the inputs again.
      */
      handleFieldEdit(id,event){
-        console.log(this.state)
-        console.dir(id,event)
-        // Get field clicked through parent element *name* attribute
-        // const clickedField = event.target.parentElement.getAttribute('name')
+         // Get field clicked through parent element *name* attribute
+         const clickedField = event.target.parentElement.getAttribute('name')
         // Look into the array based on the clickedField value 
+        const arrayToLookUp = this.state[`${clickedField}`][`${clickedField  + 'Array'}`]
         // Find the object within the array with the same id as the parameter one
+        const elementToEdit = arrayToLookUp.find(element => element.id === id)
+        this.setState(prevState =>{
+            console.log(prevState)
+            if(clickedField === 'education'){
+                return{
+                    ...prevState,
+                    [clickedField]:{
+                        title: elementToEdit.title,
+                        university: elementToEdit.university,
+                        observations: elementToEdit.observations,
+                        educationArray: prevState.education.educationArray
+                        
+                    }
+                }
+            }
+            if(clickedField === 'work'){
+                return{
+                    ...prevState,
+                    [clickedField]:{
+                        place: elementToEdit.place,
+                        company: elementToEdit.company,
+                        observations: elementToEdit.observations,
+                        workArray: prevState.work.workArray
+                        
+                    }
+                }
+                
+            }
+        })
+        console.log(this.state)
         // Get each attribute(destructure) 
         // Allocate it into the clickedField named key properties(inputs will change)
         // Turn the field button into a resubmit button instead of submit(make functionality)
