@@ -19,16 +19,19 @@ class LanguagesInputs extends React.Component {
 
             <section className='languages-bottom'>
                   <select 
-                      defaultValue="elementary" 
-                      id='language--level' 
+                      value={this.props.values.proficiency}
+                      defaultValue={'Elementary'}
+                      onChange={this.props.handleChange}
+                      id='proficiency'
+                      name='languages'
                       className="proficiency"
                   >
                       <option value="Elementary"> Elementary </option>
                       <option value="Professional"> Professional </option>
                       <option value="Native"> Native </option>
                   </select>
+
                   <button 
-                    value={this.props.values.proficiency || ''}
                     onClick={this.props.handleSubmit}  
                     className='languages' > Add language 
                   </button>

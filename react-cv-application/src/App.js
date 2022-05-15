@@ -45,7 +45,7 @@ class App extends React.Component {
             languages:{
 				id: uniqid(),
                 language:"",
-                proficiency:"",
+                proficiency:("" || 'Elementary'),
                 languagesArray:[
                     {id:'32329992', language:"English", proficiency: "Native"},
                     {id:'320923', language:"Spanish", proficiency: "Native"},
