@@ -90,20 +90,20 @@ no fancy editing mode on preview mode)  -->
 
 <!-- -Languages inputs get state of proficiency -->
 
--Major refactoring
-    <!-- : pending handleFieldEdit to avoid if statement -->
-    : check for improvements on component structure (merge education and work?)
-    : check for improvements on component readability
 
 - Implement profile photo change
     :You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
     :https://javascript.plainenglish.io/how-to-add-an-image-preview-when-an-image-file-is-selected-in-the-file-input-62609ac92a4f
-- Make specific part of the page downloadable as PDF
-    :https://stackoverflow.com/questions/17293135/download-a-div-in-a-html-page-as-pdf-using-javascript
+<!-- - Make specific part of the page downloadable as PDF
+    :https://stackoverflow.com/questions/17293135/download-a-div-in-a-html-page-as-pdf-using-javascript -->
 
-- Make specific part of the page printable
-    :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage
+<!-- - Make specific part of the page printable
+    :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage -->
 
+-Major refactoring
+    <!-- : pending handleFieldEdit to avoid if statement -->
+    : check for improvements on component structure (merge education and work?)
+    : check for improvements on component readability
 - Adjust css alignment
 
 - QUESTIONS

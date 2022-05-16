@@ -19,7 +19,11 @@ class Header extends React.Component {
                     className='pdf--button--bottom'
                     > Download PDF 
                 </button>
-                <button className='print--button--bottom'> Print CV </button>
+                <button 
+                    onClick={this.props.printCV}
+                    className='print--button--bottom'
+                    > Print CV 
+                </button>
               </div>
             }
           </div>

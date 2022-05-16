@@ -7,6 +7,7 @@ import PreviewModeView from './components/PreviewModeView'
 import profilePhoto from './images/profile-photo.png'
 import uniqid from 'uniqid'
 import html2pdf from 'html2pdf.js'
+import $ from 'jquery'
 
 class App extends React.Component {
     constructor(){
@@ -308,6 +309,14 @@ class App extends React.Component {
             .catch(err => console.log(err))
     }
 
+    printCV(){
+        const pageBackup = $('#root').html()
+        const printContent = $('.cv--container').clone()
+        $('#root').empty().html(printContent)
+        window.print()
+        $('#root').html(pageBackup)
+    }
+
     render() {
             return (
             <section className='general--container'>
@@ -326,6 +335,7 @@ class App extends React.Component {
                     isEditorMode={this.state.isEditorMode}
                     toggleMode={this.toggleMode}
                     createPDF={this.createPDF}
+                    printCV={this.printCV}
                 />
 
                 { 
