@@ -28,7 +28,6 @@
 
 .root{
     display: flex;
-    /* justify-content: center; */
 }
 
 .header{
@@ -170,7 +169,8 @@
     -webkit-filter: brightness(80%);
 }
 
-.profile--photo--section:hover .image--picker{
+.profile--photo--section:hover 
+.image--picker{
     display: flex;
     cursor: pointer;
 }

@@ -10,8 +10,15 @@ class Header extends React.Component {
               <div className="header--buttons">
                 <button
                    onClick={this.props.toggleMode}
-                   className='edit--button--bottom'> Back to edit </button>
-                <button className='pdf--button--bottom'> Download PDF </button>
+                   className='edit--button--bottom'
+                   > Back to edit 
+                </button>
+                
+                <button
+                    onClick={this.props.createPDF} 
+                    className='pdf--button--bottom'
+                    > Download PDF 
+                </button>
                 <button className='print--button--bottom'> Print CV </button>
               </div>
             }
