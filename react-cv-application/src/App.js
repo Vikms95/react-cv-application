@@ -24,8 +24,8 @@ class App extends React.Component {
                 university:"",
                 observations:"",
                 educationArray:[
-					{id:'32', title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Lorem Ipsum is simply dummy text ofnic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letr Ipsum"},
-					{id:'33', title:"Grade in Tourism", university: "CETA - Escola de Turisme", observations:"Lorem Ipsum is simply dummy text has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lom Ipsum"},
+					// {id:'32', title:"Bachellors in Computer Science", university: "Massachussets Institute of Technology ", observations:"Lorem Ipsum is simply dummy text ofnic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letr Ipsum"},
+					// {id:'33', title:"Grade in Tourism", university: "CETA - Escola de Turisme", observations:"Lorem Ipsum is simply dummy text has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lom Ipsum"},
 					// {title:"Highscool Diploma", university: "Carrasco i Formiguera", observations:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
 				],
             },
@@ -36,8 +36,8 @@ class App extends React.Component {
                 company:"",
                 observations:"",
                 workArray:[
-                    {id:'3232132', place:"Backend developer", company: "Spotify", observations:"Lorem Ipsum is simply dummy text of the printing and types in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
-                    {id:'33242342', place:"Hotel Recepcionist", company: "H10 Diagonal", observations:"Lorem Ipsum is simply dummy text of the printing and unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
+                    // {id:'3232132', place:"Backend developer", company: "Spotify", observations:"Lorem Ipsum is simply dummy text of the printing and types in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
+                    // {id:'33242342', place:"Hotel Recepcionist", company: "H10 Diagonal", observations:"Lorem Ipsum is simply dummy text of the printing and unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
                     // {place:"Hotel Recepcionist", company: "Duquesa de Cardona", observations:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
                 ],
             },
@@ -47,9 +47,9 @@ class App extends React.Component {
                 language:"",
                 proficiency:("" || 'Elementary'),
                 languagesArray:[
-                    {id:'32329992', language:"English", proficiency: "Native"},
-                    {id:'320923', language:"Spanish", proficiency: "Native"},
-                    {id:'903239', language:"Russian", proficiency: "Professional"},
+                    // {id:'32329992', language:"English", proficiency: "Native"},
+                    // {id:'320923', language:"Spanish", proficiency: "Native"},
+                    // {id:'903239', language:"Russian", proficiency: "Professional"},
                 ],
             }
         }
@@ -86,10 +86,10 @@ class App extends React.Component {
 		if(this.formIsValid(clickedField)){
 			this.setState(prevState =>{
 				const newArray = this.getArrayToAdd(prevState, clickedField, arrayToEdit)
-				const emptyObject = this.getEmptyObjectToAdd(clickedField)
-				
+				const emptyObject = this.getEmptyObjectToAdd(prevState, clickedField)
+                console.log(emptyObject)
                 return {
-					...prevState,
+                    ...prevState,
 					[clickedField]: {
 						...emptyObject, 
 						[arrayToEdit]: 
@@ -104,7 +104,7 @@ class App extends React.Component {
      * It takes the values of the corresponding key of state so
      * we can return a new object for later use with a pure approach
      */
-     getArrayToAdd(state, clickedField, arrayToEdit){
+    getArrayToAdd(state, clickedField, arrayToEdit){
         const fieldToEdit    = state[clickedField]
         const objectToAdd    = Object.assign({}, fieldToEdit)
         const newArray       = fieldToEdit[arrayToEdit] 
@@ -113,8 +113,8 @@ class App extends React.Component {
         
 
         if(this.isKeyInState(indexToReplace)){
-            // Button id attribute is removed so the button knows it needs to
-            // change its textContent value
+            // Button id attribute is removed so the button 
+            // knows it needs to change its textContent value
             document.querySelector(`button.${clickedField}`).removeAttribute('id-to-edit')
             newArray.splice(indexToReplace, 1, objectToAdd)
             return newArray
@@ -126,37 +126,17 @@ class App extends React.Component {
 
     /**
      * Takes the clickedField and returns an empty object
-     * with the key names and empty values
+     * with the key names, a new id and the rest of the values
+     * as empty
      */
-    getEmptyObjectToAdd(name){
-        let objectToAdd
-        if(name === 'education'){
-            objectToAdd = {
-                'id': uniqid(),
-                'title': "",
-                'university': "",
-                'observations': ""
-            }
+    getEmptyObjectToAdd(state, clickedField){
+        const emptyObject = Object.assign({}, state[clickedField])
+        for(let value in emptyObject){
+            emptyObject[value] = ""
         }
-
-        if(name === 'work'){
-            objectToAdd = {
-                'id': uniqid(),
-                'place': "",
-                'company': "",
-                'observations': ""
-            }
-        }
-
-        if(name === 'languages'){
-            objectToAdd = {
-                'id': uniqid(),
-                'language': "",
-                'proficiency': ""
-            }
-        }
-        return objectToAdd
-        }
+        emptyObject.id = uniqid()
+        return emptyObject    
+    }
 
     /**
      * Invoked when edit button is clicked on edit mode
