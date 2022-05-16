@@ -4,7 +4,7 @@ import AlertBox from './components/AlertBox'
 import Header from './components/Header'
 import EditModeView from './components/EditModeView'
 import PreviewModeView from './components/PreviewModeView'
-import profilePhoto from './images/stock-pic.png'
+import profilePhoto from './images/profile-photo.png'
 import uniqid from 'uniqid'
 
 class App extends React.Component {
@@ -12,6 +12,7 @@ class App extends React.Component {
         super()
         this.state = {
             isEditorMode: true,
+            profilePhoto: profilePhoto,
             general:{
                 name  : "John Doe",
                 email : "lorem@ipsu.com",

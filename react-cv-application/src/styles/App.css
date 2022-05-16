@@ -162,15 +162,46 @@
     font-size: 2rem;
 }
 
+.profile--photo--section{
+    position: relative;
+}
+
+.profile--photo--section:hover{
+    -webkit-filter: brightness(80%);
+}
+
+.profile--photo--section:hover .image--picker{
+    display: flex;
+    cursor: pointer;
+}
+
 .profile--photo{
     width:20rem;
     border-radius: 15px; 
+}
+
+.profile--photo--selector{
+    position: absolute;
+    top: 80%;
+    left: 36%;
 }
 
 .profile--photo--preview{
    margin: 0 2rem;
    width: 10rem;
    border-radius: 50%; 
+}
+
+#image--picker{
+    display: none;
+}
+
+.image--picker{
+    display: none;
+    background-color: #480b21;
+    color: white;
+    padding: .5rem;
+    border-radius: 15px;
 }
 
 .edit--button,
