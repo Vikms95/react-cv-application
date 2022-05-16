@@ -80,18 +80,24 @@ class App extends React.Component {
 	}
 
 	handleSubmit(event){
+        // debugger; // eslint-disable-line no-debugger
 		event.preventDefault()
 		const clickedField = event.target.className
+        const arrayToModify = [`${clickedField + 'Array'}`] 
+        document.querySelector(`button.${clickedField}`).removeAttribute('id-to-edit')
+
 		if(this.formIsValid(clickedField)){
 			this.setState(prevState =>{
+
 				const newArray = this.getArrayToAdd(prevState, clickedField)
-				// Store the current object with empty fields to reassign to state
+                 // Store the current object with empty fields to reset state for a new key
 				const emptyObject = this.getEmptyObjectToAdd(clickedField)
-				return {
+				
+                return {
 					...prevState,
 					[clickedField]: {
 						...emptyObject, 
-						[`${clickedField + 'Array'}`] : 
+						[arrayToModify]: 
 							newArray 
 					}
 				}
@@ -109,10 +115,9 @@ class App extends React.Component {
     handleResubmit(event){
         event.preventDefault()
         const clickedField = event.target.className
-        document.querySelector(`button.${clickedField}`).removeAttribute('id-to-edit')
         if(this.formIsValid(clickedField)){
             this.setState(prevState =>{
-                const newArray = this.getArrayToResubmit(prevState, clickedField)
+                const newArray = this.getArrayToAdd(prevState, clickedField)
                 const emptyObject = this.getEmptyObjectToAdd(clickedField)
                 // Splice the object array and use the new array instead
                 return{
@@ -126,11 +131,12 @@ class App extends React.Component {
                 }
             })
         }
+    }
         // Take id element from the same input.target attributes
         // Take field name to store from the input.target attributes
         // Call setState and return all the state with new array within the corresponding field 
         // with the current state values
-    }
+    // }
 
     /**
      * Invoked when edit button is clicked on edit mode
@@ -225,95 +231,101 @@ class App extends React.Component {
 		element.classList.add('invalid--input')
 	}
 
+    /**
+     * Resets styling of inputs when the submit button is clicked
+     */
 	resetFormsStyling(){
 		const inputElements = Array.from(document.getElementsByTagName('input'))
         inputElements.forEach(element => element.classList.remove('invalid--input'))
 	}
 	
+    /**
+     * It takes the values of the corresponding key of state so
+     * we can return a new object for later use with a pure approach
+     */
 	getArrayToAdd(state, name){
-        //TODO Refactor into better object destructuring to avoid 3 if statements
-            // Rest operator?
-            // Get the elements of the array with destructuring, name by name
+        // debugger; // eslint-disable-line no-debugger
+        const fieldToModify = state[name]
         const arrayToModify = [`${name + 'Array'}`]
-            // Get a filtered array from state excluding the one currently on edit
-        if(name==='education'){
-            const newArray = state[`${name}`][`${arrayToModify}`]
-                .filter(element => element.id !== state[name].id)
+        const objectToAdd   = Object.assign({}, fieldToModify)
+        const indexToReplace = fieldToModify[arrayToModify].findIndex(element => element.id === fieldToModify.id)
+        let newArray
+        // Remove the array key from the newly created object
+        
+        
 
-            const objectToAdd = Object.assign({}, state[name])
-            delete objectToAdd[`${name + 'Array'}`]
-            
+        if(indexToReplace === -1){
+            delete objectToAdd[arrayToModify]
+            newArray = fieldToModify[arrayToModify]
+                .filter(element => element.id !== fieldToModify.id)
+
             return [...newArray, objectToAdd]
+
+        }else{
+
+            newArray = fieldToModify[arrayToModify]
+            fieldToModify[arrayToModify].splice(indexToReplace,1,objectToAdd)
+            return newArray
         }
-
-		if(name === 'languages'){
-			const {id, language, proficiency} = state[name]
-            console.log(state[name])
-			// const proficiency = document.querySelector('.proficiency').value
-
-            const newArray = state.languages.languagesArray
-                .filter(element => element.id !== id)
-
-			const objectToAdd = {
-				'id': id,
-				'language': language,
-				'proficiency': proficiency
-			}
-			return [...newArray, objectToAdd]
-		}
-	}
-	getArrayToResubmit(state, name){
-        // Check if element is in the array, and take its index if its the case to use splice?
-		if(name === 'education'){
-			const {id, title, university, observations} = state[name]
-
-			const objectToAdd = {
-				'id': id,
-				'title': title,
-				'university': university,
-				'observations': observations
-			}
-
-            const indexToReplace = state.education.educationArray.findIndex(element => element.id === id)
-            const editedArray = state.education.educationArray
-            editedArray.splice(indexToReplace,1,objectToAdd)
-
-			return editedArray
-		}
-
-		if(name === 'work'){
-			const {id, place, company, observations} = state[name]
-
-			const objectToAdd = {
-				'id': id,
-				'place': place,
-				'company': company,
-				'observations': observations
-			}
-            const indexToReplace = state.work.workArray.findIndex(element => element.id === id)
-            const editedArray = state.work.workArray
-            editedArray.splice(indexToReplace,1,objectToAdd)
-
-			return editedArray
-		}
-
-		if(name === 'languages'){
-			const {id, language} = state[name]
-			const proficiency = document.querySelector('.proficiency').value
-
-			const objectToAdd = {
-				'id': id,
-				'language': language,
-				'proficiency': proficiency
-			}
-            const indexToReplace = state.work.workArray.findIndex(element => element.id === id)
-            const editedArray = state.work.workArray
-            editedArray.splice(indexToReplace,1,objectToAdd)
-
-			return editedArray
-		}
 	}
 
+	// getArrayToResubmit(state, name){
+    //     // Check if element is in the array, and take its index if its the case to use splice?
+	// 	if(name === 'education'){
+	// 		const {id, title, university, observations} = state[name]
+
+	// 		const objectToAdd = {
+	// 			'id': id,
+	// 			'title': title,
+	// 			'university': university,
+	// 			'observations': observations
+	// 		}
+
+    //         const indexToReplace = state.education.educationArray.findIndex(element => element.id === id)
+    //         const editedArray = state.education.educationArray
+    //         editedArray.splice(indexToReplace,1,objectToAdd)
+
+	// 		return editedArray
+	// 	}
+
+	// 	if(name === 'work'){
+	// 		const {id, place, company, observations} = state[name]
+
+	// 		const objectToAdd = {
+	// 			'id': id,
+	// 			'place': place,
+	// 			'company': company,
+	// 			'observations': observations
+	// 		}
+    //         const indexToReplace = state.work.workArray.findIndex(element => element.id === id)
+    //         const editedArray = state.work.workArray
+    //         editedArray.splice(indexToReplace,1,objectToAdd)
+
+	// 		return editedArray
+	// 	}
+
+	// 	if(name === 'languages'){
+	// 		const {id, language} = state[name]
+	// 		const proficiency = document.querySelector('.proficiency').value
+
+	// 		const objectToAdd = {
+	// 			'id': id,
+	// 			'language': language,
+	// 			'proficiency': proficiency
+	// 		}
+    //         const indexToReplace = state.work.workArray.findIndex(element => element.id === id)
+    //         const editedArray = state.work.workArray
+    //         editedArray.splice(indexToReplace,1,objectToAdd)
+
+	// 		return editedArray
+	// 	}
+	// }
+
+    /**
+     * Receives the field that was clicked
+     * and returns a new empty set of keys
+     * for the object 
+     */
 	getEmptyObjectToAdd(name){
         let objectToAdd
         if(name === 'education'){

@@ -88,9 +88,10 @@ below the form fields
 
 <!-- - Find a way to insert the newly edited property to the previous index(splice?) -->
 
--Languages inputs get state of proficiency
+<!-- -Languages inputs get state of proficiency -->
 
 -Major refactoring
+    :
 
 - Can avoid using 2 functions for submit and resubmit since both share the same logic(i did the implementation on getArrayToAdd)
 

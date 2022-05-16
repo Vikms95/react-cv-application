@@ -19,7 +19,6 @@ class LanguagesInputs extends React.Component {
 
             <section className='languages-bottom'>
                   <select 
-                      value={this.props.values.proficiency}
                       defaultValue={'Elementary'}
                       onChange={this.props.handleChange}
                       id='proficiency'

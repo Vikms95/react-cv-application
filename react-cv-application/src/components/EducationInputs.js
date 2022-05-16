@@ -66,6 +66,7 @@ class EducationInputs extends React.Component {
                         value={this.props.values.observations || ''}/>
             </section>   
             <button 
+                type='button'
                 className='education'> 
             </button> 
           </form>

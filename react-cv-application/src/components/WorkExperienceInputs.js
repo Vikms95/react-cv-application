@@ -67,6 +67,7 @@ class WorkExperienceInputs extends React.Component {
                         />
             </section>   
             <button 
+                    type='button'
                   className='work'>
             </button> 
           </form>
