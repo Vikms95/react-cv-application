@@ -67,9 +67,9 @@ class App extends React.Component {
 
 	handleChange(event){
 		const {value, id ,name} = event.target
+        
 		this.setState(prevState=>{
 			return {
-				...prevState,
 				[name]: {
 					...prevState[name],
 					[id] : value
@@ -87,10 +87,11 @@ class App extends React.Component {
 			this.setState(prevState =>{
 				const newArray = this.getArrayToAdd(prevState, clickedField, arrayToEdit)
 				const emptyObject = this.getEmptyObjectToAdd(prevState, clickedField)
-                console.log(emptyObject)
+                
                 return {
-                    ...prevState,
 					[clickedField]: {
+                        // An empty object is passed in state  
+                        // to empty the inputs when submitted
 						...emptyObject, 
 						[arrayToEdit]: 
 							newArray 
@@ -109,7 +110,7 @@ class App extends React.Component {
         const objectToAdd    = Object.assign({}, fieldToEdit)
         const newArray       = fieldToEdit[arrayToEdit] 
         const indexToReplace = fieldToEdit[arrayToEdit]
-            .findIndex(element => element.id === fieldToEdit.id)
+            .findIndex(key => key.id === fieldToEdit.id)
         
 
         if(this.isKeyInState(indexToReplace)){
@@ -119,7 +120,8 @@ class App extends React.Component {
             newArray.splice(indexToReplace, 1, objectToAdd)
             return newArray
         }else{
-            newArray.filter(element => element.id !== fieldToEdit.id)
+
+            newArray.filter(key => key.id !== fieldToEdit.id)
             return [...newArray, objectToAdd]
         }
 	}
@@ -147,38 +149,33 @@ class App extends React.Component {
      * the array corresponding to the element clicked and empty the inputs again.
      */
      handleFieldEdit(id,event){
-        // Get field clicked through parent element *name* attribute
-        const clickedField = event.target.parentElement.getAttribute('name')
-        // Look into the array based on the clickedField value 
-        const arrayToLookUp = this.state[`${clickedField}`][`${clickedField  + 'Array'}`]
-        // Find the object within the array with the same id as the parameter one
-        const elementToEdit = arrayToLookUp.find(element => element.id === id)
-        // Turn the field button into a resubmit button instead of submit(make functionality)
+        const clickedField  = event.target.parentElement.getAttribute('name')
+        const arrayToLookUp = this.state[clickedField][`${clickedField  + 'Array'}`]
+        const keyToEdit     = arrayToLookUp.find(key => key.id === id)
 
-        // Pass the id to resubmit to the button element? 
-        document.querySelector(`button.${clickedField}`).setAttribute('id-to-edit',id)
+        // Pass the id to the button element to remember
+        //  between functions the id that has to be modified 
+        document.querySelector(`button.${clickedField}`).setAttribute('id-to-edit', id)
+
         this.setState(prevState =>{
-            // Allocate it into the clickedField named key properties(inputs will change)
             if(clickedField === 'education'){
                 return{
-                    ...prevState,
                     [clickedField]:{
-                        id: elementToEdit.id,
-                        title: elementToEdit.title,
-                        university: elementToEdit.university,
-                        observations: elementToEdit.observations,
+                        id: keyToEdit.id,
+                        title: keyToEdit.title,
+                        university: keyToEdit.university,
+                        observations: keyToEdit.observations,
                         educationArray: prevState.education.educationArray
                     }
                 }
             }
             if(clickedField === 'work'){
                 return{
-                    ...prevState,
                     [clickedField]:{
-                        id: elementToEdit.id,
-                        place: elementToEdit.place,
-                        company: elementToEdit.company,
-                        observations: elementToEdit.observations,
+                        id: keyToEdit.id,
+                        place: keyToEdit.place,
+                        company: keyToEdit.company,
+                        observations: keyToEdit.observations,
                         workArray: prevState.work.workArray
                     }
                 }
@@ -194,24 +191,23 @@ class App extends React.Component {
 	 */
 	handleDelete(id, event){
         const clickedField = event.target.parentElement.getAttribute('name')
+        const arrayToEdit = [`${clickedField + 'Array'}`]
+
         this.setState(prevState =>{
-            //Get reference of corresponding array and create a new array out of it
-            const newArray = prevState[`${clickedField}`][`${clickedField + 'Array'}`]
-            //Assign it to the new state
             return{
-                ...prevState,
                 [clickedField]: {
-                    ...prevState.clickedField,
-                    [`${clickedField + 'Array'}`]:
-                        // Filter the element that received the click event
-                        newArray.filter(element => element.id !== id)
+                    ...prevState[clickedField],
+                    [arrayToEdit]:
+                        // Filter the element that received the delete click event
+                        prevState[clickedField][arrayToEdit]
+                            .filter(key => key.id !== id)
                 }    
             }
         })  
 	}
 
 	formIsValid(name){
-		const formToValidate = document.getElementById(`${name}`)
+		const formToValidate   = document.getElementById(`${name}`)
 		const inputsToValidate = Array.from(formToValidate.getElementsByTagName('input'))
 		this.resetFormsStyling()
 
@@ -246,14 +242,8 @@ class App extends React.Component {
 
 
 	toggleMode(){
-		this.setState(prevState =>{
-			return {
-					...prevState,
-					isEditorMode : !prevState.isEditorMode
-					}
-		})
+		this.setState(prevState =>({isEditorMode : !prevState.isEditorMode}))
 		this.removeAlertBox()
-		console.log(this.state.isEditorMode)
 	}
 
 	removeAlertBox(){
