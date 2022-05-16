@@ -5,11 +5,9 @@ class EducationInputs extends React.Component {
     componentDidMount(){
         let button = document.querySelector('button.education')
         if(button.hasAttribute('id-to-edit')){
-            button.addEventListener('click', this.props.handleResubmit)
             button.textContent = 'Edit education'
         }
         if(!button.hasAttribute('id-to-edit')){
-            button.addEventListener('click', this.props.handleSubmit)
             button.textContent = 'Add education'
         }
     }
@@ -17,13 +15,9 @@ class EducationInputs extends React.Component {
     componentDidUpdate(){
         let button = document.querySelector('button.education')
         if(button.hasAttribute('id-to-edit')){
-            button.removeEventListener('click', this.props.handleSubmit)
-            button.addEventListener('click', this.props.handleResubmit)
             button.textContent = 'Edit education'
         }
         if(!button.hasAttribute('id-to-edit')){
-            button.removeEventListener('click', this.props.handleResubmit)
-            button.addEventListener('click', this.props.handleSubmit)
             button.textContent = 'Add education'
         }
     }
@@ -66,6 +60,7 @@ class EducationInputs extends React.Component {
                         value={this.props.values.observations || ''}/>
             </section>   
             <button 
+                onClick={this.props.handleSubmit}
                 type='button'
                 className='education'> 
             </button> 

@@ -5,11 +5,9 @@ class WorkExperienceInputs extends React.Component {
       componentDidMount(){
             let button = document.querySelector('button.work')
             if(button.hasAttribute('id-to-edit')){
-                button.addEventListener('click', this.props.handleResubmit)
                 button.textContent = 'Edit experience'
             }
             if(!button.hasAttribute('id-to-edit')){
-                button.addEventListener('click', this.props.handleSubmit)
                 button.textContent = 'Add experience'
             }
         }
@@ -17,13 +15,9 @@ class WorkExperienceInputs extends React.Component {
         componentDidUpdate(){
             let button = document.querySelector('button.work')
             if(button.hasAttribute('id-to-edit')){
-                button.removeEventListener('click', this.props.handleSubmit)
-                button.addEventListener('click', this.props.handleResubmit)
                 button.textContent = 'Edit experience'
             }
             if(!button.hasAttribute('id-to-edit')){
-                button.removeEventListener('click', this.props.handleResubmit)
-                button.addEventListener('click', this.props.handleSubmit)
                 button.textContent = 'Add experience'
             }
         }
@@ -67,8 +61,9 @@ class WorkExperienceInputs extends React.Component {
                         />
             </section>   
             <button 
+                    onClick={this.props.handleSubmit}
                     type='button'
-                  className='work'>
+                    className='work'>
             </button> 
           </form>
       )

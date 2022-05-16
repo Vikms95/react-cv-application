@@ -62,7 +62,6 @@ class App extends React.Component {
 		this.isRequiredFieldsValid = this.isRequiredFieldsValid.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
         this.handleFieldEdit = this.handleFieldEdit.bind(this)
-		this.handleResubmit = this.handleResubmit.bind(this)
     }
 
 
@@ -80,24 +79,20 @@ class App extends React.Component {
 	}
 
 	handleSubmit(event){
-        // debugger; // eslint-disable-line no-debugger
 		event.preventDefault()
 		const clickedField = event.target.className
-        const arrayToModify = [`${clickedField + 'Array'}`] 
-        document.querySelector(`button.${clickedField}`).removeAttribute('id-to-edit')
+        const arrayToEdit = [`${clickedField + 'Array'}`] 
 
 		if(this.formIsValid(clickedField)){
 			this.setState(prevState =>{
-
-				const newArray = this.getArrayToAdd(prevState, clickedField)
-                 // Store the current object with empty fields to reset state for a new key
+				const newArray = this.getArrayToAdd(prevState, clickedField, arrayToEdit)
 				const emptyObject = this.getEmptyObjectToAdd(clickedField)
 				
                 return {
 					...prevState,
 					[clickedField]: {
 						...emptyObject, 
-						[arrayToModify]: 
+						[arrayToEdit]: 
 							newArray 
 					}
 				}
@@ -106,37 +101,62 @@ class App extends React.Component {
 	}
     
     /**
-     * Will be called when resubmit button is available(when edit field is clicked)
-     * Will take the elements from the corresponding input value and the id which was attached
-     * to the button element from *handleFieldEdit* and return an object to state on the same index
-     * within the array(will be found with the ID) but with the newly changed values taken from state 
-     * instead of creating a whole new value
+     * It takes the values of the corresponding key of state so
+     * we can return a new object for later use with a pure approach
      */
-    handleResubmit(event){
-        event.preventDefault()
-        const clickedField = event.target.className
-        if(this.formIsValid(clickedField)){
-            this.setState(prevState =>{
-                const newArray = this.getArrayToAdd(prevState, clickedField)
-                const emptyObject = this.getEmptyObjectToAdd(clickedField)
-                // Splice the object array and use the new array instead
-                return{
-                    ...prevState,
-                    [clickedField]:{
-                        ...emptyObject,
-                        [`${clickedField + 'Array'}`] : 
-						// Include all the values and substitute the new array
-							newArray 
-                    }
-                }
-            })
+     getArrayToAdd(state, clickedField, arrayToEdit){
+        const fieldToEdit    = state[clickedField]
+        const objectToAdd    = Object.assign({}, fieldToEdit)
+        const newArray       = fieldToEdit[arrayToEdit] 
+        const indexToReplace = fieldToEdit[arrayToEdit]
+            .findIndex(element => element.id === fieldToEdit.id)
+        
+
+        if(this.isKeyInState(indexToReplace)){
+            // Button id attribute is removed so the button knows it needs to
+            // change its textContent value
+            document.querySelector(`button.${clickedField}`).removeAttribute('id-to-edit')
+            newArray.splice(indexToReplace, 1, objectToAdd)
+            return newArray
+        }else{
+            newArray.filter(element => element.id !== fieldToEdit.id)
+            return [...newArray, objectToAdd]
         }
-    }
-        // Take id element from the same input.target attributes
-        // Take field name to store from the input.target attributes
-        // Call setState and return all the state with new array within the corresponding field 
-        // with the current state values
-    // }
+	}
+
+    /**
+     * Takes the clickedField and returns an empty object
+     * with the key names and empty values
+     */
+    getEmptyObjectToAdd(name){
+        let objectToAdd
+        if(name === 'education'){
+            objectToAdd = {
+                'id': uniqid(),
+                'title': "",
+                'university': "",
+                'observations': ""
+            }
+        }
+
+        if(name === 'work'){
+            objectToAdd = {
+                'id': uniqid(),
+                'place': "",
+                'company': "",
+                'observations': ""
+            }
+        }
+
+        if(name === 'languages'){
+            objectToAdd = {
+                'id': uniqid(),
+                'language': "",
+                'proficiency': ""
+            }
+        }
+        return objectToAdd
+        }
 
     /**
      * Invoked when edit button is clicked on edit mode
@@ -239,122 +259,11 @@ class App extends React.Component {
         inputElements.forEach(element => element.classList.remove('invalid--input'))
 	}
 	
-    /**
-     * It takes the values of the corresponding key of state so
-     * we can return a new object for later use with a pure approach
-     */
-	getArrayToAdd(state, name){
-        // debugger; // eslint-disable-line no-debugger
-        const fieldToModify = state[name]
-        const arrayToModify = [`${name + 'Array'}`]
-        const objectToAdd   = Object.assign({}, fieldToModify)
-        const indexToReplace = fieldToModify[arrayToModify].findIndex(element => element.id === fieldToModify.id)
-        let newArray
-        // Remove the array key from the newly created object
-        
-        
 
-        if(indexToReplace === -1){
-            delete objectToAdd[arrayToModify]
-            newArray = fieldToModify[arrayToModify]
-                .filter(element => element.id !== fieldToModify.id)
+    isKeyInState(index){
+        return index !== -1
+    }
 
-            return [...newArray, objectToAdd]
-
-        }else{
-
-            newArray = fieldToModify[arrayToModify]
-            fieldToModify[arrayToModify].splice(indexToReplace,1,objectToAdd)
-            return newArray
-        }
-	}
-
-	// getArrayToResubmit(state, name){
-    //     // Check if element is in the array, and take its index if its the case to use splice?
-	// 	if(name === 'education'){
-	// 		const {id, title, university, observations} = state[name]
-
-	// 		const objectToAdd = {
-	// 			'id': id,
-	// 			'title': title,
-	// 			'university': university,
-	// 			'observations': observations
-	// 		}
-
-    //         const indexToReplace = state.education.educationArray.findIndex(element => element.id === id)
-    //         const editedArray = state.education.educationArray
-    //         editedArray.splice(indexToReplace,1,objectToAdd)
-
-	// 		return editedArray
-	// 	}
-
-	// 	if(name === 'work'){
-	// 		const {id, place, company, observations} = state[name]
-
-	// 		const objectToAdd = {
-	// 			'id': id,
-	// 			'place': place,
-	// 			'company': company,
-	// 			'observations': observations
-	// 		}
-    //         const indexToReplace = state.work.workArray.findIndex(element => element.id === id)
-    //         const editedArray = state.work.workArray
-    //         editedArray.splice(indexToReplace,1,objectToAdd)
-
-	// 		return editedArray
-	// 	}
-
-	// 	if(name === 'languages'){
-	// 		const {id, language} = state[name]
-	// 		const proficiency = document.querySelector('.proficiency').value
-
-	// 		const objectToAdd = {
-	// 			'id': id,
-	// 			'language': language,
-	// 			'proficiency': proficiency
-	// 		}
-    //         const indexToReplace = state.work.workArray.findIndex(element => element.id === id)
-    //         const editedArray = state.work.workArray
-    //         editedArray.splice(indexToReplace,1,objectToAdd)
-
-	// 		return editedArray
-	// 	}
-	// }
-
-    /**
-     * Receives the field that was clicked
-     * and returns a new empty set of keys
-     * for the object 
-     */
-	getEmptyObjectToAdd(name){
-        let objectToAdd
-        if(name === 'education'){
-            objectToAdd = {
-                'id': uniqid(),
-                'title': "",
-                'university': "",
-                'observations': ""
-            }
-        }
-
-        if(name === 'work'){
-            objectToAdd = {
-                'id': uniqid(),
-                'place': "",
-                'company': "",
-                'observations': ""
-            }
-        }
-
-        if(name === 'languages'){
-            objectToAdd = {
-                'id': uniqid(),
-                'language': "",
-                'proficiency': ""
-            }
-        }
-        return objectToAdd
-        }
 
 	toggleMode(){
 		this.setState(prevState =>{
