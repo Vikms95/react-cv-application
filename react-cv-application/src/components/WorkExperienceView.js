@@ -5,7 +5,7 @@ class WorkExperienceView extends React.Component {
     formatValues(){
          return this.props.values.map(value =>{
              return <div 
-                        key={value.place} 
+                        key={value.id} 
                         className={`work--element ${this.props.isEditorMode ? "editor" : "preview"}`}
                         name="work"
                     >

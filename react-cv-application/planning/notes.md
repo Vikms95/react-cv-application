@@ -52,34 +52,34 @@ below the form fields
 
 <!-- -Fix grid issues with creating new elements inbetween the default grid elements(they all grow to fit the 1fr specification) -->
 
--The submit button should submit your form and display the value of your input fields
+<!-- -The submit button should submit your form and display the value of your input fields
 (which do not need to be referenced, since all is already updated in our state) in HTML elements with its respective titles.
-- Be sure to include an edit button for the HTML version for each section or for the whole CV, your preference.
-    <!-- : one component for edit mode and the other for preview mode -->
-    <!-- : use ternary statement to know which component should be displayed,
-    editMode ? then display the edit mode -->
-    <!-- :previewMode needs to get the state passed as props -->
-    
-    <!-- :. create GeneralInfoView for the preview mode -->
-    <!-- :. pass in the selected profile picture -->
-    <!-- :. create element which will ask if you want to proceed with the CV preview even though not all fields have content
-        :set up an absolute div with display none on App  -->
-    <!-- :. create element pop-up to alert of required fields to be filled -->
-    <!-- :. implement handleSubmitPreview which will- -->
-    <!-- :check how many education/work/languages fields are empty to -->
-    <!-- see if swapping to preview mode makes sense, ask the user, if it says yes, change the value to false -->
-    <!-- :check if the three main inputs are filled, if not, trigger constraints validations and return from the function -->
-    <!-- {: style preview mode a little bit} -->
-    <!-- : every element will have a button that will appear on hover to bring you back to edit mode -->
-    <!-- :edit button also appears in edit mode
-            :isEditMode not being passed as a prop? -->
-    <!-- :work experience inputs not getting erased when button is clicked?
-        :state is getting updated
-        :input value property was spelled wrong xd -->
-    <!-- :implement delete button -->
-    <!-- :.at the header of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print -->
-    <!-- : change *isEditorMode* whenever the edit button is clicked or if any edit button is clicked on the preview mode(just goes back to editor mode,
-    no fancy editing mode on preview mode)  -->
+- Be sure to include an edit button for the HTML version for each section or for the whole CV, your preference. -->
+<!-- : one component for edit mode and the other for preview mode -->
+<!-- : use ternary statement to know which component should be displayed,
+editMode ? then display the edit mode -->
+<!-- :previewMode needs to get the state passed as props -->
+
+<!-- :. create GeneralInfoView for the preview mode -->
+<!-- :. pass in the selected profile picture -->
+<!-- :. create element which will ask if you want to proceed with the CV preview even though not all fields have content
+    :set up an absolute div with display none on App  -->
+<!-- :. create element pop-up to alert of required fields to be filled -->
+<!-- :. implement handleSubmitPreview which will- -->
+<!-- :check how many education/work/languages fields are empty to -->
+<!-- see if swapping to preview mode makes sense, ask the user, if it says yes, change the value to false -->
+<!-- :check if the three main inputs are filled, if not, trigger constraints validations and return from the function -->
+<!-- {: style preview mode a little bit} -->
+<!-- : every element will have a button that will appear on hover to bring you back to edit mode -->
+<!-- :edit button also appears in edit mode
+        :isEditMode not being passed as a prop? -->
+<!-- :work experience inputs not getting erased when button is clicked?
+    :state is getting updated
+    :input value property was spelled wrong xd -->
+<!-- :implement delete button -->
+<!-- :.at the header of preview mode, 3 buttons will be needed: another button to go back to editing, download as pdf, print -->
+<!-- : change *isEditorMode* whenever the edit button is clicked or if any edit button is clicked on the preview mode(just goes back to editor mode,
+no fancy editing mode on preview mode)  -->
 
 
 <!-- - Remove button per field element     -->
@@ -91,10 +91,12 @@ below the form fields
 <!-- -Languages inputs get state of proficiency -->
 
 -Major refactoring
-    :
+    <!-- : pending handleFieldEdit to avoid if statement -->
+    : check for improvements on components (merge education and work?)
 
-- Can avoid using 2 functions for submit and resubmit since both share the same logic(i did the implementation on getArrayToAdd)
+- Implement profile photo change
 
+- Make specigic part of the page downloadable as PDF
 
 - Make specific part of the page printable
     :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage

@@ -67,7 +67,7 @@ class App extends React.Component {
 
 	handleChange(event){
 		const {value, id ,name} = event.target
-        
+
 		this.setState(prevState=>{
 			return {
 				[name]: {
@@ -116,7 +116,9 @@ class App extends React.Component {
         if(this.isKeyInState(indexToReplace)){
             // Button id attribute is removed so the button 
             // knows it needs to change its textContent value
-            document.querySelector(`button.${clickedField}`).removeAttribute('id-to-edit')
+            document.querySelector(`button.${clickedField}`)
+                    .removeAttribute('id-to-edit')
+                    
             newArray.splice(indexToReplace, 1, objectToAdd)
             return newArray
         }else{
@@ -141,45 +143,32 @@ class App extends React.Component {
     }
 
     /**
-     * Invoked when edit button is clicked on edit mode
-     * Will take the clicked button field element, find it in the array
-     * based on the id, erase the values from state and insert the values from
-     * the clicked element in state.
-     * When the submit button is clicked, it will change all the values from within
-     * the array corresponding to the element clicked and empty the inputs again.
+     * -Invoked when edit button is clicked on edit mode-
+     * Take values from clicked element and return them to state
+     * to be modified in handleSubmit   
      */
-     handleFieldEdit(id,event){
-        const clickedField  = event.target.parentElement.getAttribute('name')
-        const arrayToLookUp = this.state[clickedField][`${clickedField  + 'Array'}`]
-        const keyToEdit     = arrayToLookUp.find(key => key.id === id)
-
+    handleFieldEdit(id,event){
         // Pass the id to the button element to remember
-        //  between functions the id that has to be modified 
-        document.querySelector(`button.${clickedField}`).setAttribute('id-to-edit', id)
+        // between functions the id that has to be modified 
+        const clickedField  = event.target.parentElement.getAttribute('name')
+        document.querySelector(`button.${clickedField}`)
+                .setAttribute('id-to-edit', id)
 
         this.setState(prevState =>{
-            if(clickedField === 'education'){
+            const arrayName   = [`${clickedField  + 'Array'}`]
+            const arrayToEdit = prevState[clickedField][`${clickedField  + 'Array'}`]
+            const keyToEdit   = arrayToEdit.find(key => key.id === id)
+            console.log(keyToEdit)
                 return{
                     [clickedField]:{
-                        id: keyToEdit.id,
-                        title: keyToEdit.title,
-                        university: keyToEdit.university,
-                        observations: keyToEdit.observations,
-                        educationArray: prevState.education.educationArray
+                        // Assign the element of the key to modify to state
+                        ...keyToEdit,
+                        // Replace the previous state array with 
+                        // the array of the key to be modified
+                        [arrayName]: arrayToEdit
                     }
                 }
-            }
-            if(clickedField === 'work'){
-                return{
-                    [clickedField]:{
-                        id: keyToEdit.id,
-                        place: keyToEdit.place,
-                        company: keyToEdit.company,
-                        observations: keyToEdit.observations,
-                        workArray: prevState.work.workArray
-                    }
-                }
-            }
+
         })
     }
 
@@ -232,14 +221,14 @@ class App extends React.Component {
      */
 	resetFormsStyling(){
 		const inputElements = Array.from(document.getElementsByTagName('input'))
-        inputElements.forEach(element => element.classList.remove('invalid--input'))
+        inputElements.forEach(element => element
+                                        .classList
+                                        .remove('invalid--input'))
 	}
 	
-
     isKeyInState(index){
         return index !== -1
     }
-
 
 	toggleMode(){
 		this.setState(prevState =>({isEditorMode : !prevState.isEditorMode}))
@@ -247,14 +236,18 @@ class App extends React.Component {
 	}
 
 	removeAlertBox(){
-		document.querySelector('.alert--box').classList.remove('active')
+		document.querySelector('.alert--box')
+                .classList
+                .remove('active')
 	}
 
 	revealAlertBox(){
-		document.querySelector('.alert--box').classList.add('active')
+		document.querySelector('.alert--box')
+                .classList
+                .add('active')
 	}
 
-  //When the preview button is clicked  
+
 	handleSubmitPreview(){        
 		if(this.isRequiredFieldsValid()){
 			if(this.isAnyOptionalFieldEmpty()){
@@ -293,51 +286,51 @@ class App extends React.Component {
 	}
 
 
-  render() {
-		return (
-		<section className='general--container'>
-			<AlertBox
-				toggleMode={this.toggleMode}
-				removeAlertBox={this.removeAlertBox}
-				isRequiredFieldsValid={this.isRequiredFieldsValid}
-			/>
-			<button 
-				onClick={this.scrollTop} 
-				id='scroll--up--button'>
-			Scroll up
-			</button>
+    render() {
+            return (
+            <section className='general--container'>
+                <AlertBox
+                    toggleMode={this.toggleMode}
+                    removeAlertBox={this.removeAlertBox}
+                    isRequiredFieldsValid={this.isRequiredFieldsValid}
+                />
+                <button 
+                    onClick={this.scrollTop} 
+                    id='scroll--up--button'>
+                Scroll up
+                </button>
 
-			<Header 
-				isEditorMode={this.state.isEditorMode}
-				toggleMode={this.toggleMode}
+                <Header 
+                    isEditorMode={this.state.isEditorMode}
+                    toggleMode={this.toggleMode}
 
-			/>
+                />
 
-			{ 
-				(this.state.isEditorMode) 
-					? <EditModeView 
-						profilePhoto        = {profilePhoto}
-						inputValues         = {this.state}
-						isEditorMode        = {this.state.isEditorMode}
-						handleChange        = {this.handleChange} 
-						handleSubmit        = {this.handleSubmit} 
-                        handleDelete        = {this.handleDelete}
-                        handleFieldEdit     = {this.handleFieldEdit}
-                        handleResubmit      = {this.handleResubmit}
-						isAnyItemInField    = {this.isAnyItemInField}
-						handleSubmitPreview = {this.handleSubmitPreview}
-					/>
-					: <PreviewModeView   
-						toggleMode       = {this.toggleMode}
-						profilePhoto     = {profilePhoto}
-						inputValues      = {this.state}
-						isEditorMode     = {this.state.isEditorMode}
-						isAnyItemInField = {this.isAnyItemInField}
-					/>
-			}
-		</section>
-		)
-  }
+                { 
+                    (this.state.isEditorMode) 
+                        ? <EditModeView 
+                            profilePhoto        = {profilePhoto}
+                            inputValues         = {this.state}
+                            isEditorMode        = {this.state.isEditorMode}
+                            handleChange        = {this.handleChange} 
+                            handleSubmit        = {this.handleSubmit} 
+                            handleDelete        = {this.handleDelete}
+                            handleFieldEdit     = {this.handleFieldEdit}
+                            handleResubmit      = {this.handleResubmit}
+                            isAnyItemInField    = {this.isAnyItemInField}
+                            handleSubmitPreview = {this.handleSubmitPreview}
+                        />
+                        : <PreviewModeView   
+                            toggleMode       = {this.toggleMode}
+                            profilePhoto     = {profilePhoto}
+                            inputValues      = {this.state}
+                            isEditorMode     = {this.state.isEditorMode}
+                            isAnyItemInField = {this.isAnyItemInField}
+                        />
+                }
+            </section>
+            )
+    }
 }
 
 export default App

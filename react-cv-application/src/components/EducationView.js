@@ -5,7 +5,7 @@ class EducationView extends React.Component {
     formatValues(){
          return this.props.values.map(value =>{
              return <div 
-                        key={value.title} 
+                        key={value.id} 
                         className={`education--element ${this.props.isEditorMode ? "editor" : "preview"}`}
                         name='education'
                     >
