@@ -92,21 +92,24 @@ no fancy editing mode on preview mode)  -->
 
 -Major refactoring
     <!-- : pending handleFieldEdit to avoid if statement -->
-    : check for improvements on components (merge education and work?)
+    : check for improvements on component structure (merge education and work?)
+    : check for improvements on component readability
 
 - Implement profile photo change
 
-- Make specigic part of the page downloadable as PDF
+- Make specific part of the page downloadable as PDF
+    :https://stackoverflow.com/questions/17293135/download-a-div-in-a-html-page-as-pdf-using-javascript
 
 - Make specific part of the page printable
     :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage
 
+- Adjust css alignment
+
 - QUESTIONS
--State will be held in App.js?
--Wrap each component in a form or just one?
--Last row one component rendering 2 components or 2 components in App?
--To swap views, conditional rendering on the App component?
--State is already updated on each change, so button just has to get the state and render an HTML ?
+<!-- -State will be held in App.js? -->
+<!-- -Wrap each component in a form or just one? -->
+<!-- -Last row one component rendering 2 components or 2 components in App? -->
+<!-- -To swap views, conditional rendering on the App component? -->
+<!-- -State is already updated on each change, so button just has to get the state and render an HTML ? -->
 -Education and Work in one component with different props?
--Reassign props to another variable name without changing its value to make
-components in the jsx cleaner?
+-Reassign props to another variable name without changing its value to make components in the jsx cleaner?

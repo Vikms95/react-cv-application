@@ -47,9 +47,9 @@ class App extends React.Component {
                 language:"",
                 proficiency:("" || 'Elementary'),
                 languagesArray:[
-                    // {id:'32329992', language:"English", proficiency: "Native"},
-                    // {id:'320923', language:"Spanish", proficiency: "Native"},
-                    // {id:'903239', language:"Russian", proficiency: "Professional"},
+                    {id:'32329992', language:"English", proficiency: "Native"},
+                    {id:'320923', language:"Spanish", proficiency: "Native"},
+                    {id:'903239', language:"Russian", proficiency: "Professional"},
                 ],
             }
         }
@@ -158,7 +158,6 @@ class App extends React.Component {
             const arrayName   = [`${clickedField  + 'Array'}`]
             const arrayToEdit = prevState[clickedField][`${clickedField  + 'Array'}`]
             const keyToEdit   = arrayToEdit.find(key => key.id === id)
-            console.log(keyToEdit)
                 return{
                     [clickedField]:{
                         // Assign the element of the key to modify to state
@@ -247,7 +246,6 @@ class App extends React.Component {
                 .add('active')
 	}
 
-
 	handleSubmitPreview(){        
 		if(this.isRequiredFieldsValid()){
 			if(this.isAnyOptionalFieldEmpty()){
@@ -269,11 +267,10 @@ class App extends React.Component {
 	}
 
     isAnyOptionalFieldEmpty(){
-        return (
-                   this.state.education.educationArray.length === 0
-                || this.state.work.workArray.length === 0
-                || this.state.languages.languagesArray.length === 0                
-               )
+        return this.state.education.educationArray.length === 0
+               || this.state.work.workArray.length === 0
+               || this.state.languages.languagesArray.length === 0                
+               
     }
 
 	isAnyItemInField(values){

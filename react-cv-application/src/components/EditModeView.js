@@ -18,6 +18,7 @@ class EditModeView extends React.Component{
         const educationValues = values.education.educationArray
         const workValues = values.work.workArray
         const languagesValues = values.languages.languagesArray
+        
         return(   
             <section className="cv--container">
                 <section className='general--info'>
