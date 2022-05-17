@@ -78,6 +78,7 @@
     padding: 90px;
     max-width: 15rem;
     transform: translate(-50%, -50%);
+    z-index: 99999;
 }
 
 .alert--box.active {
@@ -91,6 +92,7 @@
 }
 
 .alert--box--buttons {
+    margin-top: 2rem;
     display: flex;
     justify-content: space-evenly;
 }

@@ -89,7 +89,7 @@ no fancy editing mode on preview mode)  -->
 
 <!-- -Languages inputs get state of proficiency -->
 
--   Implement profile photo change
+-TODO   Implement profile photo change
 :You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
 :https://javascript.plainenglish.io/how-to-add-an-image-preview-when-an-image-file-is-selected-in-the-file-input-62609ac92a4f
 <!-- - Make specific part of the page downloadable as PDF
@@ -98,14 +98,14 @@ no fancy editing mode on preview mode)  -->
 <!-- - Make specific part of the page printable
     :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage -->
 
--Major refactoring
+-TODO Major refactoring
 
 <!-- : pending handleFieldEdit to avoid if statement -->
 
 : check for improvements on component structure (merge education and work?)
 : check for improvements on component readability
 
--   Adjust css alignment
+<!-- -   Adjust css alignment -->
 
 -   QUESTIONS
     <!-- -State will be held in App.js? -->
@@ -113,5 +113,5 @@ no fancy editing mode on preview mode)  -->
     <!-- -Last row one component rendering 2 components or 2 components in App? -->
     <!-- -To swap views, conditional rendering on the App component? -->
     <!-- -State is already updated on each change, so button just has to get the state and render an HTML ? -->
-    -Education and Work in one component with different props?
-    -Reassign props to another variable name without changing its value to make components in the jsx cleaner?
+    <!-- -Education and Work in one component with different props? -->
+    <!-- -Reassign props to another variable name without changing its value to make components in the jsx cleaner? -->
