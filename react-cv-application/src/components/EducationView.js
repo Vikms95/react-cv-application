@@ -13,7 +13,7 @@ class EducationView extends React.Component {
                             onClick = {(event) =>
                                 (this.props.isEditorMode)
                                     ? this.props.handleFieldEdit(value.id, event)
-                                    : this.props.toggleMode
+                                    : this.props.toggleMode()
                             }
                             className='edit--button'>
                             {this.props.isEditorMode ? 'Edit' : 'Back to edit'}
@@ -23,8 +23,8 @@ class EducationView extends React.Component {
                             (this.props.isEditorMode) && 
                             <button
                                 onClick={(event) => this.props.handleDelete(value.id, event)}
-                                className='delete--button'>
-                                Delete
+                                className='delete--button'
+                                > Delete
                             </button>
                         }
 

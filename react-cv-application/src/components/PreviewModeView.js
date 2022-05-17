@@ -7,7 +7,6 @@ import LanguagesView from './LanguagesView'
 
 class PreviewModeView extends React.Component {
     render() {
-
       const values = this.props.inputValues
       const generalValues = values.general
       const educationValues = values.education.educationArray
@@ -28,8 +27,8 @@ class PreviewModeView extends React.Component {
               this.props.isAnyItemInField(educationValues) 
               && <EducationView 
                     isEditorMode={this.props.isEditorMode}
-                    values={educationValues}
                     toggleMode = {this.props.toggleMode}
+                    values={educationValues}
                  />
             }
             <h2 className='preview--field--title'> WORK EXPERIENCE </h2>
@@ -37,8 +36,8 @@ class PreviewModeView extends React.Component {
               this.props.isAnyItemInField(workValues) 
               && <WorkExperienceView
                     isEditorMode={this.props.isEditorMode}
-                    values={workValues}
                     toggleMode = {this.props.toggleMode}
+                    values={workValues}
                  />
             }
             <h2 className='preview--field--title'> LANGUAGES </h2>

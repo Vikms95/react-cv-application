@@ -233,7 +233,9 @@ class App extends React.Component {
     }
 
 	toggleMode(){
+        // debugger; // eslint-disable-line no-debugger
 		this.setState(prevState =>({isEditorMode : !prevState.isEditorMode}))
+        console.log("Hi")
 		this.removeAlertBox()
 	}
 
@@ -257,9 +259,10 @@ class App extends React.Component {
 			}
 			this.toggleMode()
 			return
-		}
-		this.revealAlertBox()
-		setTimeout(this.removeAlertBox, 2000)
+		}else{
+            this.revealAlertBox()
+            setTimeout(this.removeAlertBox, 2000)
+        }
 	}
 
 	isRequiredFieldsValid(){
