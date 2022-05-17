@@ -167,6 +167,7 @@
 
 .profile--photo--section:hover{
     -webkit-filter: brightness(80%);
+    filter: brightness(80%);
 }
 
 .profile--photo--section:hover 
@@ -286,6 +287,7 @@ button:hover{
 }
 
 .container--input{
+    position: relative;
     display: flex;
     flex-direction: column;
     text-align: start;
@@ -293,6 +295,8 @@ button:hover{
     gap: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
 }
 
 .container--input > section > input,
@@ -340,8 +344,10 @@ button:hover{
 button.education,
 button.work
 {
+    position: absolute;
     padding: 1rem;
-    align-self: center;
+    top: 120%;
+    left: 40%;
 }
 
 .place--input{
@@ -365,6 +371,7 @@ button.work
     gap: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    margin-top: 1rem;
 }
 
 .language--input{
@@ -377,9 +384,9 @@ button.work
 }
 
 button.languages{
-    margin-left: 2rem;
+    margin-left: 2.5rem;
     padding-left: 2.7rem;
-    padding-right: 2.7rem;
+    padding-right: 2.5rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
 }
@@ -406,6 +413,7 @@ button.languages{
 .languages--view{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .title--view,
