@@ -1,47 +1,54 @@
 import React from 'react';
 
 class WorkExperienceView extends React.Component {
-	formatValues() {
-		return this.props.values.map((value) => {
-			return (
-				<div
-					key={value.id}
-					className={`work--element ${this.props.isEditorMode ? 'editor' : 'preview'}`}
-					name="work"
-				>
-					<button
-						onClick={(event) =>
-							this.props.isEditorMode
-								? this.props.handleFieldEdit(value.id, event)
-								: this.props.toggleMode()
-						}
-						className="edit--button"
-					>
-						{this.props.isEditorMode ? 'Edit' : 'Back to edit'}
-					</button>
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-					{this.props.isEditorMode && (
-						<button
-							onClick={(event) => this.props.handleDelete(value.id, event)}
-							className="delete--button"
-						>
-                            Delete
-						</button>
-					)}
+  formatValues() {
+    const {
+      values, isEditorMode, handleFieldEdit, handleDelete, toggleMode,
+    } = this.props;
 
-					<h2 className="place--view">{value.place}</h2>
-					<h4 className="company--view">{value.company}</h4>
+    return values.map((value) => (
+      <div
+        key={value.id}
+        className={`work--element ${isEditorMode ? 'editor' : 'preview'}`}
+        name="work"
+      >
+        <button
+          type="button"
+          onClick={(event) => (isEditorMode
+            ? handleFieldEdit(value.id, event)
+            : toggleMode())}
+          className="edit--button"
+        >
+          {isEditorMode ? 'Edit' : 'Back to edit'}
+        </button>
 
-					{value.observations && (
-						<div className="observations--view">{value.observations}</div>
-					)}
-				</div>
-			);
-		});
-	}
+        {isEditorMode && (
+        <button
+          type="button"
+          onClick={(event) => handleDelete(value.id, event)}
+          className="delete--button"
+        >
+          Delete
+        </button>
+        )}
 
-	render() {
-		return <section className="work--view">{this.formatValues()}</section>;
-	}
+        <h2 className="place--view">{value.place}</h2>
+        <h4 className="company--view">{value.company}</h4>
+
+        {value.observations && (
+        <div className="observations--view">{value.observations}</div>
+        )}
+      </div>
+    ));
+  }
+
+  render() {
+    return <section className="work--view">{this.formatValues()}</section>;
+  }
 }
 export default WorkExperienceView;

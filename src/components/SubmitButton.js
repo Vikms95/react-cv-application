@@ -1,14 +1,21 @@
 import React from 'react';
 
 class SubmitButton extends React.Component {
-	render() {
-		return (
-			<button className="create--button" onClick={this.props.handleClick}>
-				{' '}
-                Preview CV{' '}
-			</button>
-		);
-	}
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { handleClick } = this.props;
+    return (
+      <button type="button" className="create--button" onClick={handleClick}>
+        {' '}
+        Preview CV
+        {' '}
+      </button>
+    );
+  }
 }
 
 export default SubmitButton;

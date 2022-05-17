@@ -1,15 +1,21 @@
 import React from 'react';
 
 class ProfilePhotoView extends React.Component {
-	render() {
-		return (
-			<img
-				className="profile--photo--preview"
-				src={this.props.profilePhoto}
-				alt="Profile Photo"
-			/>
-		);
-	}
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { profilePhoto } = this.props;
+    return (
+      <img
+        className="profile--photo--preview"
+        src={profilePhoto}
+        alt="Profile"
+      />
+    );
+  }
 }
 
 export default ProfilePhotoView;

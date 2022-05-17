@@ -50,7 +50,7 @@
     margin-left: 3rem;
 }
 
-.header--buttons > button {
+.header--buttons>button {
     background-color: transparent;
     font-weight: 600;
     font-size: medium;
@@ -97,7 +97,7 @@
     justify-content: space-evenly;
 }
 
-.alert--box--buttons > button {
+.alert--box--buttons>button {
     padding: 0.3rem 0.5rem;
 }
 
@@ -278,7 +278,7 @@ button:hover {
     gap: 0.5rem;
 }
 
-.general--info--inputs > label {
+.general--info--inputs>label {
     text-decoration: underline;
 }
 
@@ -295,8 +295,8 @@ button:hover {
     margin-top: 2rem;
 }
 
-.container--input > section > input,
-.container--input > section > textarea {
+.container--input>section>input,
+.container--input>section>textarea {
     width: 24rem;
     max-width: 24.2rem;
     min-height: 1rem;
@@ -308,9 +308,10 @@ button:hover {
     margin-left: 2.9rem;
 }
 
-.container--input > section > textarea .title--input {
+.container--input>section>textarea .title--input {
     margin-left: 2.5rem;
 }
+
 .university--input {
     margin-left: 4.2rem;
 }
@@ -322,6 +323,7 @@ button:hover {
 .title--input {
     margin-left: 2.5rem;
 }
+
 .university--input {
     margin-left: 4.2rem;
 }

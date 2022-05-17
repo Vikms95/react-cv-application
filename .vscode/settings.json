@@ -1,11 +1,15 @@
-{   
-    "files.eol": "\r\n",
+{
+    "files.eol": "\n",
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
     },
-
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "eslint.validate": ["javascript"]
+    "eslint.validate": [
+        "javascript"
+    ],
+    "git.ignoreLimitWarning": true,
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.formatOnSave": true
 }
