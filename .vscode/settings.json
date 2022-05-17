@@ -1,0 +1,11 @@
+{   
+    "files.eol": "\r\n",
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.validate": ["javascript"]
+}
