@@ -26,6 +26,17 @@ class EducationInputs extends React.Component {
 	}
 
 	render() {
+		const {
+			handleChange,
+			handleSubmit
+		} = this.props;
+
+		const {
+			title,
+			university,
+			observations
+		} = this.props.values;
+
 		return (
 			<form className="container--input" id="education">
 				<section>
@@ -37,8 +48,8 @@ class EducationInputs extends React.Component {
 						id="title"
 						name="education"
 						minLength="2"
-						onChange={this.props.handleChange}
-						value={this.props.values.title || ''}
+						onChange={handleChange}
+						value={title || ''}
 					/>
 				</section>
 
@@ -51,8 +62,8 @@ class EducationInputs extends React.Component {
 						id="university"
 						name="education"
 						minLength="2"
-						onChange={this.props.handleChange}
-						value={this.props.values.university || ''}
+						onChange={handleChange}
+						value={university || ''}
 					/>
 				</section>
 
@@ -64,13 +75,13 @@ class EducationInputs extends React.Component {
 						type="text"
 						id="observations"
 						name="education"
-						onChange={this.props.handleChange}
-						value={this.props.values.observations || ''}
+						onChange={handleChange}
+						value={observations || ''}
 					/>
 				</section>
 
 				<button
-					onClick={this.props.handleSubmit}
+					onClick={handleSubmit}
 					type="button"
 					className="education"
 				></button>

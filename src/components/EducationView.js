@@ -43,7 +43,7 @@ class EducationView extends React.Component {
 		});
 	}
 
-	render() {
+	render() {	
 		return <section className="education--view">{this.formatValues()}</section>;
 	}
 }

@@ -13,32 +13,39 @@ class PreviewModeView extends React.Component {
 		const workValues = values.work.workArray;
 		const languagesValues = values.languages.languagesArray;
 
+		const {
+			profilePhoto,
+			isEditorMode,
+			toggleMode,
+			isAnyItemInField
+		} = this.props;
+
 		return (
 			<section className="cv--container preview">
 				<section className="general--info--view">
-					<ProfilePhotoView profilePhoto={this.props.profilePhoto} />
+					<ProfilePhotoView profilePhoto={profilePhoto} />
 					<GeneralInfoView values={generalValues} />
 				</section>
 
 				<h2 className="preview--field--title"> EDUCATION </h2>
-				{this.props.isAnyItemInField(educationValues) && (
+				{isAnyItemInField(educationValues) && (
 					<EducationView
-						isEditorMode={this.props.isEditorMode}
-						toggleMode={this.props.toggleMode}
+						isEditorMode={isEditorMode}
+						toggleMode={toggleMode}
 						values={educationValues}
 					/>
 				)}
 				<h2 className="preview--field--title"> WORK EXPERIENCE </h2>
-				{this.props.isAnyItemInField(workValues) && (
+				{isAnyItemInField(workValues) && (
 					<WorkExperienceView
-						isEditorMode={this.props.isEditorMode}
-						toggleMode={this.props.toggleMode}
+						isEditorMode={isEditorMode}
+						toggleMode={toggleMode}
 						values={workValues}
 					/>
 				)}
 				<h2 className="preview--field--title"> LANGUAGES </h2>
 				<div className="bottom--row--preview">
-					{this.props.isAnyItemInField(languagesValues) && (
+					{isAnyItemInField(languagesValues) && (
 						<LanguagesView values={languagesValues} />
 					)}
 				</div>

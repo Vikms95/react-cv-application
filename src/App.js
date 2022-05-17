@@ -305,44 +305,62 @@ class App extends React.Component {
 	}
 
 	render() {
+		const {
+			isEditorMode
+		} = this.state;
+		const 
+			{
+				toggleMode,
+				removeAlertBox, 
+				createPDF, 
+				printCV, 
+				handleChange, 
+				handleSubmit,
+				handleDelete,
+				handleFieldEdit,
+				handleSubmitPreview,
+				isRequiredFieldsValid,
+				isAnyItemInField, 
+				scrollTop
+			} = this;
+
 		return (
 			<section className="general--container">
 				<AlertBox
-					toggleMode={this.toggleMode}
-					removeAlertBox={this.removeAlertBox}
-					isRequiredFieldsValid={this.isRequiredFieldsValid}
+					toggleMode            = {toggleMode}
+					removeAlertBox        = {removeAlertBox}
+					isRequiredFieldsValid = {isRequiredFieldsValid}
 				/>
-				<button onClick={this.scrollTop} id="scroll--up--button">
+				<button onClick={scrollTop} id="scroll--up--button">
                     Scroll up
 				</button>
 
 				<Header
-					isEditorMode={this.state.isEditorMode}
-					toggleMode={this.toggleMode}
-					createPDF={this.createPDF}
-					printCV={this.printCV}
+					printCV      = {printCV}
+					createPDF    = {createPDF}
+					toggleMode   = {toggleMode}
+					isEditorMode = {isEditorMode}
 				/>
 
-				{this.state.isEditorMode ? (
+				{isEditorMode ? (
 					<EditModeView
-						profilePhoto={profilePhoto}
-						inputValues={this.state}
-						isEditorMode={this.state.isEditorMode}
-						handleChange={this.handleChange}
-						handleSubmit={this.handleSubmit}
-						handleDelete={this.handleDelete}
-						handleFieldEdit={this.handleFieldEdit}
-						handleResubmit={this.handleResubmit}
-						isAnyItemInField={this.isAnyItemInField}
-						handleSubmitPreview={this.handleSubmitPreview}
+						inputValues         = {this.state}
+						profilePhoto        = {profilePhoto}
+						isEditorMode        = {isEditorMode}
+						handleChange        = {handleChange}
+						handleSubmit        = {handleSubmit}
+						handleDelete        = {handleDelete}
+						handleFieldEdit     = {handleFieldEdit}
+						isAnyItemInField    = {isAnyItemInField}
+						handleSubmitPreview = {handleSubmitPreview}
 					/>
-				) : (
+				) : (      
 					<PreviewModeView
-						toggleMode={this.toggleMode}
-						profilePhoto={profilePhoto}
-						inputValues={this.state}
-						isEditorMode={this.state.isEditorMode}
-						isAnyItemInField={this.isAnyItemInField}
+						toggleMode          =	{toggleMode}
+						profilePhoto        =	{profilePhoto}
+						inputValues         =	{this.state}
+						isEditorMode        =	{isEditorMode}
+						isAnyItemInField    =	{isAnyItemInField}
 					/>
 				)}
 			</section>
