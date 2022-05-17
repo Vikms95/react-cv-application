@@ -1,58 +1,50 @@
-import React from 'react'
-import ProfilePhotoView from './ProfilePhotoView'
-import GeneralInfoView from './GeneralInfoView'
-import EducationView from './EducationView'
-import WorkExperienceView from './WorkExperienceView'
-import LanguagesView from './LanguagesView'
+import React from 'react';
+import ProfilePhotoView from './ProfilePhotoView';
+import GeneralInfoView from './GeneralInfoView';
+import EducationView from './EducationView';
+import WorkExperienceView from './WorkExperienceView';
+import LanguagesView from './LanguagesView';
 
 class PreviewModeView extends React.Component {
-    render() {
-      const values = this.props.inputValues
-      const generalValues = values.general
-      const educationValues = values.education.educationArray
-      const workValues = values.work.workArray
-      const languagesValues = values.languages.languagesArray
+	render() {
+		const values = this.props.inputValues;
+		const generalValues = values.general;
+		const educationValues = values.education.educationArray;
+		const workValues = values.work.workArray;
+		const languagesValues = values.languages.languagesArray;
 
-      return (
+		return (
+			<section className="cv--container preview">
+				<section className="general--info--view">
+					<ProfilePhotoView profilePhoto={this.props.profilePhoto} />
+					<GeneralInfoView values={generalValues} />
+				</section>
 
-        <section className="cv--container preview">
+				<h2 className="preview--field--title"> EDUCATION </h2>
+				{this.props.isAnyItemInField(educationValues) && (
+					<EducationView
+						isEditorMode={this.props.isEditorMode}
+						toggleMode={this.props.toggleMode}
+						values={educationValues}
+					/>
+				)}
+				<h2 className="preview--field--title"> WORK EXPERIENCE </h2>
+				{this.props.isAnyItemInField(workValues) && (
+					<WorkExperienceView
+						isEditorMode={this.props.isEditorMode}
+						toggleMode={this.props.toggleMode}
+						values={workValues}
+					/>
+				)}
+				<h2 className="preview--field--title"> LANGUAGES </h2>
+				<div className="bottom--row--preview">
+					{this.props.isAnyItemInField(languagesValues) && (
+						<LanguagesView values={languagesValues} />
+					)}
+				</div>
+			</section>
+		);
+	}
+}
 
-            <section className='general--info--view'>
-              <ProfilePhotoView profilePhoto={this.props.profilePhoto} />
-              <GeneralInfoView values={generalValues} />
-            </section>
-
-            <h2 className='preview--field--title'> EDUCATION </h2>
-            {
-              this.props.isAnyItemInField(educationValues) 
-              && <EducationView 
-                    isEditorMode={this.props.isEditorMode}
-                    toggleMode = {this.props.toggleMode}
-                    values={educationValues}
-                 />
-            }
-            <h2 className='preview--field--title'> WORK EXPERIENCE </h2>
-            {
-              this.props.isAnyItemInField(workValues) 
-              && <WorkExperienceView
-                    isEditorMode={this.props.isEditorMode}
-                    toggleMode = {this.props.toggleMode}
-                    values={workValues}
-                 />
-            }
-            <h2 className='preview--field--title'> LANGUAGES </h2>
-            <div className="bottom--row--preview">
-              {
-                this.props.isAnyItemInField(languagesValues)
-                && <LanguagesView
-                      values={languagesValues}
-                />
-              }
-          </div>  
-        </section>
-      )
-    }
-  }
-  
-export default PreviewModeView
-  
+export default PreviewModeView;

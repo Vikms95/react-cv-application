@@ -1,10 +1,10 @@
-- FUNCTIONALITIES
--Create CV template with the data taken from the CV input.
--Transform the input page into an actual CV to be downloaded
--You can edit each field with buttons on the CV downloadable version
+-   FUNCTIONALITIES
+    -Create CV template with the data taken from the CV input.
+    -Transform the input page into an actual CV to be downloaded
+    -You can edit each field with buttons on the CV downloadable version
 
--  COMPONENTS
- App.js
+-   COMPONENTS
+    App.js
     ProfilePicture.js
     GeneralInfo.js
     Education.js
@@ -12,25 +12,26 @@
     Languages.js
     SubmitButton.js
 
-- REMINDERS
--The easiest way is to build a version that takes your data model and renders the UI but has no interactivity. To build a static version of your app that renders your data model, you’ll want to build components that reuse other components and pass data using props. props are a way of passing data from parent to child. If you’re familiar with the concept of state, don’t use state at all to build this static version.
+-   REMINDERS
+    -The easiest way is to build a version that takes your data model and renders the UI but has no interactivity. To build a static version of your app that renders your data model, you’ll want to build components that reuse other components and pass data using props. props are a way of passing data from parent to child. If you’re familiar with the concept of state, don’t use state at all to build this static version.
 
-
-- STEPS
-<!-- -Make static version -->
-<!-- -Make header -->
+-   STEPS
+    <!-- -Make static version -->
+    <!-- -Make header -->
 
 {
+
 <!-- - Plan how to handle props and state within the App
 *:https://reactjs.org/docs/thinking-in-react.html
 :https://reactjs.org/docs/faq-state.html#what-is-the-difference-between-state-and-props -->
 
 <!-- - Hold state in App and the functions to modify it (setState) and pass those functions to setState as
 props to each component, then use those functions and pass them to the onChange property, share the name of the input with the value -->
-*<!-- : save state as nested objects for each section? > test changing name with nested objects (works) -->
+
+\*<!-- : save state as nested objects for each section? > test changing name with nested objects (works) -->
+
 <!-- : on each input? each form? each input (works) -->
 <!-- : pass the state directly as props as well to have controlled components? -->
-
 
 <!-- - Add the values within the state array's with submit but -->
 <!-- : button submit the created form within the object array -->
@@ -40,7 +41,6 @@ props to each component, then use those functions and pass them to the onChange 
 :check JS constraints lessons and docs
 :copied the library form validation, adjust?
 :use the passed 'name' variable to locate the form which required validity instead of the inputs? -->
-
 
 <!-- -Implement HTML creation on button press
 *:they will be new components that will show up ONLY when the arrays from
@@ -81,7 +81,6 @@ editMode ? then display the edit mode -->
 <!-- : change *isEditorMode* whenever the edit button is clicked or if any edit button is clicked on the preview mode(just goes back to editor mode,
 no fancy editing mode on preview mode)  -->
 
-
 <!-- - Remove button per field element     -->
 
 <!-- - The edit button should add back (display) the input fields, with the previously displayed information as values. In those input fields, you should be able to edit and resubmit the content(use the already created inputs and lay down the values from current state) -->
@@ -90,10 +89,9 @@ no fancy editing mode on preview mode)  -->
 
 <!-- -Languages inputs get state of proficiency -->
 
-
-- Implement profile photo change
-    :You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
-    :https://javascript.plainenglish.io/how-to-add-an-image-preview-when-an-image-file-is-selected-in-the-file-input-62609ac92a4f
+-   Implement profile photo change
+:You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
+:https://javascript.plainenglish.io/how-to-add-an-image-preview-when-an-image-file-is-selected-in-the-file-input-62609ac92a4f
 <!-- - Make specific part of the page downloadable as PDF
     :https://stackoverflow.com/questions/17293135/download-a-div-in-a-html-page-as-pdf-using-javascript -->
 
@@ -101,16 +99,19 @@ no fancy editing mode on preview mode)  -->
     :https://stackoverflow.com/questions/12997123/print-specific-part-of-webpage -->
 
 -Major refactoring
-    <!-- : pending handleFieldEdit to avoid if statement -->
-    : check for improvements on component structure (merge education and work?)
-    : check for improvements on component readability
-- Adjust css alignment
 
-- QUESTIONS
-<!-- -State will be held in App.js? -->
-<!-- -Wrap each component in a form or just one? -->
-<!-- -Last row one component rendering 2 components or 2 components in App? -->
-<!-- -To swap views, conditional rendering on the App component? -->
-<!-- -State is already updated on each change, so button just has to get the state and render an HTML ? -->
--Education and Work in one component with different props?
--Reassign props to another variable name without changing its value to make components in the jsx cleaner?
+<!-- : pending handleFieldEdit to avoid if statement -->
+
+: check for improvements on component structure (merge education and work?)
+: check for improvements on component readability
+
+-   Adjust css alignment
+
+-   QUESTIONS
+    <!-- -State will be held in App.js? -->
+    <!-- -Wrap each component in a form or just one? -->
+    <!-- -Last row one component rendering 2 components or 2 components in App? -->
+    <!-- -To swap views, conditional rendering on the App component? -->
+    <!-- -State is already updated on each change, so button just has to get the state and render an HTML ? -->
+    -Education and Work in one component with different props?
+    -Reassign props to another variable name without changing its value to make components in the jsx cleaner?
