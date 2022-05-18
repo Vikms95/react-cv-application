@@ -10,87 +10,79 @@ import EducationView from './EducationView';
 import WorkExperienceView from './WorkExperienceView';
 import LanguagesView from './LanguagesView';
 
-class EditModeView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+function EditModeView(props) {
+  const {
+    profilePhoto,
+    handleChange,
+    handleSubmit,
+    handleDelete,
+    handleFieldEdit,
+    handleSubmitPreview,
+    isAnyItemInField,
+    isEditorMode,
+    inputValues,
+  } = props;
 
-  render() {
-    const {
-      profilePhoto,
-      handleChange,
-      handleSubmit,
-      handleDelete,
-      handleFieldEdit,
-      handleSubmitPreview,
-      isAnyItemInField,
-      isEditorMode,
-      inputValues,
-    } = this.props;
+  const values = inputValues;
+  const educationValues = values.education.educationArray;
+  const workValues = values.work.workArray;
+  const languagesValues = values.languages.languagesArray;
 
-    const values = inputValues;
+  return (
 
-    const educationValues = values.education.educationArray;
-    const workValues = values.work.workArray;
-    const languagesValues = values.languages.languagesArray;
+    <section className="cv--container">
+      <section className="general--info">
+        <ProfilePhotoInput profilePhoto={profilePhoto} />
+        <GeneralInfoInputs handleChange={handleChange} />
+      </section>
 
-    return (
+      <EducationInputs
+        values={values.education}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
 
-      <section className="cv--container">
-        <section className="general--info">
-          <ProfilePhotoInput profilePhoto={profilePhoto} />
-          <GeneralInfoInputs handleChange={handleChange} />
-        </section>
-
-        <EducationInputs
-          values={values.education}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
-
-        {isAnyItemInField(educationValues) && (
+      {isAnyItemInField(educationValues) && (
         <EducationView
           values={educationValues}
           isEditorMode={isEditorMode}
           handleDelete={handleDelete}
           handleFieldEdit={handleFieldEdit}
         />
-        )}
+      )}
 
-        <WorkExperienceInputs
-          values={values.work}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
+      <WorkExperienceInputs
+        values={values.work}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
 
-        {isAnyItemInField(workValues) && (
+      {isAnyItemInField(workValues) && (
         <WorkExperienceView
           values={workValues}
           isEditorMode={isEditorMode}
           handleDelete={handleDelete}
           handleFieldEdit={handleFieldEdit}
         />
-        )}
+      )}
 
-        {isAnyItemInField(languagesValues) && (
+      {isAnyItemInField(languagesValues) && (
         <LanguagesView
           values={languagesValues}
           handleDelete={handleDelete}
         />
-        )}
+      )}
 
-        <section className="bottom--row">
-          <LanguagesInputs
-            values={values.languages}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
-          <SubmitButton handleClick={handleSubmitPreview} />
-        </section>
+      <section className="bottom--row">
+        <LanguagesInputs
+          values={values.languages}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        <SubmitButton handleClick={handleSubmitPreview} />
       </section>
-    );
-  }
+    </section>
+  );
 }
 
 export default EditModeView;

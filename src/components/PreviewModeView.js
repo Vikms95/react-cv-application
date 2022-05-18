@@ -5,59 +5,52 @@ import EducationView from './EducationView';
 import WorkExperienceView from './WorkExperienceView';
 import LanguagesView from './LanguagesView';
 
-class PreviewModeView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+function PreviewModeView(props) {
+  const { inputValues } = props;
+  const values = inputValues;
+  const generalValues = values.general;
+  const educationValues = values.education.educationArray;
+  const workValues = values.work.workArray;
+  const languagesValues = values.languages.languagesArray;
 
-  render() {
-    const { inputValues } = this.props;
-    const values = inputValues;
-    const generalValues = values.general;
-    const educationValues = values.education.educationArray;
-    const workValues = values.work.workArray;
-    const languagesValues = values.languages.languagesArray;
+  const {
+    profilePhoto,
+    isEditorMode,
+    toggleMode,
+    isAnyItemInField,
+  } = props;
 
-    const {
-      profilePhoto,
-      isEditorMode,
-      toggleMode,
-      isAnyItemInField,
-    } = this.props;
+  return (
+    <section className="cv--container preview">
+      <section className="general--info--view">
+        <ProfilePhotoView profilePhoto={profilePhoto} />
+        <GeneralInfoView values={generalValues} />
+      </section>
 
-    return (
-      <section className="cv--container preview">
-        <section className="general--info--view">
-          <ProfilePhotoView profilePhoto={profilePhoto} />
-          <GeneralInfoView values={generalValues} />
-        </section>
-
-        <h2 className="preview--field--title"> EDUCATION </h2>
-        {isAnyItemInField(educationValues) && (
+      <h2 className="preview--field--title"> EDUCATION </h2>
+      {isAnyItemInField(educationValues) && (
         <EducationView
           isEditorMode={isEditorMode}
           toggleMode={toggleMode}
           values={educationValues}
         />
-        )}
-        <h2 className="preview--field--title"> WORK EXPERIENCE </h2>
-        {isAnyItemInField(workValues) && (
+      )}
+      <h2 className="preview--field--title"> WORK EXPERIENCE </h2>
+      {isAnyItemInField(workValues) && (
         <WorkExperienceView
           isEditorMode={isEditorMode}
           toggleMode={toggleMode}
           values={workValues}
         />
-        )}
-        <h2 className="preview--field--title"> LANGUAGES </h2>
-        <div className="bottom--row--preview">
-          {isAnyItemInField(languagesValues) && (
+      )}
+      <h2 className="preview--field--title"> LANGUAGES </h2>
+      <div className="bottom--row--preview">
+        {isAnyItemInField(languagesValues) && (
           <LanguagesView values={languagesValues} />
-          )}
-        </div>
-      </section>
-    );
-  }
+        )}
+      </div>
+    </section>
+  );
 }
 
 export default PreviewModeView;

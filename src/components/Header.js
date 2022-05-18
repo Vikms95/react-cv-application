@@ -1,23 +1,18 @@
 import React from 'react';
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+function Header(props) {
+  const {
+    isEditorMode, toggleMode, createPDF, printCV,
+  } = props;
 
-  render() {
-    const {
-      isEditorMode, toggleMode, createPDF, printCV,
-    } = this.props;
-    return (
-      <div className="header">
-        <h2 className="title">
-          {' '}
-          Resu
-          <span className="make--title">Make</span>
-        </h2>
-        {!isEditorMode && (
+  return (
+    <div className="header">
+      <h2 className="title">
+        {' '}
+        Resu
+        <span className="make--title">Make</span>
+      </h2>
+      {!isEditorMode && (
         <div className="header--buttons">
           <button type="button" onClick={toggleMode} className="edit--button--bottom">
             {' '}
@@ -33,10 +28,9 @@ class Header extends React.Component {
             Print CV
           </button>
         </div>
-        )}
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 }
 
 export default Header;

@@ -1,15 +1,10 @@
 import React from 'react';
 
-class WorkExperienceView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  formatValues() {
+function WorkExperienceView(props) {
+  const formatValues = () => {
     const {
       values, isEditorMode, handleFieldEdit, handleDelete, toggleMode,
-    } = this.props;
+    } = props;
 
     return values.map((value) => (
       <div
@@ -45,10 +40,8 @@ class WorkExperienceView extends React.Component {
         )}
       </div>
     ));
-  }
+  };
 
-  render() {
-    return <section className="work--view">{this.formatValues()}</section>;
-  }
+  return <section className="work--view">{formatValues()}</section>;
 }
 export default WorkExperienceView;

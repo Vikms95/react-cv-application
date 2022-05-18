@@ -1,15 +1,16 @@
 {
-    "files.eol": "\n",
-    "emmet.includeLanguages": {
-        "javascript": "javascriptreact"
-    },
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.validate": [
-        "javascript"
-    ],
-    "git.ignoreLimitWarning": true,
-    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-    "editor.formatOnSave": true
+  "files.eol": "\n",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript"
+  ],
+  "git.ignoreLimitWarning": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2
 }

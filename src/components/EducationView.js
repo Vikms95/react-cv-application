@@ -1,15 +1,10 @@
 import React from 'react';
 
-class EducationView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  formatValues() {
+function EducationView(props) {
+  const formatValues = () => {
     const {
       values, isEditorMode, handleFieldEdit, toggleMode, handleDelete,
-    } = this.props;
+    } = props;
 
     return values.map((value) => (
       <div
@@ -48,10 +43,8 @@ class EducationView extends React.Component {
         )}
       </div>
     ));
-  }
+  };
 
-  render() {
-    return <section className="education--view">{this.formatValues()}</section>;
-  }
+  return <section className="education--view">{formatValues()}</section>;
 }
 export default EducationView;
