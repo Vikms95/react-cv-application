@@ -14,13 +14,12 @@ import profilePhoto from './images/profile-photo.png';
 
 function App() {
   // Separate setState into different functions, put them in their respective Components?
-  const [isEditorMode, setIsEditorMode] = useState(true);
-
-  const [general, setGeneral] = useState(
-    { name: 'John Doe', email: 'lorem@ipsu.com', phone: '123321123321' },
-  );
-  const [education, setEducation] = useState(
-    {
+  const [state, setState] = useState({
+    isEditorMode: true,
+    general: {
+      name: 'John Doe', email: 'lorem@ipsu.com', phone: '123321123321',
+    },
+    education: {
       id: uniqid(),
       title: '',
       university: '',
@@ -45,9 +44,7 @@ function App() {
       //   },
       ],
     },
-  );
-  const [work, setWork] = useState(
-    {
+    work: {
       id: uniqid(),
       place: '',
       company: '',
@@ -72,9 +69,7 @@ function App() {
       //   },
       ],
     },
-  );
-  const [languages, setLanguages] = useState(
-    {
+    languages: {
       id: uniqid(),
       language: '',
       proficiency: '' || 'Elementary',
@@ -84,20 +79,86 @@ function App() {
         // {id:'903239', language:"Russian", proficiency: "Professional"},
       ],
     },
-  );
-
-  const capitalizeFirstLetter = (string) => string[0].toUppercase() + string.slice(1).toLowerCase();
+  });
 
   const handleChange = (event) => {
     const { value, id } = event.target;
-    let { name } = event.target;
-    name = capitalizeFirstLetter(name);
-    [`'set'${name}`]((prevState) => ({
+    const { name } = event.target;
+    setState((prevState) => ({
       [name]: {
         ...prevState[name],
         [id]: value,
       },
     }));
+  };
+
+  /**
+     * Resets styling of inputs when the submit button is clicked
+     */
+  const resetFormsStyling = () => {
+    const inputElements = Array.from(document.getElementsByTagName('input'));
+    inputElements.forEach((element) => element.classList.remove('invalid--input'));
+  };
+
+  const reportInvalidInput = (element) => {
+    element.setCustomValidity('This field is required');
+    element.reportValidity();
+    element.classList.add('invalid--input');
+  };
+
+  const formIsValid = (name) => {
+    const formToValidate = document.getElementById(`${name}`);
+    const inputsToValidate = Array.from(formToValidate.getElementsByTagName('input'));
+    resetFormsStyling();
+
+    for (let i = 0; i < inputsToValidate.length; i += 1) {
+      inputsToValidate[i].setCustomValidity('');
+      if (inputsToValidate[i].value === '') {
+        reportInvalidInput(inputsToValidate[i]);
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const isKeyInState = (index) => index !== -1;
+
+  /**
+     * It takes the values of the corresponding key of state so
+     * we can return a new object for later use with a pure approach
+     */
+  const getArrayToAdd = (currentState, clickedField, arrayToEdit) => {
+    const fieldToEdit = currentState[clickedField];
+    const objectToAdd = { ...fieldToEdit };
+    const newArray = fieldToEdit[arrayToEdit];
+    const indexToReplace = fieldToEdit[arrayToEdit].findIndex(
+      (key) => key.id === fieldToEdit.id,
+    );
+
+    if (isKeyInState(indexToReplace)) {
+    // Button id attribute is removed so the button
+    // knows it needs to change its textContent value
+      document.querySelector(`button.${clickedField}`).removeAttribute('id-to-edit');
+
+      newArray.splice(indexToReplace, 1, objectToAdd);
+      return newArray;
+    }
+    newArray.filter((key) => key.id !== fieldToEdit.id);
+    return [...newArray, objectToAdd];
+  };
+
+  /**
+     * Takes the clickedField and returns an empty object
+     * with the key names, a new id and the rest of the values
+     * as empty
+     */
+  const getEmptyObjectToAdd = (currentState, clickedField) => {
+    const emptyObject = { ...currentState[clickedField] };
+    for (const value in emptyObject) {
+      emptyObject[value] = '';
+    }
+    emptyObject.id = uniqid();
+    return emptyObject;
   };
 
   const handleSubmit = (event) => {
@@ -172,6 +233,26 @@ function App() {
     document.querySelector('.alert--box').classList.remove('active');
   };
 
+  const isRequiredFieldsValid = () => {
+    const { name, email, phone } = state.general;
+    return name.length > 0 && email.length > 0 && phone.length > 0;
+  };
+
+  const isAnyOptionalFieldEmpty = () => (
+    state.education.educationArray.length === 0
+        || state.work.workArray.length === 0
+        || state.languages.languagesArray.length === 0
+  );
+
+  const revealAlertBox = () => {
+    document.querySelector('.alert--box').classList.add('active');
+  };
+
+  const toggleMode = () => {
+    setState((prevState) => (!prevState.isEditorMode));
+    removeAlertBox();
+  };
+
   const handleSubmitPreview = () => {
     if (isRequiredFieldsValid()) {
       if (isAnyOptionalFieldEmpty()) {
@@ -184,95 +265,6 @@ function App() {
       setTimeout(removeAlertBox, 2000);
     }
   };
-
-  const isKeyInState = (index) => index !== -1;
-
-  /**
-     * It takes the values of the corresponding key of state so
-     * we can return a new object for later use with a pure approach
-     */
-  const getArrayToAdd = (state, clickedField, arrayToEdit) => {
-    const fieldToEdit = state[clickedField];
-    const objectToAdd = { ...fieldToEdit };
-    const newArray = fieldToEdit[arrayToEdit];
-    const indexToReplace = fieldToEdit[arrayToEdit].findIndex(
-      (key) => key.id === fieldToEdit.id,
-    );
-
-    if (isKeyInState(indexToReplace)) {
-      // Button id attribute is removed so the button
-      // knows it needs to change its textContent value
-      document.querySelector(`button.${clickedField}`).removeAttribute('id-to-edit');
-
-      newArray.splice(indexToReplace, 1, objectToAdd);
-      return newArray;
-    }
-    newArray.filter((key) => key.id !== fieldToEdit.id);
-    return [...newArray, objectToAdd];
-  };
-
-  /**
-     * Takes the clickedField and returns an empty object
-     * with the key names, a new id and the rest of the values
-     * as empty
-     */
-  const getEmptyObjectToAdd = (state, clickedField) => {
-    const emptyObject = { ...state[clickedField] };
-    for (const value in emptyObject) {
-      emptyObject[value] = '';
-    }
-    emptyObject.id = uniqid();
-    return emptyObject;
-  };
-
-  const reportInvalidInput = (element) => {
-    element.setCustomValidity('This field is required');
-    element.reportValidity();
-    element.classList.add('invalid--input');
-  };
-
-  /**
-     * Resets styling of inputs when the submit button is clicked
-     */
-  const resetFormsStyling = () => {
-    const inputElements = Array.from(document.getElementsByTagName('input'));
-    inputElements.forEach((element) => element.classList.remove('invalid--input'));
-  };
-
-  const formIsValid = (name) => {
-    const formToValidate = document.getElementById(`${name}`);
-    const inputsToValidate = Array.from(formToValidate.getElementsByTagName('input'));
-    resetFormsStyling();
-
-    for (let i = 0; i < inputsToValidate.length; i += 1) {
-      inputsToValidate[i].setCustomValidity('');
-      if (inputsToValidate[i].value === '') {
-        reportInvalidInput(inputsToValidate[i]);
-        return false;
-      }
-    }
-    return true;
-  };
-
-  const toggleMode = () => {
-    setIsEditorMode((prevIsEditorMode) => (!prevIsEditorMode.isEditorMode));
-    removeAlertBox();
-  };
-
-  const revealAlertBox = () => {
-    document.querySelector('.alert--box').classList.add('active');
-  };
-
-  const isRequiredFieldsValid = () => {
-    const { name, email, phone } = general;
-    return name.length > 0 && email.length > 0 && phone.length > 0;
-  };
-
-  const isAnyOptionalFieldEmpty = () => (
-    education.educationArray.length === 0
-        || work.workArray.length === 0
-        || languages.languagesArray.length === 0
-  );
 
   const isAnyItemInField = (values) => values.length > 0;
 
@@ -328,15 +320,15 @@ function App() {
         printCV={printCV}
         createPDF={createPDF}
         toggleMode={toggleMode}
-        isEditorMode={isEditorMode}
+        isEditorMode={state.isEditorMode}
       />
 
-      {isEditorMode
+      {state.isEditorMode
         ? (
           <EditModeView
-            inputValues={[general, education, work, languages]}
+            inputValues={state}
             profilePhoto={profilePhoto}
-            isEditorMode={isEditorMode}
+            isEditorMode={state.isEditorMode}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             handleDelete={handleDelete}
@@ -349,8 +341,8 @@ function App() {
           <PreviewModeView
             toggleMode={toggleMode}
             profilePhoto={profilePhoto}
-            inputValues={[general, education, work, languages]}
-            isEditorMode={isEditorMode}
+            inputValues={state}
+            isEditorMode={state.isEditorMode}
             isAnyItemInField={isAnyItemInField}
           />
         )}

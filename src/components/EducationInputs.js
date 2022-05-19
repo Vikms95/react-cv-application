@@ -7,12 +7,14 @@ function EducationInputs(props) {
   const button = document.querySelector('button.education');
 
   useEffect(() => {
-    setButtonTextContent((prevButtonTextContent) => (
-      (prevButtonTextContent === 'Add education')
-        ? 'Edit education'
-        : 'Add education'
-    ));
-  }, [button.attributes]);
+    if (button) {
+      setButtonTextContent((prevButtonTextContent) => (
+        (prevButtonTextContent === 'Add education')
+          ? 'Edit education'
+          : 'Add education'
+      ));
+    }
+  }, []);
 
   const {
     handleChange,

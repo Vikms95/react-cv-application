@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 function WorkExperienceInputs(props) {
   const [buttonTextContent, setButtonTextContent] = useState('Add experience');
-  const button = document.querySelector('button.work');
+  // const button = document.querySelector('button.work');
 
   useEffect(() => {
     setButtonTextContent((prevButtonTextContent) => (
@@ -12,7 +12,7 @@ function WorkExperienceInputs(props) {
         ? 'Edit experience '
         : 'Add experience'
     ));
-  }, [button.attributes]);
+  }, []);
 
   const { values, handleChange, handleSubmit } = props;
   const { place, company, observations } = values;

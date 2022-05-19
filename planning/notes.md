@@ -115,3 +115,8 @@ no fancy editing mode on preview mode)  -->
     <!-- -State is already updated on each change, so button just has to get the state and render an HTML ? -->
     <!-- -Education and Work in one component with different props? -->
     <!-- -Reassign props to another variable name without changing its value to make components in the jsx cleaner? -->
+
+
+
+REFACTOR STATE FUNCTIONS
+-Have each component with its state
